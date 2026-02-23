@@ -201,12 +201,12 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
 
 /* --- Header / Navigation --- */
 .site-header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
@@ -400,7 +400,7 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
 
 /* --- Hero Sections --- */
 .hero {
-  padding: calc(var(--section-pad) + 80px) 0 var(--section-pad);
+  padding: var(--section-pad) 0;
   position: relative;
   overflow: hidden;
 }
@@ -1444,19 +1444,17 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
 
 /* Notification Banner */
 .notification-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   background: linear-gradient(135deg, #b45309, #d97706);
   color: white;
   padding: 14px 48px 14px 20px;
   text-align: center;
-  z-index: 10001;
   font-size: 0.9rem;
   font-weight: 500;
   line-height: 1.5;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 99999;
+  width: 100%;
+  display: block;
 }
 
 .notification-banner a {

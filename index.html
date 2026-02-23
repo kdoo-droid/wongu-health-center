@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://www.wonguhealthcenter.com">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -75,32 +75,13 @@
   }
   </script>
 </head>
-<body>
+<body class="has-notif">
   <!-- Notification Banner -->
   <div class="notification-banner" id="notifBanner">
     <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280">(702) 852-1280</a> or text <a href="sms:+17025509483">702-550-9483</a> to schedule your appointment.</span>
-    <button class="notif-close" id="notifClose" aria-label="Dismiss notification">&times;</button>
+    <button class="notif-close" onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');" aria-label="Dismiss notification">&times;</button>
   </div>
-  <script>
-  (function(){
-    var banner = document.getElementById('notifBanner');
-    var close = document.getElementById('notifClose');
-    function adjustOffset(){
-      if(banner && banner.style.display !== 'none'){
-        var h = banner.offsetHeight;
-        document.querySelector('.site-header').style.top = h + 'px';
-        document.body.style.paddingTop = h + 'px';
-      }
-    }
-    adjustOffset();
-    window.addEventListener('resize', adjustOffset);
-    close.addEventListener('click', function(){
-      banner.style.display = 'none';
-      document.querySelector('.site-header').style.top = '0';
-      document.body.style.paddingTop = '0';
-    });
-  })();
-  </script>
+
 
   <!-- ==================== HEADER ==================== -->
   <header class="site-header" role="banner">
