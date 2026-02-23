@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://www.wonguhealthcenter.com/services">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 
   <script type="application/ld+json">
   {
@@ -26,12 +26,13 @@
     ]
   }
   </script>
+<script>if(localStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
 <body class="has-notif">
   <!-- Notification Banner -->
   <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);color:white;padding:16px 48px 16px 20px;text-align:center;font-size:1rem;font-weight:500;line-height:1.6;position:relative;z-index:99999;width:100%;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
     <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280" style="color:white;font-weight:700;text-decoration:underline;">(702) 852-1280</a> or text <a href="sms:+17025509483" style="color:white;font-weight:700;text-decoration:underline;">702-550-9483</a> to schedule your appointment.</span>
-    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');" aria-label="Dismiss notification" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;padding:4px 8px;">&times;</button>
+    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');localStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;padding:4px 8px;">&times;</button>
   </div>
 
 
