@@ -609,7 +609,7 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
 .hero-page {
   background: linear-gradient(135deg, var(--cream) 0%, var(--sand) 100%);
   text-align: center;
-  padding: calc(var(--section-pad) + 60px) 0 60px;
+  padding: 40px 0 40px;
 }
 
 .hero-page h1 {
