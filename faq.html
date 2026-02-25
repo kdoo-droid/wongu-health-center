@@ -169,8 +169,234 @@
   <div class="mobile-book-bar">
     <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener">Book Your Appointment →</a>
   </div>
+<!-- Wongu Chat Widget -->
+<div id="wonguChat" style="position:fixed;bottom:90px;right:20px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <button id="chatToggle" onclick="wonguToggleChat()" style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#2d4a32,#4a7c59);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <svg id="chatIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg id="closeIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <div id="chatWindow" style="display:none;position:absolute;bottom:70px;right:0;width:370px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.15);overflow:hidden;">
+    <div style="background:linear-gradient(135deg,#2d4a32,#4a7c59);color:white;padding:16px 20px;">
+      <div style="font-weight:600;font-size:1rem;">Wongu Health Center</div>
+      <div style="font-size:0.8rem;opacity:0.85;">Quick answers about our clinic</div>
+    </div>
+    <div id="chatMessages" style="overflow-y:auto;padding:16px;max-height:350px;min-height:200px;"></div>
+    <div style="padding:12px;border-top:1px solid #eee;display:flex;gap:8px;">
+      <input id="chatInput" type="text" placeholder="Type your question..." onkeydown="if(event.key==='Enter')wonguSendMsg()" style="flex:1;padding:10px 14px;border:1.5px solid #ddd;border-radius:24px;font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='#4a7c59'" onblur="this.style.borderColor='#ddd'">
+      <button onclick="wonguSendMsg()" style="width:40px;height:40px;border-radius:50%;background:#4a7c59;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="jSfV4vv678LCc8PQgRnaw";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+(function(){
+var wonguChatOpen=false;
+var wonguStarted=false;
+
+var qa=[
+  // PRICING
+  {k:["price","cost","how much","pricing","fee","charge","pay","afford","cheap","expensive","rate","dollar","money"],
+   a:"Here's our pricing:\n\n\u2022 Intern Initial Visit: $80 (1.5-2 hours)\n\u2022 Intern Follow-up: $50 (~1 hour)\n\u2022 OMD Initial Visit: $120 (~1 hour)\n\u2022 OMD Follow-up: $80 (30-55 min)\n\u2022 OMD + Observer: $100 initial / $70 follow-up\n\u2022 Doctor's Consultation: $100\n\u2022 Cupping: $50 (intern) / $100 (OMD, includes consultation)\n\u2022 Herbal Rx: $10/day\n\n$5 community discount for seniors, military, students & educators with photo ID!"},
+  // HOURS
+  {k:["hour","open","close","when","time","monday","tuesday","wednesday","thursday","friday","saturday","sunday","weekend","day"],
+   a:"Our clinic hours:\n\n\u2022 Monday - Friday: 8:00 AM - 4:30 PM\n\u2022 Saturday: 8:00 AM - 12:00 PM\n\u2022 Sunday: Closed\n\nCall (702) 852-1280 or text 702-550-9483 to schedule!"},
+  // CONDITIONS
+  {k:["treat","condition","help with","what do you","illness","disease","symptom","diagnos","what can","heal","cure"],
+   a:"We treat a wide range of conditions:\n\n\u2022 Stroke Recovery\n\u2022 Cancer Support (chemo/radiation side effects)\n\u2022 Mental Health & PTSD (including veterans)\n\u2022 Chronic Illness & Autoimmune\n\u2022 Pain Management (back, joint, migraines, sciatica, arthritis)\n\u2022 Pregnancy & Birth Support\n\u2022 Weight Management\n\u2022 Women's Health\n\u2022 Stress, Anxiety & Insomnia\n\u2022 Sports Injuries\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans!"},
+  // INSURANCE
+  {k:["insurance","va ","veteran","accept","cover","tricare","benefits"],
+   a:"We accept VA insurance for eligible veterans. For other insurance types, please call us at (702) 852-1280 to check your specific coverage.\n\nWe also offer a $5 community discount for military members, seniors, students, and educators with valid photo ID."},
+  // BOOKING
+  {k:["book","appointment","reserve","schedule","sign up","register","make an","set up"],
+   a:"You can schedule an appointment by:\n\n\u2022 Calling: (702) 852-1280\n\u2022 Texting: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nWe're working on getting online booking back up. In the meantime our front desk team is happy to help you by phone or text!"},
+  // LOCATION
+  {k:["location","address","where","find you","direction","map","drive","parking","located"],
+   a:"We're located at:\n\n8630 S Eastern Ave\nLas Vegas, NV 89123\n\n(Inside the Wongu University campus)\n\nCall (702) 852-1280 if you need help finding us!"},
+  // ACUPUNCTURE
+  {k:["acupuncture","needle","how does acupuncture","what is acupuncture","does it hurt","painful"],
+   a:"Acupuncture uses thin, sterile needles placed at specific points on your body to stimulate natural healing. It's effective for chronic pain, migraines, sciatica, neurological conditions, stress, and much more.\n\nMost patients find it very relaxing with minimal discomfort. The needles are much thinner than injection needles!\n\n\u2022 Intern sessions: $80 initial / $50 follow-up\n\u2022 OMD sessions: $120 initial / $80 follow-up"},
+  // CUPPING
+  {k:["cupping","cup","glass cup","fire cup","suction"],
+   a:"We offer fire cupping therapy using glass cups for sessions up to 30 minutes. Cupping promotes blood circulation, relieves muscle tension, and reduces inflammation.\n\n\u2022 Intern Cupping: $50\n\u2022 OMD Cupping: $100 (includes consultation)\n\nOur OMDs use traditional glass cups for all cupping treatments."},
+  // HERBAL
+  {k:["herbal","herb","medicine","formula","prescription","chinese medicine","tcm","traditional"],
+   a:"Our licensed OMDs prescribe custom Chinese herbal formulas tailored to your specific condition. Herbal prescriptions are $10 per day and can complement your acupuncture treatments for better results.\n\nHerbal formulas are prepared after your treatment based on your practitioner's diagnosis."},
+  // INTERN/STUDENT
+  {k:["intern","student","supervised","training","learning","student clinic","who treats"],
+   a:"Our student interns are 3rd and 4th-year graduate students from Wongu University of Oriental Medicine. Every single intern session is directly supervised by a licensed OMD for your safety.\n\nBenefits of intern visits:\n\u2022 Longer appointments (1.5-2 hours)\n\u2022 More affordable ($80 initial, $50 follow-up)\n\u2022 Thorough, unhurried evaluations\n\u2022 Same quality care under OMD supervision"},
+  // DOCTORS/STAFF
+  {k:["doctor","omd","practitioner","dr yu","dr. yu","dr sekine","dr. sekine","provider","who","staff","team","licensed"],
+   a:"Our clinic team includes:\n\n\u2022 Dr. Yu - Licensed OMD, clinic director\n\u2022 Dr. Sekine - Licensed OMD, specializing in Japanese acupuncture and chronic internal diseases\n\u2022 Supervised student interns (3rd & 4th year)\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans for pregnancy, weight management, fertility, and more!"},
+  // FIRST VISIT
+  {k:["first visit","first time","expect","prepare","what to","bring","wear","before","new patient","never been"],
+   a:"Here's how to prepare for your first visit:\n\n1. Eat a light snack beforehand (don't come on an empty stomach)\n2. Drink plenty of water before and after\n3. Wear comfortable, loose clothing (access to arms and legs needed)\n\nWhat to expect:\n\u2022 15-20 min intake with tongue & pulse diagnosis\n\u2022 Full acupuncture treatment\n\u2022 Intern visits: 1.5-2 hours total\n\u2022 OMD visits: ~1 hour total\n\nHerbal formula may be prepared after your treatment."},
+  // PAIN
+  {k:["pain","back pain","knee","joint","neck","shoulder","headache","migraine","sciatica","arthritis","hurt","sore","ache","injury","injuries"],
+   a:"We specialize in drug-free pain management! We commonly treat:\n\n\u2022 Back & neck pain\n\u2022 Joint pain & arthritis\n\u2022 Migraines & headaches\n\u2022 Sciatica\n\u2022 Shoulder & knee pain\n\u2022 Sports injuries\n\u2022 Post-surgical recovery\n\nBoth our interns ($80 initial) and licensed OMDs ($120 initial) are experienced in pain treatment."},
+  // MENTAL HEALTH
+  {k:["stress","anxiety","depression","mental","sleep","insomnia","ptsd","trauma","worry","nervous","panic"],
+   a:"We offer holistic treatment for mental health conditions including:\n\n\u2022 Anxiety & stress\n\u2022 Depression\n\u2022 PTSD (specialized veteran care)\n\u2022 Insomnia & sleep disorders\n\u2022 Panic & nervousness\n\nTreatment combines acupuncture, herbal support, and lifestyle guidance. VA insurance accepted for eligible veterans."},
+  // PREGNANCY
+  {k:["pregnancy","pregnant","fertility","birth","baby","prenatal","postpartum","ivf","conceive","morning sickness","labor"],
+   a:"We offer comprehensive pregnancy & fertility support:\n\n\u2022 Fertility support & IVF support\n\u2022 Prenatal wellness care\n\u2022 Morning sickness relief\n\u2022 Labor preparation\n\u2022 Postpartum recovery\n\nDr. Yu and Dr. Sekine offer package treatment plans. Call (702) 852-1280 for details!"},
+  // WEIGHT
+  {k:["weight","obes","lose weight","diet","fat","slim","body","bmi"],
+   a:"We offer integrated weight management combining:\n\n\u2022 Acupuncture treatments\n\u2022 Herbal medicine\n\u2022 Nutritional guidance\n\u2022 Lifestyle support\n\nDr. Yu and Dr. Sekine can design a personalized package treatment plan. Call (702) 852-1280 to discuss options!"},
+  // CANCER
+  {k:["cancer","oncology","chemo","chemotherapy","radiation","tumor","nausea"],
+   a:"We provide oncology supportive care through our MD-OMD Unified Medical Clinic. We help manage:\n\n\u2022 Nausea from chemo/radiation\n\u2022 Fatigue & weakness\n\u2022 Pain management\n\u2022 Sleep quality\n\u2022 Overall treatment tolerance\n\nOur integrated model coordinates with your primary oncology team."},
+  // STROKE
+  {k:["stroke","recovery","rehab","paralysis","motor","spasticity"],
+   a:"We offer post-stroke rehabilitation through our MD-OMD Unified Medical Clinic. Acupuncture can support:\n\n\u2022 Motor recovery\n\u2022 Spasticity reduction\n\u2022 Quality of life improvement\n\u2022 Pain management\n\nPhysician-led care is coordinated with our licensed OMDs for the best outcomes."},
+  // DISCOUNT
+  {k:["discount","senior","military","student","educator","community","deal","special","promo","coupon"],
+   a:"We offer a $5 community discount on ALL services for:\n\n\u2022 Seniors\n\u2022 Active military & veterans\n\u2022 Students\n\u2022 Educators\n\u2022 And more!\n\nJust bring a valid photo ID to your appointment. This discount applies to every visit!"},
+  // CONTACT
+  {k:["phone","call","contact","email","reach","talk","text","message","number"],
+   a:"You can reach us at:\n\n\u2022 Phone: (702) 852-1280\n\u2022 Text: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nOur office hours are Mon-Fri 8AM-4:30PM and Sat 8AM-12PM. We're happy to answer any questions!"},
+  // GUA SHA
+  {k:["gua sha","scraping","scrape"],
+   a:"Gua Sha is a gentle scraping technique that:\n\n\u2022 Promotes blood flow\n\u2022 Reduces inflammation\n\u2022 Relieves chronic pain patterns\n\u2022 Eases musculoskeletal tension\n\nIt's available as part of your treatment plan. Ask your practitioner if it's right for your condition!"},
+  // PACKAGE
+  {k:["package","plan","bundle","multi","series","program","course"],
+   a:"Dr. Yu and Dr. Sekine offer customized multi-session treatment packages for:\n\n\u2022 Pregnancy & Birth\n\u2022 Weight Management\n\u2022 Fertility Support\n\u2022 Custom health goals\n\nCall (702) 852-1280 to discuss a personalized treatment plan!"},
+  // INTEGRATED CARE
+  {k:["integrat","md-omd","unified","western","oriental","collaborat","md ","omd ","holistic","comprehensive"],
+   a:"We are Southern Nevada's first MD-OMD Unified Medical Clinic!\n\nThis means we combine:\n\u2022 MD/Western Medicine (physician-led diagnosis & treatment)\n\u2022 OMD/Oriental Medicine (evidence-informed adjunct therapies)\n\nThis fully integrative approach is especially effective for complex conditions like stroke recovery, cancer support, PTSD, and chronic illness."},
+  // UNIVERSITY
+  {k:["university","wongu university","school","college","education","teach","academic"],
+   a:"Wongu Health Center is the clinical arm of Wongu University of Oriental Medicine - Nevada's only Oriental medicine university clinic.\n\nOur teaching model means you receive thorough, unhurried treatments at affordable prices while supporting the training of Southern Nevada's future healthcare workforce.\n\nLearn more at wongu.edu"},
+  // DIFFERENCE INTERN VS OMD
+  {k:["difference","intern vs","omd vs","which","choose","better","recommend","should i"],
+   a:"Here's the difference between Intern and OMD visits:\n\nIntern Visits ($80 initial / $50 follow-up):\n\u2022 Treated by 3rd-4th year graduate student\n\u2022 Directly supervised by licensed OMD\n\u2022 Longer sessions (1.5-2 hours)\n\u2022 Great for new patients wanting thorough care\n\nOMD Visits ($120 initial / $80 follow-up):\n\u2022 Treated directly by licensed OMD\n\u2022 ~1 hour sessions\n\u2022 Herbal prescriptions available\n\u2022 All modalities available\n\nBoth provide excellent care!"},
+  // SAFETY
+  {k:["safe","risk","side effect","danger","complication","worry about","afraid","scared"],
+   a:"Acupuncture is very safe when performed by trained practitioners. Common and temporary effects may include:\n\n\u2022 Minor bruising at needle sites\n\u2022 Slight soreness\n\u2022 Brief lightheadedness\n\nAll our treatments use sterile, single-use needles. Every intern session is directly supervised by a licensed OMD. Serious complications are extremely rare.\n\nYour practitioner will discuss any risks specific to your condition before treatment."},
+  // MOXIBUSTION
+  {k:["moxa","moxibustion","mugwort","heat","warm"],
+   a:"Moxibustion is a traditional technique that uses dried mugwort (moxa) to warm specific acupuncture points. It helps stimulate circulation, promote healing, and strengthen the body's energy. Your practitioner may recommend it as part of your treatment plan."},
+  // HOW LONG / DURATION
+  {k:["how long","duration","take","length","minutes","hours"],
+   a:"Session lengths vary by provider:\n\n\u2022 Intern Initial Visit: 1.5-2 hours\n\u2022 Intern Follow-up: ~1 hour\n\u2022 OMD Initial Visit: ~1 hour\n\u2022 OMD Follow-up: 30-55 minutes\n\u2022 Cupping: up to 30 minutes\n\u2022 Doctor's Consultation: varies\n\nEach visit includes a 15-20 minute intake with tongue & pulse diagnosis, followed by treatment."},
+  // WALK IN
+  {k:["walk in","walk-in","without appointment","drop in","same day","available today","urgent"],
+   a:"We recommend scheduling an appointment to ensure availability. Please call (702) 852-1280 or text 702-550-9483 to check for same-day openings.\n\nOur hours are Mon-Fri 8AM-4:30PM and Sat 8AM-12PM."},
+  // THANK YOU / GREETING
+  {k:["thank","thanks","bye","goodbye","great","awesome","perfect","appreciate","ok","okay","got it"],
+   a:"You're welcome! If you have any more questions, feel free to ask. We look forward to seeing you at the clinic!\n\n\u2022 Call: (702) 852-1280\n\u2022 Text: 702-550-9483"},
+  {k:["hi","hello","hey","good morning","good afternoon","good evening","sup","yo"],
+   a:"Hi there! Welcome to Wongu Health Center. I can help answer questions about our services, pricing, hours, conditions we treat, and more. What would you like to know?"},
+  // PAYMENT METHODS
+  {k:["credit card","debit","cash","payment method","how to pay","venmo","zelle","check"],
+   a:"Please call our front desk at (702) 852-1280 for details on accepted payment methods. Payment is due at the time of service.\n\nWe accept VA insurance for eligible veterans and offer a $5 community discount with valid photo ID."},
+  // CHRONIC
+  {k:["chronic","autoimmune","fibromyalgia","fatigue","diabetes","long term","ongoing","lupus","crohn"],
+   a:"We specialize in chronic illness management through our MD-OMD Unified Medical Clinic:\n\n\u2022 Autoimmune conditions\n\u2022 Fibromyalgia\n\u2022 Chronic fatigue\n\u2022 Diabetes management\n\u2022 Digestive disorders\n\u2022 Long-term disease support\n\nOur integrated MD-OMD model coordinates physician-led care with Oriental medicine for better outcomes."},
+  // WOMEN'S HEALTH
+  {k:["women","menstrual","period","menopause","hormone","endometriosis","pms","cramp","reproductive"],
+   a:"We offer comprehensive women's health support:\n\n\u2022 Menstrual disorders & painful periods\n\u2022 Menopause symptoms\n\u2022 Hormonal balance\n\u2022 Endometriosis\n\u2022 PMS relief\n\u2022 Reproductive health\n\nOne of our Google reviewers saw marked reduction in menstrual cramps after just 2 sessions!"}
+];
+
+window.wonguToggleChat=function(){
+  wonguChatOpen=!wonguChatOpen;
+  document.getElementById("chatWindow").style.display=wonguChatOpen?"flex":"none";
+  document.getElementById("chatWindow").style.flexDirection="column";
+  document.getElementById("chatIconSvg").style.display=wonguChatOpen?"none":"block";
+  document.getElementById("closeIconSvg").style.display=wonguChatOpen?"block":"none";
+  if(wonguChatOpen){
+    document.getElementById("chatInput").focus();
+    if(!wonguStarted){wonguStarted=true;wonguShowWelcome();}
+  }
+};
+
+function wonguShowWelcome(){
+  wonguAddMsg("Hi! I can help answer questions about Wongu Health Center. Tap a topic below or type your own question!",false);
+  var d=document.getElementById("chatMessages");
+  var qr=document.createElement("div");
+  qr.id="quickReplies";
+  qr.style.cssText="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;";
+  ["What are your prices?","What do you treat?","What are your hours?","Do you take insurance?","How do I book?","Intern vs OMD?","Tell me about your doctors","Is acupuncture safe?"].forEach(function(t){
+    var b=document.createElement("button");
+    b.textContent=t;
+    b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:7px 13px;border-radius:20px;font-size:0.82rem;cursor:pointer;transition:all 0.2s;";
+    b.onmouseover=function(){this.style.background="#f0f4f0";};
+    b.onmouseout=function(){this.style.background="white";};
+    b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};
+    qr.appendChild(b);
+  });
+  d.appendChild(qr);
+  d.scrollTop=d.scrollHeight;
+}
+
+function wonguAddMsg(text,isUser){
+  var d=document.getElementById("chatMessages");
+  var m=document.createElement("div");
+  m.style.cssText=isUser
+    ?"background:#2d4a32;color:white;padding:10px 14px;border-radius:12px;border-bottom-right-radius:4px;margin-bottom:8px;font-size:0.9rem;line-height:1.5;max-width:85%;margin-left:auto;word-wrap:break-word;white-space:pre-line;"
+    :"background:#f0f4f0;padding:10px 14px;border-radius:12px;border-bottom-left-radius:4px;margin-bottom:8px;font-size:0.9rem;color:#333;line-height:1.5;max-width:85%;word-wrap:break-word;white-space:pre-line;";
+  m.textContent=text;
+  d.appendChild(m);
+  d.scrollTop=d.scrollHeight;
+}
+
+function wonguFindAnswer(q){
+  var ql=q.toLowerCase().replace(/[^a-z0-9\s]/g,"");
+  var best=null;var bestScore=0;
+  for(var i=0;i<qa.length;i++){
+    var score=0;
+    for(var j=0;j<qa[i].k.length;j++){
+      if(ql.indexOf(qa[i].k[j])!==-1){
+        score+=qa[i].k[j].length;
+      }
+    }
+    if(score>bestScore){bestScore=score;best=qa[i].a;}
+  }
+  if(bestScore>=3)return best;
+  return null;
+}
+
+window.wonguSendMsg=function(){
+  var input=document.getElementById("chatInput");
+  var text=input.value.trim();
+  if(!text)return;
+  input.value="";
+  wonguSendMessage(text);
+};
+
+function wonguSendMessage(text){
+  wonguAddMsg(text,true);
+  var qr=document.getElementById("quickReplies");
+  if(qr)qr.remove();
+  setTimeout(function(){
+    var answer=wonguFindAnswer(text);
+    if(answer){
+      wonguAddMsg(answer,false);
+    }else{
+      wonguAddMsg("I don\'t have a specific answer for that, but our team would love to help! Please reach out directly:\n\n\u2022 Call: (702) 852-1280\n\u2022 Text: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu",false);
+    }
+    showFollowUp();
+  },400);
+}
+
+function showFollowUp(){
+  var d=document.getElementById("chatMessages");
+  var qr=document.createElement("div");
+  qr.id="quickReplies";
+  qr.style.cssText="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;";
+  ["Pricing","Hours","How to book","Conditions we treat","Contact info"].forEach(function(t){
+    var b=document.createElement("button");
+    b.textContent=t;
+    b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;";
+    b.onmouseover=function(){this.style.background="#f0f4f0";};
+    b.onmouseout=function(){this.style.background="white";};
+    b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};
+    qr.appendChild(b);
+  });
+  d.appendChild(qr);
+  d.scrollTop=d.scrollHeight;
+}
+})();
 </script>
 </body>
 </html>
