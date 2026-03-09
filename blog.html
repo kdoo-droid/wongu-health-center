@@ -9,7 +9,7 @@
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="canonical" href="https://www.wonguhealthcenter.com/blog">
+  <link rel="canonical" href="https://wonguhealthcenter.com/blog">
   <link rel="stylesheet" href="styles.css?v=4">
 <script>if(sessionStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
@@ -122,7 +122,7 @@
         </div>
         <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Acupuncture</a></li><li><a href="services.html">Cupping Therapy</a></li><li><a href="services.html">Herbal Medicine</a></li><li><a href="services.html">Pain Management</a></li></ul></div>
         <div class="footer-col"><h4>Clinic</h4><ul><li><a href="about.html">About Us</a></li><li><a href="student-clinic.html">Student Clinic</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="blog.html">Blog</a></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+17028521280">(702) 852-1280</a></li><li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li><li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li><li>Mon&ndash;Fri: 8AM&ndash;4:30PM<br>Sat: 8AM&ndash;12PM</li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+17028521280">(702) 852-1280</a></li><li><a href="/cdn-cgi/l/email-protection#dab9b6b3b4b3b9f7b5bcbcb3b9bf9aadb5b4bdaff4bfbeaf"><span class="__cf_email__" data-cfemail="c5a6a9acabaca6e8aaa3a3aca6a085b2aaaba2b0eba0a1b0">[email&#160;protected]</span></a></li><li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li><li>Mon&ndash;Fri: 8AM&ndash;4:30PM<br>Sat: 8AM&ndash;12PM</li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Wongu Health Center. Part of <a href="https://wongu.edu" target="_blank" rel="noopener" style="text-decoration:underline;">Wongu University</a>.</span>
@@ -130,7 +130,7 @@
       </div>
     </div>
   </footer>
-  <script src="main.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="main.js"></script>
   <div class="mobile-book-bar">
     <a href="tel:+17028521280">Call to Book: (702) 852-1280 &rarr;</a>
   </div>
@@ -187,8 +187,4 @@ function wonguAddMsg(text,isUser){var d=document.getElementById("chatMessages");
 function wonguFindAnswer(q){var ql=q.toLowerCase();var best=null;var bestScore=0;for(var i=0;i<qa.length;i++){var score=0;for(var j=0;j<qa[i].k.length;j++){if(ql.indexOf(qa[i].k[j])!==-1)score+=qa[i].k[j].length;}if(score>bestScore){bestScore=score;best=qa[i].a;}}return bestScore>=3?best:null;}
 window.wonguSendMsg=function(){var input=document.getElementById("chatInput");var text=input.value.trim();if(!text)return;input.value="";wonguSendMessage(text);};
 function wonguSendMessage(text){wonguAddMsg(text,true);var qr=document.getElementById("quickReplies");if(qr)qr.remove();setTimeout(function(){var answer=wonguFindAnswer(text);if(answer){wonguAddMsg(answer,false);}else{wonguAddMsg("I don't have a specific answer for that. Please reach out directly:\n\n\u2022 Call: (702) 852-1280\n\u2022 Text: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu",false);}showFollowUp();},400);}
-function showFollowUp(){var d=document.getElementById("chatMessages");var qr=document.createElement("div");qr.id="quickReplies";qr.style.cssText="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;";["Pricing","Hours","How to book","Contact info"].forEach(function(t){var b=document.createElement("button");b.textContent=t;b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-radius:20px;font-size:0.78rem;cursor:pointer;";b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};qr.appendChild(b);});d.appendChild(qr);d.scrollTop=d.scrollHeight;}
-})();
-</script>
-</body>
-</html>
+function showFollowUp(){var d=document.getElementById("chatMessages");var qr=document.createElement("div");qr.id="quickReplies";qr.style.cssText="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;";["Pricing","Hours","How to book","Contact info"].forEach(function(t){var b=document.createElement("button");b.textContent=t;b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-r
