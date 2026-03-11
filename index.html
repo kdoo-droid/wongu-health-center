@@ -392,8 +392,8 @@
       <div class="grid-3">
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
           <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--sand),var(--sage-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="images/team-director.jpg" alt="Dr. Yu, Licensed OMD and Clinic Director at Wongu Health Center, smiling warmly at the camera in professional attire" style="width:100%;height:100%;object-fit:cover;">
-
+            <!-- Replace with real photo: <img src="images/dr-yu.jpg" alt="Dr. Yu" style="width:100%;height:100%;object-fit:cover;"> -->
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
           </div>
           <h4 style="margin-bottom:4px;">Dr. Yu</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; Clinic Director</p>
@@ -402,7 +402,8 @@
 
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
           <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--sand),var(--sage-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="images/team-omd-1.jpg" alt="Dr. Sekine" style="width:100%;height:100%;object-fit:cover;">
+            <!-- Replace with real photo: <img src="images/dr-sekine.jpg" alt="Dr. Sekine" style="width:100%;height:100%;object-fit:cover;"> -->
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
           </div>
           <h4 style="margin-bottom:4px;">Dr. Sekine</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; Japanese Acupuncture Specialist</p>
@@ -411,7 +412,7 @@
 
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
           <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--sand),var(--sage-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="images/dr-fish.jpg" alt="Dr. Fish" style="width:100%;height:100%;object-fit:cover;">
+            <img src="images/dr-fish.jpg" alt="Madison Fish, OMD at Wongu Health Center" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Fish</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; General Acupuncture</p>
@@ -627,7 +628,7 @@
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:+17028521280">(702) 852-1280</a></li>
-            <li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li>
+            <li><a href="mailto:clinic-office@wongu.edu" style="color:var(--sage);">clinic-office@wongu.edu</a></li>
             <li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li>
             <li>Mon–Fri: 8AM–4:30PM<br>Sat: 8AM–12PM</li>
           </ul>
@@ -870,4 +871,14 @@ function showFollowUp(){
     b.textContent=t;
     b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;";
     b.onmouseover=function(){this.style.background="#f0f4f0";};
-    b.onmouseout=function(){this.s
+    b.onmouseout=function(){this.style.background="white";};
+    b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};
+    qr.appendChild(b);
+  });
+  d.appendChild(qr);
+  d.scrollTop=d.scrollHeight;
+}
+})();
+</script>
+</body>
+</html>

@@ -128,7 +128,7 @@
         </div>
         <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Acupuncture</a></li><li><a href="services.html">Cupping Therapy</a></li><li><a href="services.html">Herbal Medicine</a></li><li><a href="services.html">Pain Management</a></li></ul></div>
         <div class="footer-col"><h4>Clinic</h4><ul><li><a href="about.html">About Us</a></li><li><a href="student-clinic.html">Student Clinic</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="faq.html">FAQ</a></li><li><a href="about.html#integrated-care">Integrated Care</a></li><li><a href="blog.html">Blog</a></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+17028521280">(702) 852-1280</a></li><li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li><li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+17028521280">(702) 852-1280</a></li><li><a href="mailto:clinic-office@wongu.edu" style="color:var(--sage);">clinic-office@wongu.edu</a></li><li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Wongu Health Center. Part of <a href="https://wongu.edu" target="_blank" rel="noopener" style="text-decoration:underline;">Wongu University</a>.</span>
@@ -358,4 +358,16 @@ function showFollowUp(){
   ["Pricing","Hours","How to book","Conditions we treat","Contact info"].forEach(function(t){
     var b=document.createElement("button");
     b.textContent=t;
-    b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-radius:20px;font-size:0
+    b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;";
+    b.onmouseover=function(){this.style.background="#f0f4f0";};
+    b.onmouseout=function(){this.style.background="white";};
+    b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};
+    qr.appendChild(b);
+  });
+  d.appendChild(qr);
+  d.scrollTop=d.scrollHeight;
+}
+})();
+</script>
+</body>
+</html>
