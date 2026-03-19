@@ -56,7 +56,7 @@
           <p style="color:var(--gray);margin:16px 0 28px;line-height:1.8;">Fill out the form below and our front desk will follow up within one business day (Mon–Fri) to confirm your appointment time. Requests submitted on weekends will be responded to the following Monday. All services are by appointment only.</p>
 
           <div class="card" style="padding:32px;">
-            <form action="https://formspree.io/f/xgondboe" method="POST" id="appointmentForm" novalidate>
+            <form action="/api/contact" method="POST" id="appointmentForm" novalidate>
               <input type="hidden" name="_subject" value="New Appointment Request – Wongu Health Center">
               <input type="hidden" name="_replyto" value="">
 
@@ -337,18 +337,25 @@
       if (d) d.min = new Date().toISOString().split('T')[0];
     })();
 
-    // Appointment form: show success state after Formspree AJAX submission
+    // Appointment form — submits to Vercel serverless function /api/contact
     (function() {
       var form = document.getElementById('appointmentForm');
       var success = document.getElementById('formSuccess');
+      var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
       if (!form) return;
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        var data = new FormData(form);
-        fetch(form.action, {
+        // Collect form fields as JSON
+        var fd = new FormData(form);
+        var data = {};
+        fd.forEach(function(val, key) { data[key] = val; });
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        fetch('/api/contact', {
           method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         }).then(function(res) {
           if (res.ok) {
             form.style.display = 'none';
@@ -357,9 +364,13 @@
               gtag('event', 'appointment_request', { event_category: 'CTA', event_label: 'Contact Form' });
             }
           } else {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Appointment Request';
             alert('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
           }
         }).catch(function() {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Appointment Request';
           alert('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
         });
       });
