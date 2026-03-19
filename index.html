@@ -16,7 +16,10 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://wonguhealthcenter.com">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -69,26 +72,27 @@
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "10"
+      "ratingValue": "4.9",
+      "reviewCount": "31"
     }
   }
   </script>
 <script>if(sessionStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
 <body class="has-notif">
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
   <!-- Notification Banner -->
-  <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);color:white;padding:16px 48px 16px 20px;text-align:center;font-size:1rem;font-weight:500;line-height:1.6;position:relative;z-index:99999;width:100%;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
+  <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);">
     <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280" style="color:white;font-weight:700;text-decoration:underline;">(702) 852-1280</a> or text <a href="sms:+17025509483" style="color:white;font-weight:700;text-decoration:underline;">702-550-9483</a> to schedule your appointment.</span>
-    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');sessionStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;padding:4px 8px;">&times;</button>
+    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');sessionStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" class="notif-dismiss">&times;</button>
   </div>
 
 
   <!-- ==================== HEADER ==================== -->
-  <header class="site-header" style="position:sticky;top:0;" role="banner">
+  <header class="site-header" role="banner">
     <div class="header-top">
       <div class="container">
-        <span>Nevada's Only Oriental Medicine University Clinic</span>
+        <span>Nevada's Only Oriental Medicine University Clinic · <em style="font-style:normal;opacity:0.85;">Se habla español</em></span>
         <div style="display:flex;gap:24px;align-items:center;">
           <a href="tel:+17028521280">📞 (702) 852-1280</a>
           <a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University →</a>
@@ -103,7 +107,7 @@
           </div>
           <div class="logo-text">
             <span class="logo-name">Wongu Health Center</span>
-            <span class="logo-tagline">Acupuncture & Oriental Medicine Clinic</span>
+            <span class="logo-tagline">University Acupuncture Clinic</span>
           </div>
         </a>
 
@@ -132,7 +136,7 @@
   <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
     <button class="mobile-close" aria-label="Close menu">&times;</button>
     <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
+    <a href="about.html">About</a>
     <a href="services.html">Services</a>
     <a href="pricing.html">Pricing</a>
     <a href="student-clinic.html">Student Clinic</a>
@@ -142,13 +146,13 @@
   </div>
 
   <!-- ==================== HERO ==================== -->
-  <section class="hero hero-home" aria-label="Welcome">
+  <section id="main-content" class="hero hero-home" aria-label="Welcome">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-content">
           <div class="hero-badge">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg>
-            5.0★ Rated on Google &middot; Serving Las Vegas Since 2015
+            4.9★ Rated on Google &middot; Serving Las Vegas Since 2015
           </div>
 
           <h1>Feel Better Naturally. We'll Take Good Care of You.</h1>
@@ -169,7 +173,7 @@
               <div class="label">Serving Las Vegas</div>
             </div>
             <div class="hero-stat">
-              <div class="number">5.0★</div>
+              <div class="number">4.9★</div>
               <div class="label">Google Rating</div>
             </div>
             <div class="hero-stat">
@@ -181,10 +185,8 @@
 
         <div class="hero-image">
           <div class="hero-image-main">
-            <img src="images/hero-clinic.jpg" alt="Licensed acupuncturist providing treatment at Wongu Health Center in Las Vegas" style="width:100%;height:100%;object-fit:cover;">
-            <div class="img-placeholder" style="display:none;">
-              [Replace images/hero-clinic.jpg with your photo]
-            </div>
+            <img src="images/hero-clinic.jpg" alt="Licensed acupuncturist providing treatment at Wongu Health Center in Las Vegas">
+
           </div>
           <div class="hero-float-card card-1">
             <div class="float-card-row">
@@ -219,7 +221,7 @@
       <div class="trust-items">
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          5.0★ Google Rating
+          4.9★ Google Rating
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
@@ -251,29 +253,29 @@
       </div>
 
       <div class="grid-4">
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
           <h4>Stroke Recovery</h4>
           <p style="font-size:0.88rem;">Rebuilding strength and mobility after a stroke. We're here to support your recovery journey, one session at a time.</p>
         </div>
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
           </div>
           <h4>Cancer Support</h4>
           <p style="font-size:0.88rem;">Going through chemo or radiation is tough enough. We help manage the nausea, fatigue, and pain so you can focus on healing.</p>
         </div>
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
           </div>
           <h4>Mental Health</h4>
           <p style="font-size:0.88rem;">Anxiety, depression, PTSD, insomnia &mdash; you don't have to white-knuckle through it. We offer gentle, effective support, including specialized veteran care.</p>
         </div>
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
           </div>
           <h4>Chronic Illness</h4>
@@ -282,29 +284,29 @@
       </div>
 
       <div class="grid-4" style="margin-top:20px;">
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
           </div>
           <h4>Pain Management</h4>
           <p style="font-size:0.88rem;">Back pain, migraines, sciatica, arthritis &mdash; if you've been living with pain, we can help you find real relief without relying on medications.</p>
         </div>
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
           </div>
           <h4>Pregnancy &amp; Birth</h4>
           <p style="font-size:0.88rem;">From fertility support to postpartum recovery, we're with you through every stage. Ask about our pregnancy care packages.</p>
         </div>
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
           <h4>Weight Management</h4>
           <p style="font-size:0.88rem;">A holistic approach to healthy weight &mdash; combining acupuncture, herbal medicine, and practical lifestyle guidance. No crash diets, just real support.</p>
         </div>
-        <div class="card fade-in" style="text-align:center;padding:28px;">
-          <div class="card-icon" style="margin:0 auto 16px;">
+        <div class="card card--center fade-in">
+          <div class="card-icon card-icon--center">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
           <h4>Women's Health</h4>
@@ -364,7 +366,7 @@
         </div>
 
         <div class="content-image">
-          <img src="images/clinic-room.jpg" alt="Modern treatment room at Wongu Health Center" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);">
+          <img src="images/clinic-room.jpg" alt="Modern treatment room at Wongu Health Center" class="img-cover" style="border-radius:var(--radius-lg);" loading="lazy">
         </div>
       </div>
     </div>
@@ -391,8 +393,8 @@
 
       <div class="grid-3">
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
-          <div style="width:240px;height:240px;border-radius:50%;background:linear-gradient(135deg,var(--sand),var(--sage-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="images/team-director.jpg" alt="Dr. Yu, Licensed Oriental Medicine Doctor and Clinic Director, smiling in a bright, modern acupuncture treatment room at Wongu Health Center in Las Vegas. The setting conveys a welcoming and professional atmosphere of care." style="width:100%;height:100%;object-fit:cover;">
+          <div class="team-photo">
+            <img src="images/team-director.jpg" alt="Dr. Yu, Licensed Oriental Medicine Doctor and Clinic Director, smiling in a bright, modern acupuncture treatment room at Wongu Health Center in Las Vegas. The setting conveys a welcoming and professional atmosphere of care." class="img-cover" loading="lazy">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Yu</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; Clinic Director</p>
@@ -400,8 +402,8 @@
         </div>
 
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
-          <div style="width:240px;height:240px;border-radius:50%;background:linear-gradient(135deg,var(--sand),var(--sage-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="images/team-omd-1.jpg" alt="Dr. Sekine, a licensed Oriental Medicine Doctor, in a bright, modern treatment room at Wongu Health Center in Las Vegas" style="width:100%;height:100%;object-fit:cover;">
+          <div class="team-photo">
+            <img src="images/team-omd-1.jpg" alt="Dr. Sekine, a licensed Oriental Medicine Doctor, in a bright, modern treatment room at Wongu Health Center in Las Vegas" class="img-cover" loading="lazy">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Sekine</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; Japanese Acupuncture Specialist</p>
@@ -409,8 +411,8 @@
         </div>
 
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
-          <div style="width:240px;height:240px;border-radius:50%;background:linear-gradient(135deg,var(--sand),var(--sage-light));margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="images/dr-fish.jpg" alt="Madison Fish, OMD at Wongu Health Center" style="width:100%;height:100%;object-fit:cover;">
+          <div class="team-photo">
+            <img src="images/dr-fish.jpg" alt="Madison Fish, OMD at Wongu Health Center" class="img-cover" loading="lazy">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Fish</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; General Acupuncture</p>
@@ -434,46 +436,46 @@
       <div class="grid-3">
         <div class="testimonial-card fade-in">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"For over 2 years, I tried so many things to relieve my painful menstrual cramps. After 2 sessions with Dr. Kim, I have noticed a marked reduction in my period pain."</p>
-          <p class="testimonial-author">Google Review</p>
-          <p class="testimonial-role">March 2023</p>
+          <p class="testimonial-text">"Best place to go! Dr. Sekine is amazing — he helped me with back pain that was a 10 out of 10. In just 15 minutes with acupuncture my pain was down to a 5. I have no words to express my gratitude. People are friendly and helpful. Highly recommended!"</p>
+          <p class="testimonial-author">Marlene G. · Google Review</p>
+          <p class="testimonial-role">March 2026</p>
         </div>
 
         <div class="testimonial-card fade-in">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Each employee is amazing and the prices for acupuncture are very reasonable. Vicky gives me acupuncture, and I feel incredible afterwards. Vicky is patient and thorough."</p>
-          <p class="testimonial-author">Google Review</p>
-          <p class="testimonial-role">January 2023</p>
+          <p class="testimonial-text">"They did more for me in 3 visits than the pain doctor did in 3 years. I don't know why I waited so long to make that first appointment. They are wonderful. Don't hesitate — just go and be happy you found them."</p>
+          <p class="testimonial-author">Mary K. · Google Review</p>
+          <p class="testimonial-role">October 2025</p>
         </div>
 
         <div class="testimonial-card fade-in">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Competent professionals. Reasonably priced. 2 sessions in two weeks, and a lot of improvement in my body."</p>
-          <p class="testimonial-author">Google Review</p>
-          <p class="testimonial-role">September 2022</p>
+          <p class="testimonial-text">"This place is a goldmine. I suffered from a car accident with a lot of body pain and a severe concussion. Acupuncture has healed me better than all other treatments I was getting. 1000% recommend. 100% painless."</p>
+          <p class="testimonial-author">Catherine S. · Google Review</p>
+          <p class="testimonial-role">September 2025</p>
         </div>
       </div>
 
       <div class="grid-3 testimonial-grid-2" style="margin-top:24px;">
         <div class="testimonial-card fade-in">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Over the years, I had many health issues. I was so desperate to travel to Mexico to get help. After a couple of treatments, I realized that I didn't need to. I found help in Las Vegas."</p>
-          <p class="testimonial-author">Google Review</p>
-          <p class="testimonial-role">July 2022</p>
+          <p class="testimonial-text">"Thank you Dr. Keita — not only for the effective treatment but also your genuine care. I felt so relaxed after my appointment. Oriental medicine is particularly effective at targeting the CAUSE of health issues. Highly recommend!"</p>
+          <p class="testimonial-author">Youngmin Y. · Google Review</p>
+          <p class="testimonial-role">March 2026</p>
         </div>
 
         <div class="testimonial-card fade-in">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Incredible treatment. My body has been free from so much tension. I am grateful for Wongu's health center services."</p>
-          <p class="testimonial-author">Google Review</p>
-          <p class="testimonial-role">July 2022</p>
+          <p class="testimonial-text">"Dr. Sekine is incredibly professional, knowledgeable, and attentive. He treated me with cupping, acupuncture, and moxa — my body feels lighter, more relaxed, and better aligned afterward. You can tell he genuinely cares about long-term health, not just quick fixes."</p>
+          <p class="testimonial-author">Yumezo D. · Google Review</p>
+          <p class="testimonial-role">February 2026</p>
         </div>
 
         <div class="testimonial-card fade-in">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"The quality of care and professionalism has been the best I have had anywhere in the Las Vegas valley. Wongu also has interesting educational events offered to the public."</p>
-          <p class="testimonial-author">Google Review</p>
-          <p class="testimonial-role">Las Vegas, NV</p>
+          <p class="testimonial-text">"This office is amazing! I came in with terrible pain and after just a few sessions I noticed serious relief. They will always be my go-to clinic for my needs."</p>
+          <p class="testimonial-author">Maxx D. · Google Review</p>
+          <p class="testimonial-role">March 2026</p>
         </div>
       </div>
 
@@ -481,7 +483,7 @@
       <div class="review-cta fade-in" style="max-width:600px;margin:40px auto 0;">
         <div>
           <div class="stars">★★★★★</div>
-          <p class="review-cta-text"><strong>5.0 out of 5</strong> on Google Reviews</p>
+          <p class="review-cta-text"><strong>4.9 out of 5</strong> · 31 reviews on Google</p>
         </div>
         <a href="https://g.page/r/CRPIuds9oPwlEBM/review" target="_blank" rel="noopener" class="btn btn-gold" style="white-space:nowrap;">Leave a Review</a>
       </div>
@@ -618,7 +620,8 @@
             <li><a href="student-clinic.html">Student Clinic</a></li>
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact</a></li><li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="blog.html">Blog</a></li>
           </ul>
         </div>
 
@@ -626,7 +629,8 @@
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:+17028521280">(702) 852-1280</a></li>
-            <li><a href="mailto:clinic-office@wongu.edu" style="color:var(--sage);">clinic-office@wongu.edu</a></li>
+            <li><a href="sms:+17025509483">Text: 702-550-9483</a></li>
+            <li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li>
             <li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li>
             <li>Mon–Fri: 8AM–4:30PM<br>Sat: 8AM–12PM</li>
           </ul>
@@ -649,234 +653,5 @@
   <div class="mobile-book-bar">
     <a href="tel:+17028521280">Call to Book: (702) 852-1280 →</a>
   </div>
-<!-- Wongu Chat Widget -->
-<div id="wonguChat" style="position:fixed;bottom:90px;right:20px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-  <button id="chatToggle" onclick="wonguToggleChat()" style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#2d4a32,#4a7c59);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-    <svg id="chatIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    <svg id="closeIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </button>
-  <div id="chatWindow" style="display:none;position:absolute;bottom:70px;right:0;width:370px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.15);overflow:hidden;">
-    <div style="background:linear-gradient(135deg,#2d4a32,#4a7c59);color:white;padding:16px 20px;">
-      <div style="font-weight:600;font-size:1rem;">Wongu Health Center</div>
-      <div style="font-size:0.8rem;opacity:0.85;">Quick answers about our clinic</div>
-    </div>
-    <div id="chatMessages" style="overflow-y:auto;padding:16px;max-height:350px;min-height:200px;"></div>
-    <div style="padding:12px;border-top:1px solid #eee;display:flex;gap:8px;">
-      <input id="chatInput" type="text" placeholder="Type your question..." onkeydown="if(event.key==='Enter')wonguSendMsg()" style="flex:1;padding:10px 14px;border:1.5px solid #ddd;border-radius:24px;font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='#4a7c59'" onblur="this.style.borderColor='#ddd'">
-      <button onclick="wonguSendMsg()" style="width:40px;height:40px;border-radius:50%;background:#4a7c59;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
-      </button>
-    </div>
-  </div>
-</div>
-<script>
-(function(){
-var wonguChatOpen=false;
-var wonguStarted=false;
-
-var qa=[
-  // PRICING
-  {k:["price","cost","how much","pricing","fee","charge","pay","afford","cheap","expensive","rate","dollar","money"],
-   a:"Here's our pricing:\n\n\u2022 Intern Initial Visit: $80 (1.5-2 hours)\n\u2022 Intern Follow-up: $50 (~1 hour)\n\u2022 OMD Initial Visit: $120 (~1 hour)\n\u2022 OMD Follow-up: $80 (30-55 min)\n\u2022 OMD + Observer: $100 initial / $70 follow-up\n\u2022 Doctor's Consultation: $100\n\u2022 Cupping: $50 (intern) / $100 (OMD, includes consultation)\n\u2022 Herbal Rx: $10/day\n\n$5 community discount for seniors, military, students & educators with photo ID!"},
-  // HOURS
-  {k:["hour","open","close","when","time","monday","tuesday","wednesday","thursday","friday","saturday","sunday","weekend","day"],
-   a:"Our clinic hours:\n\n\u2022 Monday - Friday: 8:00 AM - 4:30 PM\n\u2022 Saturday: 8:00 AM - 12:00 PM\n\u2022 Sunday: Closed\n\nCall (702) 852-1280 or text 702-550-9483 to schedule!"},
-  // CONDITIONS
-  {k:["treat","condition","help with","what do you","illness","disease","symptom","diagnos","what can","heal","cure"],
-   a:"We treat a wide range of conditions:\n\n\u2022 Stroke Recovery\n\u2022 Cancer Support (chemo/radiation side effects)\n\u2022 Mental Health & PTSD (including veterans)\n\u2022 Chronic Illness & Autoimmune\n\u2022 Pain Management (back, joint, migraines, sciatica, arthritis)\n\u2022 Pregnancy & Birth Support\n\u2022 Weight Management\n\u2022 Women's Health\n\u2022 Stress, Anxiety & Insomnia\n\u2022 Sports Injuries\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans!"},
-  // INSURANCE
-  {k:["insurance","va ","veteran","accept","cover","tricare","benefits"],
-   a:"We accept VA insurance for eligible veterans. For other insurance types, please call us at (702) 852-1280 to check your specific coverage.\n\nWe also offer a $5 community discount for military members, seniors, students, and educators with valid photo ID."},
-  // BOOKING
-  {k:["book","appointment","reserve","schedule","sign up","register","make an","set up"],
-   a:"You can schedule an appointment by:\n\n\u2022 Calling: (702) 852-1280\n\u2022 Texting: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nWe're working on getting online booking back up. In the meantime our front desk team is happy to help you by phone or text!"},
-  // LOCATION
-  {k:["location","address","where","find you","direction","map","drive","parking","located"],
-   a:"We're located at:\n\n8630 S Eastern Ave\nLas Vegas, NV 89123\n\n(Inside the Wongu University campus)\n\nCall (702) 852-1280 if you need help finding us!"},
-  // ACUPUNCTURE
-  {k:["acupuncture","needle","how does acupuncture","what is acupuncture","does it hurt","painful"],
-   a:"Acupuncture uses thin, sterile needles placed at specific points on your body to stimulate natural healing. It's effective for chronic pain, migraines, sciatica, neurological conditions, stress, and much more.\n\nMost patients find it very relaxing with minimal discomfort. The needles are much thinner than injection needles!\n\n\u2022 Intern sessions: $80 initial / $50 follow-up\n\u2022 OMD sessions: $120 initial / $80 follow-up"},
-  // CUPPING
-  {k:["cupping","cup","glass cup","fire cup","suction"],
-   a:"We offer fire cupping therapy using glass cups for sessions up to 30 minutes. Cupping promotes blood circulation, relieves muscle tension, and reduces inflammation.\n\n\u2022 Intern Cupping: $50\n\u2022 OMD Cupping: $100 (includes consultation)\n\nOur OMDs use traditional glass cups for all cupping treatments."},
-  // HERBAL
-  {k:["herbal","herb","medicine","formula","prescription","chinese medicine","tcm","traditional"],
-   a:"Our licensed OMDs prescribe custom Chinese herbal formulas tailored to your specific condition. Herbal prescriptions are $10 per day and can complement your acupuncture treatments for better results.\n\nHerbal formulas are prepared after your treatment based on your practitioner's diagnosis."},
-  // INTERN/STUDENT
-  {k:["intern","student","supervised","training","learning","student clinic","who treats"],
-   a:"Our student interns are 3rd and 4th-year graduate students from Wongu University of Oriental Medicine. Every single intern session is directly supervised by a licensed OMD for your safety.\n\nBenefits of intern visits:\n\u2022 Longer appointments (1.5-2 hours)\n\u2022 More affordable ($80 initial, $50 follow-up)\n\u2022 Thorough, unhurried evaluations\n\u2022 Same quality care under OMD supervision"},
-  // DOCTORS/STAFF
-  {k:["doctor","omd","practitioner","dr yu","dr. yu","dr sekine","dr. sekine","provider","who","staff","team","licensed"],
-   a:"Our clinic team includes:\n\n\u2022 Dr. Yu - Licensed OMD, clinic director\n\u2022 Dr. Sekine - Licensed OMD, specializing in Japanese acupuncture and chronic internal diseases\n\u2022 Supervised student interns (3rd & 4th year)\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans for pregnancy, weight management, fertility, and more!"},
-  // FIRST VISIT
-  {k:["first visit","first time","expect","prepare","what to","bring","wear","before","new patient","never been"],
-   a:"Here's how to prepare for your first visit:\n\n1. Eat a light snack beforehand (don't come on an empty stomach)\n2. Drink plenty of water before and after\n3. Wear comfortable, loose clothing (access to arms and legs needed)\n\nWhat to expect:\n\u2022 15-20 min intake with tongue & pulse diagnosis\n\u2022 Full acupuncture treatment\n\u2022 Intern visits: 1.5-2 hours total\n\u2022 OMD visits: ~1 hour total\n\nHerbal formula may be prepared after your treatment."},
-  // PAIN
-  {k:["pain","back pain","knee","joint","neck","shoulder","headache","migraine","sciatica","arthritis","hurt","sore","ache","injury","injuries"],
-   a:"We specialize in drug-free pain management! We commonly treat:\n\n\u2022 Back & neck pain\n\u2022 Joint pain & arthritis\n\u2022 Migraines & headaches\n\u2022 Sciatica\n\u2022 Shoulder & knee pain\n\u2022 Sports injuries\n\u2022 Post-surgical recovery\n\nBoth our interns ($80 initial) and licensed OMDs ($120 initial) are experienced in pain treatment."},
-  // MENTAL HEALTH
-  {k:["stress","anxiety","depression","mental","sleep","insomnia","ptsd","trauma","worry","nervous","panic"],
-   a:"We offer holistic treatment for mental health conditions including:\n\n\u2022 Anxiety & stress\n\u2022 Depression\n\u2022 PTSD (specialized veteran care)\n\u2022 Insomnia & sleep disorders\n\u2022 Panic & nervousness\n\nTreatment combines acupuncture, herbal support, and lifestyle guidance. VA insurance accepted for eligible veterans."},
-  // PREGNANCY
-  {k:["pregnancy","pregnant","fertility","birth","baby","prenatal","postpartum","ivf","conceive","morning sickness","labor"],
-   a:"We offer comprehensive pregnancy & fertility support:\n\n\u2022 Fertility support & IVF support\n\u2022 Prenatal wellness care\n\u2022 Morning sickness relief\n\u2022 Labor preparation\n\u2022 Postpartum recovery\n\nDr. Yu and Dr. Sekine offer package treatment plans. Call (702) 852-1280 for details!"},
-  // WEIGHT
-  {k:["weight","obes","lose weight","diet","fat","slim","body","bmi"],
-   a:"We offer integrated weight management combining:\n\n\u2022 Acupuncture treatments\n\u2022 Herbal medicine\n\u2022 Nutritional guidance\n\u2022 Lifestyle support\n\nDr. Yu and Dr. Sekine can design a personalized package treatment plan. Call (702) 852-1280 to discuss options!"},
-  // CANCER
-  {k:["cancer","oncology","chemo","chemotherapy","radiation","tumor","nausea"],
-   a:"We provide oncology supportive care through our MD-OMD Unified Medical Clinic. We help manage:\n\n\u2022 Nausea from chemo/radiation\n\u2022 Fatigue & weakness\n\u2022 Pain management\n\u2022 Sleep quality\n\u2022 Overall treatment tolerance\n\nOur integrated model coordinates with your primary oncology team."},
-  // STROKE
-  {k:["stroke","recovery","rehab","paralysis","motor","spasticity"],
-   a:"We offer post-stroke rehabilitation through our MD-OMD Unified Medical Clinic. Acupuncture can support:\n\n\u2022 Motor recovery\n\u2022 Spasticity reduction\n\u2022 Quality of life improvement\n\u2022 Pain management\n\nPhysician-led care is coordinated with our licensed OMDs for the best outcomes."},
-  // DISCOUNT
-  {k:["discount","senior","military","student","educator","community","deal","special","promo","coupon"],
-   a:"We offer a $5 community discount on ALL services for:\n\n\u2022 Seniors\n\u2022 Active military & veterans\n\u2022 Students\n\u2022 Educators\n\u2022 And more!\n\nJust bring a valid photo ID to your appointment. This discount applies to every visit!"},
-  // CONTACT
-  {k:["phone","call","contact","email","reach","talk","text","message","number"],
-   a:"You can reach us at:\n\n\u2022 Phone: (702) 852-1280\n\u2022 Text: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nOur office hours are Mon-Fri 8AM-4:30PM and Sat 8AM-12PM. We're happy to answer any questions!"},
-  // GUA SHA
-  {k:["gua sha","scraping","scrape"],
-   a:"Gua Sha is a gentle scraping technique that:\n\n\u2022 Promotes blood flow\n\u2022 Reduces inflammation\n\u2022 Relieves chronic pain patterns\n\u2022 Eases musculoskeletal tension\n\nIt's available as part of your treatment plan. Ask your practitioner if it's right for your condition!"},
-  // PACKAGE
-  {k:["package","plan","bundle","multi","series","program","course"],
-   a:"Dr. Yu and Dr. Sekine offer customized multi-session treatment packages for:\n\n\u2022 Pregnancy & Birth\n\u2022 Weight Management\n\u2022 Fertility Support\n\u2022 Custom health goals\n\nCall (702) 852-1280 to discuss a personalized treatment plan!"},
-  // INTEGRATED CARE
-  {k:["integrat","md-omd","unified","western","oriental","collaborat","md ","omd ","holistic","comprehensive"],
-   a:"We are Southern Nevada's first MD-OMD Unified Medical Clinic!\n\nThis means we combine:\n\u2022 MD/Western Medicine (physician-led diagnosis & treatment)\n\u2022 OMD/Oriental Medicine (evidence-informed adjunct therapies)\n\nThis fully integrative approach is especially effective for complex conditions like stroke recovery, cancer support, PTSD, and chronic illness."},
-  // UNIVERSITY
-  {k:["university","wongu university","school","college","education","teach","academic"],
-   a:"Wongu Health Center is the clinical arm of Wongu University of Oriental Medicine - Nevada's only Oriental medicine university clinic.\n\nOur teaching model means you receive thorough, unhurried treatments at affordable prices while supporting the training of Southern Nevada's future healthcare workforce.\n\nLearn more at wongu.edu"},
-  // DIFFERENCE INTERN VS OMD
-  {k:["difference","intern vs","omd vs","which","choose","better","recommend","should i"],
-   a:"Here's the difference between Intern and OMD visits:\n\nIntern Visits ($80 initial / $50 follow-up):\n\u2022 Treated by 3rd-4th year graduate student\n\u2022 Directly supervised by licensed OMD\n\u2022 Longer sessions (1.5-2 hours)\n\u2022 Great for new patients wanting thorough care\n\nOMD Visits ($120 initial / $80 follow-up):\n\u2022 Treated directly by licensed OMD\n\u2022 ~1 hour sessions\n\u2022 Herbal prescriptions available\n\u2022 All modalities available\n\nBoth provide excellent care!"},
-  // SAFETY
-  {k:["safe","risk","side effect","danger","complication","worry about","afraid","scared"],
-   a:"Acupuncture is very safe when performed by trained practitioners. Common and temporary effects may include:\n\n\u2022 Minor bruising at needle sites\n\u2022 Slight soreness\n\u2022 Brief lightheadedness\n\nAll our treatments use sterile, single-use needles. Every intern session is directly supervised by a licensed OMD. Serious complications are extremely rare.\n\nYour practitioner will discuss any risks specific to your condition before treatment."},
-  // MOXIBUSTION
-  {k:["moxa","moxibustion","mugwort","heat","warm"],
-   a:"Moxibustion is a traditional technique that uses dried mugwort (moxa) to warm specific acupuncture points. It helps stimulate circulation, promote healing, and strengthen the body's energy. Your practitioner may recommend it as part of your treatment plan."},
-  // HOW LONG / DURATION
-  {k:["how long","duration","take","length","minutes","hours"],
-   a:"Session lengths vary by provider:\n\n\u2022 Intern Initial Visit: 1.5-2 hours\n\u2022 Intern Follow-up: ~1 hour\n\u2022 OMD Initial Visit: ~1 hour\n\u2022 OMD Follow-up: 30-55 minutes\n\u2022 Cupping: up to 30 minutes\n\u2022 Doctor's Consultation: varies\n\nEach visit includes a 15-20 minute intake with tongue & pulse diagnosis, followed by treatment."},
-  // WALK IN
-  {k:["walk in","walk-in","without appointment","drop in","same day","available today","urgent"],
-   a:"We recommend scheduling an appointment to ensure availability. Please call (702) 852-1280 or text 702-550-9483 to check for same-day openings.\n\nOur hours are Mon-Fri 8AM-4:30PM and Sat 8AM-12PM."},
-  // THANK YOU / GREETING
-  {k:["thank","thanks","bye","goodbye","great","awesome","perfect","appreciate","ok","okay","got it"],
-   a:"You're welcome! If you have any more questions, feel free to ask. We look forward to seeing you at the clinic!\n\n\u2022 Call: (702) 852-1280\n\u2022 Text: 702-550-9483"},
-  {k:["hi","hello","hey","good morning","good afternoon","good evening","sup","yo"],
-   a:"Hi there! Welcome to Wongu Health Center. I can help answer questions about our services, pricing, hours, conditions we treat, and more. What would you like to know?"},
-  // PAYMENT METHODS
-  {k:["credit card","debit","cash","payment method","how to pay","venmo","zelle","check"],
-   a:"Please call our front desk at (702) 852-1280 for details on accepted payment methods. Payment is due at the time of service.\n\nWe accept VA insurance for eligible veterans and offer a $5 community discount with valid photo ID."},
-  // CHRONIC
-  {k:["chronic","autoimmune","fibromyalgia","fatigue","diabetes","long term","ongoing","lupus","crohn"],
-   a:"We specialize in chronic illness management through our MD-OMD Unified Medical Clinic:\n\n\u2022 Autoimmune conditions\n\u2022 Fibromyalgia\n\u2022 Chronic fatigue\n\u2022 Diabetes management\n\u2022 Digestive disorders\n\u2022 Long-term disease support\n\nOur integrated MD-OMD model coordinates physician-led care with Oriental medicine for better outcomes."},
-  // WOMEN'S HEALTH
-  {k:["women","menstrual","period","menopause","hormone","endometriosis","pms","cramp","reproductive"],
-   a:"We offer comprehensive women's health support:\n\n\u2022 Menstrual disorders & painful periods\n\u2022 Menopause symptoms\n\u2022 Hormonal balance\n\u2022 Endometriosis\n\u2022 PMS relief\n\u2022 Reproductive health\n\nOne of our Google reviewers saw marked reduction in menstrual cramps after just 2 sessions!"}
-];
-
-window.wonguToggleChat=function(){
-  wonguChatOpen=!wonguChatOpen;
-  document.getElementById("chatWindow").style.display=wonguChatOpen?"flex":"none";
-  document.getElementById("chatWindow").style.flexDirection="column";
-  document.getElementById("chatIconSvg").style.display=wonguChatOpen?"none":"block";
-  document.getElementById("closeIconSvg").style.display=wonguChatOpen?"block":"none";
-  if(wonguChatOpen){
-    document.getElementById("chatInput").focus();
-    if(!wonguStarted){wonguStarted=true;wonguShowWelcome();}
-  }
-};
-
-function wonguShowWelcome(){
-  wonguAddMsg("Hi! I can help answer questions about Wongu Health Center. Tap a topic below or type your own question!",false);
-  var d=document.getElementById("chatMessages");
-  var qr=document.createElement("div");
-  qr.id="quickReplies";
-  qr.style.cssText="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;";
-  ["What are your prices?","What do you treat?","What are your hours?","Do you take insurance?","How do I book?","Intern vs OMD?","Tell me about your doctors","Is acupuncture safe?"].forEach(function(t){
-    var b=document.createElement("button");
-    b.textContent=t;
-    b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:7px 13px;border-radius:20px;font-size:0.82rem;cursor:pointer;transition:all 0.2s;";
-    b.onmouseover=function(){this.style.background="#f0f4f0";};
-    b.onmouseout=function(){this.style.background="white";};
-    b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};
-    qr.appendChild(b);
-  });
-  d.appendChild(qr);
-  d.scrollTop=d.scrollHeight;
-}
-
-function wonguAddMsg(text,isUser){
-  var d=document.getElementById("chatMessages");
-  var m=document.createElement("div");
-  m.style.cssText=isUser
-    ?"background:#2d4a32;color:white;padding:10px 14px;border-radius:12px;border-bottom-right-radius:4px;margin-bottom:8px;font-size:0.9rem;line-height:1.5;max-width:85%;margin-left:auto;word-wrap:break-word;white-space:pre-line;"
-    :"background:#f0f4f0;padding:10px 14px;border-radius:12px;border-bottom-left-radius:4px;margin-bottom:8px;font-size:0.9rem;color:#333;line-height:1.5;max-width:85%;word-wrap:break-word;white-space:pre-line;";
-  m.textContent=text;
-  d.appendChild(m);
-  d.scrollTop=d.scrollHeight;
-}
-
-function wonguFindAnswer(q){
-  var ql=q.toLowerCase().replace(/[^a-z0-9\s]/g,"");
-  var best=null;var bestScore=0;
-  for(var i=0;i<qa.length;i++){
-    var score=0;
-    for(var j=0;j<qa[i].k.length;j++){
-      if(ql.indexOf(qa[i].k[j])!==-1){
-        score+=qa[i].k[j].length;
-      }
-    }
-    if(score>bestScore){bestScore=score;best=qa[i].a;}
-  }
-  if(bestScore>=3)return best;
-  return null;
-}
-
-window.wonguSendMsg=function(){
-  var input=document.getElementById("chatInput");
-  var text=input.value.trim();
-  if(!text)return;
-  input.value="";
-  wonguSendMessage(text);
-};
-
-function wonguSendMessage(text){
-  wonguAddMsg(text,true);
-  var qr=document.getElementById("quickReplies");
-  if(qr)qr.remove();
-  setTimeout(function(){
-    var answer=wonguFindAnswer(text);
-    if(answer){
-      wonguAddMsg(answer,false);
-    }else{
-      wonguAddMsg("I don\'t have a specific answer for that, but our team would love to help! Please reach out directly:\n\n\u2022 Call: (702) 852-1280\n\u2022 Text: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu",false);
-    }
-    showFollowUp();
-  },400);
-}
-
-function showFollowUp(){
-  var d=document.getElementById("chatMessages");
-  var qr=document.createElement("div");
-  qr.id="quickReplies";
-  qr.style.cssText="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;";
-  ["Pricing","Hours","How to book","Conditions we treat","Contact info"].forEach(function(t){
-    var b=document.createElement("button");
-    b.textContent=t;
-    b.style.cssText="background:white;border:1.5px solid #4a7c59;color:#2d4a32;padding:6px 11px;border-radius:20px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;";
-    b.onmouseover=function(){this.style.background="#f0f4f0";};
-    b.onmouseout=function(){this.style.background="white";};
-    b.onclick=function(){var q=document.getElementById("quickReplies");if(q)q.remove();wonguSendMessage(t);};
-    qr.appendChild(b);
-  });
-  d.appendChild(qr);
-  d.scrollTop=d.scrollHeight;
-}
-})();
-</script>
 </body>
 </html>
