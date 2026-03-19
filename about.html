@@ -12,21 +12,13 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://wonguhealthcenter.com/about">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
-<script>if(sessionStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
-<body class="has-notif">
-  <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- Notification Banner -->
-  <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);">
-    <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280" style="color:white;font-weight:700;text-decoration:underline;">(702) 852-1280</a> or text <a href="sms:+17025509483" style="color:white;font-weight:700;text-decoration:underline;">702-550-9483</a> to schedule your appointment.</span>
-    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');sessionStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" class="notif-dismiss">&times;</button>
-  </div>
-
-
+<body>
+  <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
   <!-- HEADER (same as index) -->
   <header class="site-header" role="banner">
     <div class="header-top">
@@ -60,7 +52,7 @@
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </nav>
-        <a href="tel:+17028521280" class="btn btn-primary nav-cta">Call to Book</a>
+        <a href="contact.html#appointment-form" class="btn btn-primary nav-cta">Book Appointment</a>
         <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -260,10 +252,10 @@
     <div class="container">
       <div class="cta-banner fade-in">
         <h2>Experience the Wongu Difference</h2>
-        <p>Book your first appointment and see why thousands trust our university clinic for their wellness needs.</p>
+        <p>Request your first appointment online — we'll confirm within 24 hours. See why so many in Las Vegas trust our university clinic.</p>
         <div class="btn-actions">
-          <a href="tel:+17028521280" class="btn btn-white">Call to Book: (702) 852-1280</a>
-          <a href="contact.html" class="btn btn-secondary" style="border-color:rgba(255,255,255,0.3);color:white;">Contact Us</a>
+          <a href="contact.html#appointment-form" class="btn btn-white">Request Appointment Online</a>
+          <a href="tel:+17028521280" class="btn btn-secondary" style="border-color:rgba(255,255,255,0.3);color:white;">Call (702) 852-1280</a>
         </div>
       </div>
     </div>
@@ -326,7 +318,7 @@
   <script src="main.js"></script>
   <!-- Sticky Mobile Book Now Bar -->
   <div class="mobile-book-bar">
-    <a href="tel:+17028521280">Call to Book: (702) 852-1280 →</a>
+    <a href="contact.html#appointment-form">Request Appointment →</a>
   </div>
 </body>
 </html>

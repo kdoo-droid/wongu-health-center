@@ -10,20 +10,13 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://wonguhealthcenter.com/blog">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
-<script>if(sessionStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
-<body class="has-notif">
-  <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- Notification Banner -->
-  <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);">
-    <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280" style="color:white;font-weight:700;text-decoration:underline;">(702) 852-1280</a> or text <a href="sms:+17025509483" style="color:white;font-weight:700;text-decoration:underline;">702-550-9483</a> to schedule your appointment.</span>
-    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');sessionStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" class="notif-dismiss">&times;</button>
-  </div>
-
+<body>
+  <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
   <header class="site-header" role="banner">
     <div class="header-top">
       <div class="container">
@@ -51,7 +44,7 @@
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </nav>
-        <a href="tel:+17028521280" class="btn btn-primary nav-cta">Call to Book</a>
+        <a href="contact.html#appointment-form" class="btn btn-primary nav-cta">Book Appointment</a>
         <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -74,7 +67,16 @@
   <section class="section">
     <div class="container" style="max-width:900px;">
 
-      <!-- Article 1 -->
+      <!-- Article 1 (newest) -->
+      <article style="margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid #e5e7eb;">
+        <span style="color:var(--sage);font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;">Herbal Medicine</span>
+        <h2 style="margin:8px 0 12px;font-size:1.5rem;"><a href="blog-chinese-herbs.html" style="color:var(--forest);text-decoration:none;">My Top 5 Favorite Chinese Herbs</a></h2>
+        <p style="color:var(--gray-light);font-size:0.88rem;margin-bottom:12px;">By Mia Windman &middot; March 19, 2026 &middot; 5 min read</p>
+        <p style="color:var(--gray);line-height:1.8;">From Dang Gui (Angelica Root) to Gou Qi Zi (Goji Berries), a current Wongu University student and UCLA Biochemistry graduate shares her five favorite Chinese herbs, how she uses them in daily life, and the research that backs each one up. A personal, practical guide to incorporating TCM herbs into your routine.</p>
+        <a href="blog-chinese-herbs.html" style="color:var(--sage);font-weight:600;display:inline-block;margin-top:8px;">Read More &rarr;</a>
+      </article>
+
+      <!-- Article 2 -->
       <article style="margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid #e5e7eb;">
         <span style="color:var(--sage);font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;">Acupuncture 101</span>
         <h2 style="margin:8px 0 12px;font-size:1.5rem;"><a href="blog-what-to-expect.html" style="color:var(--forest);text-decoration:none;">What to Expect at Your First Acupuncture Appointment</a></h2>
@@ -83,7 +85,7 @@
         <a href="blog-what-to-expect.html" style="color:var(--sage);font-weight:600;display:inline-block;margin-top:8px;">Read More &rarr;</a>
       </article>
 
-      <!-- Article 2 -->
+      <!-- Article 3 -->
       <article style="margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid #e5e7eb;">
         <span style="color:var(--sage);font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;">Pain Management</span>
         <h2 style="margin:8px 0 12px;font-size:1.5rem;"><a href="blog-acupuncture-migraines.html" style="color:var(--forest);text-decoration:none;">Can Acupuncture Help With Migraines? What the Research Shows</a></h2>
@@ -92,7 +94,7 @@
         <a href="blog-acupuncture-migraines.html" style="color:var(--sage);font-weight:600;display:inline-block;margin-top:8px;">Read More &rarr;</a>
       </article>
 
-      <!-- Article 3 -->
+      <!-- Article 4 -->
       <article style="margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid #e5e7eb;">
         <span style="color:var(--sage);font-weight:600;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;">Stress &amp; Mental Health</span>
         <h2 style="margin:8px 0 12px;font-size:1.5rem;"><a href="blog-stress-acupuncture.html" style="color:var(--forest);text-decoration:none;">5 Ways Acupuncture Helps Manage Stress and Anxiety</a></h2>

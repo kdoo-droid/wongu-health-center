@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {k:["insurance","va ","veteran","accept","cover","tricare","benefits","culinary"],
      a:"We accept VA insurance for eligible veterans and Culinary insurance. For other insurance types, please call us at (702) 852-1280 to check your specific coverage.\n\nWe also offer a $5 community discount for military members, seniors, students, and educators with valid photo ID."},
     {k:["book","appointment","reserve","schedule","sign up","register","make an","set up"],
-     a:"You can schedule an appointment by:\n\n\u2022 Calling: (702) 852-1280\n\u2022 Texting: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nWe're working on getting online booking back up. In the meantime our front desk team is happy to help you by phone or text!"},
+     a:"You can request an appointment by:\n\n\u2022 Online form: wonguhealthcenter.com/contact (we confirm within 24 hours)\n\u2022 Calling: (702) 852-1280\n\u2022 Texting: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nAll services are by appointment only. Our team will confirm your time within one business day!"},
     {k:["location","address","where","find you","direction","map","drive","parking","located"],
      a:"We're located at:\n\n8630 S Eastern Ave\nLas Vegas, NV 89123\n\n(Inside the Wongu University campus)\n\nCall (702) 852-1280 if you need help finding us!"},
     {k:["acupuncture","needle","how does acupuncture","what is acupuncture","does it hurt","painful"],

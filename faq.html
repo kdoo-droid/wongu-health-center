@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://wonguhealthcenter.com/faq">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
@@ -27,16 +27,9 @@
     ]
   }
   </script>
-<script>if(sessionStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
-<body class="has-notif">
-  <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- Notification Banner -->
-  <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);">
-    <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280" style="color:white;font-weight:700;text-decoration:underline;">(702) 852-1280</a> or text <a href="sms:+17025509483" style="color:white;font-weight:700;text-decoration:underline;">702-550-9483</a> to schedule your appointment.</span>
-    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');sessionStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" class="notif-dismiss">&times;</button>
-  </div>
-
+<body>
+  <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
   <header class="site-header" role="banner">
     <div class="header-top"><div class="container"><span>Nevada's Only Oriental Medicine University Clinic · <em style="font-style:normal;opacity:0.85;">Se habla español</em></span><div style="display:flex;gap:24px;align-items:center;"><a href="tel:+17028521280">📞 (702) 852-1280</a><a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University →</a></div></div></div>
     <div class="header-main"><div class="container">
@@ -50,7 +43,7 @@
           </div>
         </a>
       <nav><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="student-clinic.html">Student Clinic</a></li><li><a href="faq.html" class="active">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
-      <a href="tel:+17028521280" class="btn btn-primary nav-cta">Call to Book</a>
+      <a href="contact.html#appointment-form" class="btn btn-primary nav-cta">Book Appointment</a>
       <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div></div>
   </header>
@@ -110,7 +103,7 @@
 
       <div class="faq-item">
         <button class="faq-question">How do I book an appointment?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg></span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">You can call us at <strong>(702) 852-1280</strong> to schedule your appointment, or text us at <strong>702-550-9483</strong>. You can also book online through our Unified Practice booking portal — just click any "Book Now" button on our website. All services are by appointment only. Our hours are Monday through Friday, 8:00 AM to 4:30 PM, and Saturday 8:00 AM to 12:00 PM. You can also email us at <a href="mailto:clinic-office@wongu.edu" style="color:var(--sage);">clinic-office@wongu.edu</a>.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">The easiest way is to use our <a href="contact.html#appointment-form" style="color:var(--sage);font-weight:600;">online appointment request form</a> — fill it out and we'll confirm your appointment within 24 business hours. You can also call us at <strong>(702) 852-1280</strong>, text us at <strong>702-550-9483</strong>, or email <a href="mailto:clinic-office@wongu.edu" style="color:var(--sage);">clinic-office@wongu.edu</a>. All services are by appointment only. Clinic hours are Monday–Friday 8:00 AM–4:30 PM and Saturday 8:00 AM–12:00 PM.</div></div>
       </div>
 
       <div class="faq-item">
@@ -213,7 +206,7 @@
   <script src="main.js"></script>
   <!-- Sticky Mobile Book Now Bar -->
   <div class="mobile-book-bar">
-    <a href="tel:+17028521280">Call to Book: (702) 852-1280 →</a>
+    <a href="contact.html#appointment-form">Request Appointment →</a>
   </div>
 </body>
 </html>

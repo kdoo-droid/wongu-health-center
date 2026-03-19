@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://wonguhealthcenter.com">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
@@ -77,17 +77,9 @@
     }
   }
   </script>
-<script>if(sessionStorage.getItem("notifDismissed")){document.write("<style>#notifBanner{display:none!important}</style>");}</script>
 </head>
-<body class="has-notif">
-  <a href="#main-content" class="skip-nav">Skip to main content</a>
-  <!-- Notification Banner -->
-  <div class="notification-banner" id="notifBanner" style="background:linear-gradient(135deg,#b45309,#d97706);">
-    <span>&#128222; Our online booking system is temporarily unavailable. Please call <a href="tel:+17028521280" style="color:white;font-weight:700;text-decoration:underline;">(702) 852-1280</a> or text <a href="sms:+17025509483" style="color:white;font-weight:700;text-decoration:underline;">702-550-9483</a> to schedule your appointment.</span>
-    <button onclick="document.getElementById('notifBanner').remove();document.body.classList.remove('has-notif');sessionStorage.setItem('notifDismissed','1');" aria-label="Dismiss notification" class="notif-dismiss">&times;</button>
-  </div>
-
-
+<body>
+  <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
   <!-- ==================== HEADER ==================== -->
   <header class="site-header" role="banner">
     <div class="header-top">
@@ -123,7 +115,7 @@
           </ul>
         </nav>
 
-        <a href="tel:+17028521280" class="btn btn-primary nav-cta">Call to Book</a>
+        <a href="contact.html#appointment-form" class="btn btn-primary nav-cta">Book Appointment</a>
 
         <button class="mobile-toggle" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -160,11 +152,11 @@
           <p class="hero-desc">Whether you're dealing with chronic pain, recovering from a stroke, struggling with anxiety, or simply ready to feel like yourself again &mdash; our team of licensed practitioners and dedicated interns is here to help. Walk in as a patient, leave as part of our community. Starting at just $80.</p>
 
           <div class="hero-actions">
-            <a href="tel:+17028521280" class="btn btn-primary btn-lg">
-              Schedule Your Visit: (702) 852-1280
+            <a href="contact.html#appointment-form" class="btn btn-primary btn-lg">
+              Request an Appointment
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="sms:+17025509483" class="btn btn-secondary">Or Text Us: 702-550-9483</a>
+            <a href="tel:+17028521280" class="btn btn-secondary">Or Call: (702) 852-1280</a>
           </div>
 
           <div class="hero-stats">
@@ -393,8 +385,8 @@
 
       <div class="grid-3">
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
-          <div class="team-photo">
-            <img src="images/team-director.jpg" alt="Dr. Yu, Licensed Oriental Medicine Doctor and Clinic Director, smiling in a bright, modern acupuncture treatment room at Wongu Health Center in Las Vegas. The setting conveys a welcoming and professional atmosphere of care." class="img-cover" loading="lazy">
+          <div class="team-photo" style="border-radius:50%;overflow:hidden;">
+            <img src="images/team-director.jpg" alt="Dr. Yu, Licensed Oriental Medicine Doctor and Clinic Director, smiling in a bright, modern acupuncture treatment room at Wongu Health Center in Las Vegas. The setting conveys a welcoming and professional atmosphere of care." class="img-cover" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Yu</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; Clinic Director</p>
@@ -402,8 +394,8 @@
         </div>
 
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
-          <div class="team-photo">
-            <img src="images/team-omd-1.jpg" alt="Dr. Sekine, a licensed Oriental Medicine Doctor, in a bright, modern treatment room at Wongu Health Center in Las Vegas" class="img-cover" loading="lazy">
+          <div class="team-photo" style="border-radius:50%;overflow:hidden;">
+            <img src="images/team-omd-1.jpg" alt="Dr. Sekine, a licensed Oriental Medicine Doctor, in a bright, modern treatment room at Wongu Health Center in Las Vegas" class="img-cover" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Sekine</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; Japanese Acupuncture Specialist</p>
@@ -411,8 +403,8 @@
         </div>
 
         <div class="card fade-in" style="text-align:center;padding:32px 24px;">
-          <div class="team-photo">
-            <img src="images/dr-fish.jpg" alt="Madison Fish, OMD at Wongu Health Center" class="img-cover" loading="lazy">
+          <div class="team-photo" style="border-radius:50%;overflow:hidden;">
+            <img src="images/dr-fish.jpg" alt="Madison Fish, OMD at Wongu Health Center" class="img-cover" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
           </div>
           <h4 style="margin-bottom:4px;">Dr. Fish</h4>
           <p style="color:var(--sage);font-size:0.85rem;font-weight:600;margin-bottom:8px;">Licensed OMD &middot; General Acupuncture</p>
@@ -651,7 +643,7 @@
   <script src="main.js"></script>
   <!-- Sticky Mobile Book Now Bar -->
   <div class="mobile-book-bar">
-    <a href="tel:+17028521280">Call to Book: (702) 852-1280 →</a>
+    <a href="contact.html#appointment-form">Request Appointment →</a>
   </div>
 </body>
 </html>
