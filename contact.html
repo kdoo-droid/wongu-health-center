@@ -59,6 +59,11 @@
             <form action="/api/contact" method="POST" id="appointmentForm" novalidate>
               <input type="hidden" name="_subject" value="New Appointment Request – Wongu Health Center">
               <input type="hidden" name="_replyto" value="">
+              <input type="hidden" name="form_started_at" id="appt-started-at" value="">
+              <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                <label for="appt-website">Leave this field blank</label>
+                <input type="text" id="appt-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
 
               <!-- New vs Returning -->
               <div style="margin-bottom:16px;">
@@ -78,13 +83,13 @@
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px;">
                 <div>
                   <label for="appt-name" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Full Name <span style="color:#dc2626;">*</span></label>
-                  <input type="text" id="appt-name" name="name" required placeholder="Jane Smith"
+                  <input type="text" id="appt-name" name="name" required maxlength="100" autocomplete="name" placeholder="Jane Smith"
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
                 </div>
                 <div>
                   <label for="appt-phone" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Phone Number <span style="color:#dc2626;">*</span></label>
-                  <input type="tel" id="appt-phone" name="phone" required placeholder="(702) 555-0100"
+                  <input type="tel" id="appt-phone" name="phone" required maxlength="25" autocomplete="tel" placeholder="(702) 555-0100"
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
                 </div>
@@ -92,7 +97,7 @@
 
               <div style="margin-bottom:16px;">
                 <label for="appt-email" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Email Address <span style="color:#dc2626;">*</span></label>
-                <input type="email" id="appt-email" name="email" required placeholder="you@email.com"
+                <input type="email" id="appt-email" name="email" required maxlength="254" autocomplete="email" placeholder="you@email.com"
                   style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
                   onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
               </div>
@@ -103,7 +108,7 @@
                   <select id="appt-service" name="service"
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
-                    <option value="">Select a service…</option>
+                    <option value="">Select a service...</option>
                     <option>Acupuncture</option>
                     <option>Cupping Therapy</option>
                     <option>Herbal Medicine Consultation</option>
@@ -117,7 +122,7 @@
                   <select id="appt-insurance" name="insurance"
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
-                    <option value="">Select…</option>
+                    <option value="">Select...</option>
                     <option>VA (Veterans Affairs)</option>
                     <option>Culinary Insurance</option>
                     <option>Self-Pay</option>
@@ -139,17 +144,17 @@
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
                     <option value="">Any time</option>
-                    <option>Morning (8:00 – 10:00 AM)</option>
-                    <option>Mid-Morning (10:00 AM – 12:00 PM)</option>
-                    <option>Afternoon (12:00 – 4:30 PM)</option>
-                    <option>Saturday Morning (8:00 AM – 12:00 PM)</option>
+                    <option>Morning (8:00 - 10:00 AM)</option>
+                    <option>Mid-Morning (10:00 AM - 12:00 PM)</option>
+                    <option>Afternoon (12:00 - 4:30 PM)</option>
+                    <option>Saturday Morning (8:00 AM - 12:00 PM)</option>
                   </select>
                 </div>
               </div>
 
               <div style="margin-bottom:24px;">
                 <label for="appt-notes" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Additional Notes <span style="font-weight:400;color:var(--gray-light);">(optional)</span></label>
-                <textarea id="appt-notes" name="notes" rows="3" placeholder="Any details about your condition, questions, or scheduling preferences…"
+                <textarea id="appt-notes" name="notes" rows="3" maxlength="2000" placeholder="Any details about your condition, questions, or scheduling preferences..."
                   style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;resize:vertical;"
                   onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'"></textarea>
               </div>
@@ -342,7 +347,9 @@
       var form = document.getElementById('appointmentForm');
       var success = document.getElementById('formSuccess');
       var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+      var startedAt = document.getElementById('appt-started-at');
       if (!form) return;
+      if (startedAt) startedAt.value = String(Date.now());
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         // Collect form fields as JSON
@@ -351,13 +358,17 @@
         fd.forEach(function(val, key) { data[key] = val; });
         // Show loading state
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
+        submitBtn.textContent = 'Sending...';
         fetch('/api/contact', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         }).then(function(res) {
-          if (res.ok) {
+          return res.json().catch(function() { return {}; }).then(function(payload) {
+            return { ok: res.ok, payload: payload };
+          });
+        }).then(function(result) {
+          if (result.ok) {
             form.style.display = 'none';
             success.style.display = 'block';
             if (typeof gtag === 'function') {
@@ -366,7 +377,7 @@
           } else {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit Appointment Request';
-            alert('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
+            alert(result.payload && result.payload.error ? result.payload.error : 'Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
           }
         }).catch(function() {
           submitBtn.disabled = false;
