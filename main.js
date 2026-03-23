@@ -57,10 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Active Nav Link ---
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
     const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    if (!href || /^(tel:|sms:|mailto:|https?:)/.test(href)) return;
+
+    const linkPath = href.split('#')[0].replace(/\/$/, '') || '/';
+    if (linkPath === currentPath) {
       link.classList.add('active');
     }
   });
@@ -183,8 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
      a:"We offer a $5 community discount on ALL services for:\n\n\u2022 Seniors\n\u2022 Active military & veterans\n\u2022 Students\n\u2022 Educators\n\u2022 And more!\n\nJust bring a valid photo ID to your appointment. This discount applies to every visit!"},
     {k:["phone","call","contact","email","reach","talk","text","message","number"],
      a:"You can reach us at:\n\n\u2022 Phone: (702) 852-1280\n\u2022 Text: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nOur office hours are Mon-Fri 8AM-4:30PM and Sat 8AM-12PM. We're happy to answer any questions!"},
-    {k:["gua sha","scraping","scrape"],
-     a:"Gua Sha is a gentle scraping technique that:\n\n\u2022 Promotes blood flow\n\u2022 Reduces inflammation\n\u2022 Relieves chronic pain patterns\n\u2022 Eases musculoskeletal tension\n\nIt's available as part of your treatment plan. Ask your practitioner if it's right for your condition!"},
     {k:["package","plan","bundle","multi","series","program","course"],
      a:"Dr. Yu and Dr. Sekine offer customized multi-session treatment packages for:\n\n\u2022 Pregnancy & Birth\n\u2022 Weight Management\n\u2022 Fertility Support\n\u2022 Custom health goals\n\nCall (702) 852-1280 to discuss a personalized treatment plan!"},
     {k:["integrat","md-omd","unified","western","oriental","collaborat","md ","omd ","holistic","comprehensive"],
