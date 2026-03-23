@@ -89,7 +89,7 @@
                 </div>
                 <div>
                   <label for="appt-phone" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Phone Number <span style="color:#dc2626;">*</span></label>
-                  <input type="tel" id="appt-phone" name="phone" required maxlength="25" autocomplete="tel" placeholder="(702) 555-0100"
+                  <input type="tel" id="appt-phone" name="phone" required maxlength="25" autocomplete="tel" inputmode="numeric" placeholder="(702) 555-0100"
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
                 </div>
@@ -348,10 +348,36 @@
       var success = document.getElementById('formSuccess');
       var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
       var startedAt = document.getElementById('appt-started-at');
+      var phoneInput = document.getElementById('appt-phone');
       if (!form) return;
       if (startedAt) startedAt.value = String(Date.now());
+
+      function isValidUsPhone(value) {
+        var digits = String(value || '').replace(/\D/g, '');
+        if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+        return digits.length === 10;
+      }
+
+      function updatePhoneValidity() {
+        if (!phoneInput) return true;
+        if (!phoneInput.value.trim()) {
+          phoneInput.setCustomValidity('');
+          return false;
+        }
+        var valid = isValidUsPhone(phoneInput.value);
+        phoneInput.setCustomValidity(valid ? '' : 'Please enter a valid 10-digit phone number.');
+        return valid;
+      }
+
+      if (phoneInput) {
+        phoneInput.addEventListener('input', updatePhoneValidity);
+        phoneInput.addEventListener('blur', updatePhoneValidity);
+      }
+
       form.addEventListener('submit', function(e) {
         e.preventDefault();
+        updatePhoneValidity();
+        if (!form.reportValidity()) return;
         // Collect form fields as JSON
         var fd = new FormData(form);
         var data = {};

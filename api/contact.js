@@ -85,7 +85,10 @@ function isValidEmail(value) {
 
 function isValidPhone(value) {
   const digits = value.replace(/\D/g, '');
-  return digits.length >= 10 && digits.length <= 15;
+  if (digits.length === 11 && digits.startsWith('1')) {
+    return true;
+  }
+  return digits.length === 10;
 }
 
 function isValidDate(value) {
