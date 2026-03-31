@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     + '<svg id="chatIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
     + '<svg id="closeIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>'
     + '</button>'
-    + '<div id="chatWindow" style="display:none;position:absolute;bottom:70px;right:0;width:370px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.15);overflow:hidden;">'
+    + '<div id="chatWindow" style="display:none;position:absolute;bottom:70px;right:0;width:370px;max-width:calc(100vw - 40px);background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.15);overflow:hidden;">'
     + '<div style="background:linear-gradient(135deg,#2d4a32,#4a7c59);color:white;padding:16px 20px;">'
     + '<div style="font-weight:600;font-size:1rem;">Wongu Health Center</div>'
     + '<div style="font-size:0.8rem;opacity:0.85;">Quick answers about our clinic</div>'
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {k:["intern","student","supervised","training","learning","student clinic","who treats"],
      a:"Our student interns are 3rd and 4th-year graduate students from Wongu University of Oriental Medicine. Every single intern session is directly supervised by a licensed OMD for your safety.\n\nBenefits of intern visits:\n\u2022 Longer appointments (1.5-2 hours)\n\u2022 More affordable ($80 initial, $50 follow-up)\n\u2022 Thorough, unhurried evaluations\n\u2022 Same quality care under OMD supervision"},
     {k:["doctor","omd","practitioner","dr yu","dr. yu","dr sekine","dr. sekine","provider","who","staff","team","licensed"],
-     a:"Our clinic team includes:\n\n\u2022 Dr. Yu - Licensed OMD, clinic director\n\u2022 Dr. Sekine - Licensed OMD, specializing in Japanese acupuncture and chronic internal diseases\n\u2022 Supervised student interns (3rd & 4th year)\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans for pregnancy, weight management, fertility, and more!"},
+     a:"Our clinic team includes:\n\n\u2022 Dr. Yu - Licensed OMD, Clinic Director\n\u2022 Dr. Sekine - Licensed OMD, Japanese acupuncture specialist\n\u2022 Dr. Joanne Eng - Licensed OMD\n\u2022 Dr. Fish - Licensed OMD, General Acupuncture\n\u2022 Supervised student interns (3rd & 4th year)\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans for pregnancy, weight management, fertility, and more!"},
     {k:["first visit","first time","expect","prepare","what to","bring","wear","before","new patient","never been"],
      a:"Here's how to prepare for your first visit:\n\n1. Eat a light snack beforehand (don't come on an empty stomach)\n2. Drink plenty of water before and after\n3. Wear comfortable, loose clothing (access to arms and legs needed)\n\nWhat to expect:\n\u2022 15-20 min intake with tongue & pulse diagnosis\n\u2022 Full acupuncture treatment\n\u2022 Intern visits: 1.5-2 hours total\n\u2022 OMD visits: ~1 hour total\n\nHerbal formula may be prepared after your treatment."},
     {k:["pain","back pain","knee","joint","neck","shoulder","headache","migraine","sciatica","arthritis","hurt","sore","ache","injury","injuries"],
