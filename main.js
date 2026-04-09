@@ -10,24 +10,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileClose = document.querySelector('.mobile-close');
 
   if (mobileToggle && mobileMenu) {
-    mobileToggle.addEventListener('click', () => {
+    const focusableSelectors = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    function openMenu() {
       mobileMenu.classList.add('active');
       document.body.style.overflow = 'hidden';
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      // Move focus into the menu
+      const firstFocusable = mobileMenu.querySelector(focusableSelectors);
+      if (firstFocusable) firstFocusable.focus();
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileToggle.focus();
+    }
+
+    // Trap focus within the open menu
+    mobileMenu.addEventListener('keydown', e => {
+      if (!mobileMenu.classList.contains('active')) return;
+      if (e.key === 'Escape') { closeMenu(); return; }
+      if (e.key !== 'Tab') return;
+      const focusable = Array.from(mobileMenu.querySelectorAll(focusableSelectors));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
 
+    mobileToggle.addEventListener('click', openMenu);
+
     if (mobileClose) {
-      mobileClose.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      mobileClose.setAttribute('aria-label', 'Close menu');
+      mobileClose.addEventListener('click', closeMenu);
     }
 
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMenu);
     });
+
+    // Initial ARIA state
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
   }
 
   // --- Header Scroll Effect ---
@@ -124,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var widget = document.createElement('div');
   widget.id = 'wonguChat';
   widget.style.cssText = 'position:fixed;bottom:90px;right:20px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;';
-  widget.innerHTML = '<button id="chatToggle" onclick="wonguToggleChat()" style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#2d4a32,#4a7c59);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;" onmouseover="this.style.transform=\'scale(1.1)\'" onmouseout="this.style.transform=\'scale(1)\'">'
+  widget.innerHTML = '<button id="chatToggle" onclick="wonguToggleChat()" aria-label="Open chat" aria-expanded="false" style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#2d4a32,#4a7c59);border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;transition:transform 0.2s;" onmouseover="this.style.transform=\'scale(1.1)\'" onmouseout="this.style.transform=\'scale(1)\'">'
     + '<svg id="chatIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
     + '<svg id="closeIconSvg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>'
     + '</button>'
@@ -148,15 +180,15 @@ document.addEventListener('DOMContentLoaded', () => {
   var qa = [
     {k:["price","cost","how much","pricing","fee","charge","pay","afford","cheap","expensive","rate","dollar","money"],
      a:"Here's our pricing:\n\n\u2022 Intern Initial Visit: $80 (1.5-2 hours)\n\u2022 Intern Follow-up: $50 (~1 hour)\n\u2022 OMD Initial Visit: $120 (~1 hour)\n\u2022 OMD Follow-up: $80 (30-55 min)\n\u2022 OMD + Observer: $100 initial / $70 follow-up\n\u2022 Doctor's Consultation: $100\n\u2022 Cupping: $50 (intern) / $100 (OMD, includes consultation)\n\u2022 Herbal Rx: $10/day\n\n$5 community discount for seniors, military, students & educators with photo ID!"},
-    {k:["hour","open","close","when","time","monday","tuesday","wednesday","thursday","friday","saturday","sunday","weekend","day"],
+    {k:["hour","open","close","clinic hour","what time","monday","tuesday","wednesday","thursday","friday","saturday","sunday","weekend","business day"],
      a:"Our clinic hours:\n\n\u2022 Monday - Friday: 8:00 AM - 4:30 PM\n\u2022 Saturday: 8:00 AM - 12:00 PM\n\u2022 Sunday: Closed\n\nCall (702) 852-1280 or text 702-550-9483 to schedule!"},
     {k:["treat","condition","help with","what do you","illness","disease","symptom","diagnos","what can","heal","cure"],
-     a:"We treat a wide range of conditions:\n\n\u2022 Stroke Recovery\n\u2022 Cancer Support (chemo/radiation side effects)\n\u2022 Mental Health & PTSD (including veterans)\n\u2022 Chronic Illness & Autoimmune\n\u2022 Pain Management (back, joint, migraines, sciatica, arthritis)\n\u2022 Pregnancy & Birth Support\n\u2022 Weight Management\n\u2022 Women's Health\n\u2022 Stress, Anxiety & Insomnia\n\u2022 Sports Injuries\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans!"},
+     a:"We treat a wide range of conditions:\n\n\u2022 Stroke Recovery\n\u2022 Cancer Support (chemo/radiation side effects)\n\u2022 Mental Health & PTSD (including veterans)\n\u2022 Chronic Illness & Autoimmune\n\u2022 Pain Management (back, joint, migraines, sciatica, arthritis)\n\u2022 Pregnancy & Birth Support\n\u2022 Weight Management\n\u2022 Women's Health\n\u2022 Stress, Anxiety & Insomnia\n\u2022 Sports Injuries\n\nWellness Consultations are also available for patients who want a clearer picture of their health from an Oriental medicine perspective. Ask Dr. Yu or Dr. Sekine about package treatment plans!"},
     {k:["insurance","va ","veteran","accept","cover","tricare","benefits","culinary"],
      a:"We accept VA insurance for eligible veterans and Culinary insurance. For other insurance types, please call us at (702) 852-1280 to check your specific coverage.\n\nWe also offer a $5 community discount for military members, seniors, students, and educators with valid photo ID."},
     {k:["book","appointment","reserve","schedule","sign up","register","make an","set up"],
-     a:"You can request an appointment by:\n\n\u2022 Online form: wonguhealthcenter.com/contact (we confirm within 24 hours)\n\u2022 Calling: (702) 852-1280\n\u2022 Texting: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nAll services are by appointment only. Our team will confirm your time within one business day!"},
-    {k:["location","address","where","find you","direction","map","drive","parking","located"],
+     a:"You can request an appointment by:\n\n\u2022 Online form: wonguhealthcenter.com/contact (we confirm within 24 business hours, Mon–Fri)\n\u2022 Calling: (702) 852-1280\n\u2022 Texting: 702-550-9483\n\u2022 Email: clinic-office@wongu.edu\n\nAll services are by appointment only. Our team will confirm your time within one business day!"},
+    {k:["location","address","find you","direction","map","drive","parking","located","eastern ave","las vegas"],
      a:"We're located at:\n\n8630 S Eastern Ave\nLas Vegas, NV 89123\n\n(Inside the Wongu University campus)\n\nCall (702) 852-1280 if you need help finding us!"},
     {k:["acupuncture","needle","how does acupuncture","what is acupuncture","does it hurt","painful"],
      a:"Acupuncture uses thin, sterile needles placed at specific points on your body to stimulate natural healing. It's effective for chronic pain, migraines, sciatica, neurological conditions, stress, and much more.\n\nMost patients find it very relaxing with minimal discomfort. The needles are much thinner than injection needles!\n\n\u2022 Intern sessions: $80 initial / $50 follow-up\n\u2022 OMD sessions: $120 initial / $80 follow-up"},
@@ -166,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
      a:"Our licensed OMDs prescribe custom Chinese herbal formulas tailored to your specific condition. Herbal prescriptions are $10 per day and can complement your acupuncture treatments for better results.\n\nHerbal formulas are prepared after your treatment based on your practitioner's diagnosis."},
     {k:["intern","student","supervised","training","learning","student clinic","who treats"],
      a:"Our student interns are 3rd and 4th-year graduate students from Wongu University of Oriental Medicine. Every single intern session is directly supervised by a licensed OMD for your safety.\n\nBenefits of intern visits:\n\u2022 Longer appointments (1.5-2 hours)\n\u2022 More affordable ($80 initial, $50 follow-up)\n\u2022 Thorough, unhurried evaluations\n\u2022 Same quality care under OMD supervision"},
-    {k:["doctor","omd","practitioner","dr yu","dr. yu","dr sekine","dr. sekine","provider","who","staff","team","licensed"],
+    {k:["doctor","omd","practitioner","dr yu","dr. yu","dr sekine","dr. sekine","provider","our staff","our team","meet the","licensed"],
      a:"Our clinic team includes:\n\n\u2022 Dr. Yu - Licensed OMD, Clinic Director\n\u2022 Dr. Sekine - Licensed OMD, Japanese acupuncture specialist\n\u2022 Dr. Joanne Eng - Licensed OMD\n\u2022 Dr. Fish - Licensed OMD, General Acupuncture\n\u2022 Supervised student interns (3rd & 4th year)\n\nAsk Dr. Yu or Dr. Sekine about package treatment plans for pregnancy, weight management, fertility, and more!"},
     {k:["first visit","first time","expect","prepare","what to","bring","wear","before","new patient","never been"],
      a:"Here's how to prepare for your first visit:\n\n1. Eat a light snack beforehand (don't come on an empty stomach)\n2. Drink plenty of water before and after\n3. Wear comfortable, loose clothing (access to arms and legs needed)\n\nWhat to expect:\n\u2022 15-20 min intake with tongue & pulse diagnosis\n\u2022 Full acupuncture treatment\n\u2022 Intern visits: 1.5-2 hours total\n\u2022 OMD visits: ~1 hour total\n\nHerbal formula may be prepared after your treatment."},
@@ -192,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
      a:"We are Southern Nevada's first MD-OMD Unified Medical Clinic!\n\nThis means we combine:\n\u2022 MD/Western Medicine (physician-led diagnosis & treatment)\n\u2022 OMD/Oriental Medicine (evidence-informed adjunct therapies)\n\nThis fully integrative approach is especially effective for complex conditions like stroke recovery, cancer support, PTSD, and chronic illness."},
     {k:["university","wongu university","school","college","education","teach","academic"],
      a:"Wongu Health Center is the clinical arm of Wongu University of Oriental Medicine - Nevada's only Oriental medicine university clinic.\n\nOur teaching model means you receive thorough, unhurried treatments at affordable prices while supporting the training of Southern Nevada's future healthcare workforce.\n\nLearn more at wongu.edu"},
-    {k:["difference","intern vs","omd vs","which","choose","better","recommend","should i"],
+    {k:["difference","intern vs","omd vs","intern or omd","choose between","which is better","recommend","should i choose"],
      a:"Here's the difference between Intern and OMD visits:\n\nIntern Visits ($80 initial / $50 follow-up):\n\u2022 Treated by 3rd-4th year graduate student\n\u2022 Directly supervised by licensed OMD\n\u2022 Longer sessions (1.5-2 hours)\n\u2022 Great for new patients wanting thorough care\n\nOMD Visits ($120 initial / $80 follow-up):\n\u2022 Treated directly by licensed OMD\n\u2022 ~1 hour sessions\n\u2022 Herbal prescriptions available\n\u2022 All modalities available\n\nBoth provide excellent care!"},
     {k:["safe","risk","side effect","danger","complication","worry about","afraid","scared"],
      a:"Acupuncture is very safe when performed by trained practitioners. Common and temporary effects may include:\n\n\u2022 Minor bruising at needle sites\n\u2022 Slight soreness\n\u2022 Brief lightheadedness\n\nAll our treatments use sterile, single-use needles. Every intern session is directly supervised by a licensed OMD. Serious complications are extremely rare.\n\nYour practitioner will discuss any risks specific to your condition before treatment."},
@@ -221,7 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
     win.style.flexDirection = 'column';
     document.getElementById('chatIconSvg').style.display = wonguChatOpen ? 'none' : 'block';
     document.getElementById('closeIconSvg').style.display = wonguChatOpen ? 'block' : 'none';
-    document.getElementById('chatToggle').setAttribute('aria-expanded', wonguChatOpen ? 'true' : 'false');
+    var toggle = document.getElementById('chatToggle');
+    toggle.setAttribute('aria-expanded', wonguChatOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', wonguChatOpen ? 'Close chat' : 'Open chat');
     if (wonguChatOpen) {
       document.getElementById('chatInput').focus();
       if (!wonguStarted) { wonguStarted = true; wonguShowWelcome(); }

@@ -16,7 +16,7 @@ const ALLOWED_SERVICES = new Set([
   'Cupping Therapy',
   'Herbal Medicine Consultation',
   'Pain Management',
-  'General Consultation',
+  'Wellness Consultation',
   'Not sure yet'
 ]);
 const ALLOWED_INSURANCE = new Set([
@@ -199,8 +199,13 @@ export default async function handler(req, res) {
 
   if (Number.isFinite(startedAt)) {
     const elapsed = Date.now() - startedAt;
-    if (elapsed < MIN_FORM_FILL_MS || elapsed > MAX_FORM_AGE_MS) {
+    if (elapsed < MIN_FORM_FILL_MS) {
+      // Submitted too fast — almost certainly a bot; silent success to avoid signaling detection
       return res.status(200).json({ success: true });
+    }
+    if (elapsed > MAX_FORM_AGE_MS) {
+      // Page was left open too long; real users should refresh and resubmit
+      return res.status(400).json({ error: 'Your session has expired. Please refresh the page and try again.' });
     }
   }
 
@@ -318,6 +323,31 @@ export default async function handler(req, res) {
     </div>
   `;
 
+  const confirmationHtml = `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
+      <div style="background:#2d4a32;padding:24px 32px;">
+        <h1 style="color:white;margin:0;font-size:1.3rem;">Appointment Request Received</h1>
+        <p style="color:rgba(255,255,255,0.7);margin:4px 0 0;font-size:0.9rem;">Wongu Health Center</p>
+      </div>
+      <div style="padding:32px;">
+        <p style="color:#111827;font-size:1rem;line-height:1.7;">Hi ${safeName},</p>
+        <p style="color:#374151;line-height:1.7;">Thank you for requesting an appointment at Wongu Health Center. Our front desk has received your request and will follow up within <strong>24 business hours (Mon–Fri)</strong> to confirm your appointment time.</p>
+        <p style="color:#374151;line-height:1.7;">Requests submitted on weekends will be handled the following Monday.</p>
+        <div style="margin:24px 0;padding:16px 20px;background:#f0f4f0;border-left:4px solid #4a7c59;border-radius:0 8px 8px 0;">
+          <p style="margin:0;font-weight:600;color:#2d4a32;margin-bottom:8px;">Your Request Summary</p>
+          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Patient Type:</strong> ${safePatientType}</p>
+          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Service:</strong> ${safeService}</p>
+          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Preferred Date:</strong> ${safePreferredDate}</p>
+          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Preferred Time:</strong> ${safePreferredTime}</p>
+        </div>
+        <p style="color:#374151;line-height:1.7;">Need to reach us sooner? Call or text us directly:</p>
+        <p style="margin:0;"><a href="tel:+17028521280" style="color:#4a7c59;font-weight:600;">(702) 852-1280</a> &nbsp;|&nbsp; <a href="sms:+17025509483" style="color:#4a7c59;font-weight:600;">Text: 702-550-9483</a></p>
+        <p style="color:#374151;line-height:1.7;margin-top:16px;">We look forward to seeing you!</p>
+        <p style="color:#6b7280;font-size:0.85rem;margin-top:24px;padding-top:16px;border-top:1px solid #f3f4f6;">Wongu Health Center &middot; 8630 S Eastern Ave, Las Vegas, NV 89123 &middot; Mon–Fri 8AM–4:30PM, Sat 8AM–12PM</p>
+      </div>
+    </div>
+  `;
+
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -326,7 +356,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Wongu Health Center <appointments@wonguhealthcenter.com>',
+        from: 'Wongu Health Center <onboarding@resend.dev>',
         to: ['clinic-office@wongu.edu'],
         reply_to: email,
         subject: `New Appointment Request - ${name} (${patientType})`,
@@ -334,18 +364,34 @@ export default async function handler(req, res) {
       })
     });
 
-    if (response.ok) {
-      return res.status(200).json({ success: true });
+    if (!response.ok) {
+      let err = null;
+      try {
+        err = await response.json();
+      } catch {
+        err = { status: response.status, statusText: response.statusText };
+      }
+      console.error('Resend error (clinic email):', err);
+      return res.status(500).json({ error: 'Failed to send email.' });
     }
 
-    let err = null;
-    try {
-      err = await response.json();
-    } catch {
-      err = { status: response.status, statusText: response.statusText };
-    }
-    console.error('Resend error:', err);
-    return res.status(500).json({ error: 'Failed to send email.' });
+    // Send confirmation to patient — non-blocking; log but don't fail the request if it errors
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'Wongu Health Center <onboarding@resend.dev>',
+        to: [email],
+        reply_to: 'clinic-office@wongu.edu',
+        subject: 'Your Appointment Request — Wongu Health Center',
+        html: confirmationHtml
+      })
+    }).catch(err => console.error('Confirmation email error:', err));
+
+    return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Handler error:', err);
     return res.status(500).json({ error: 'Server error.' });

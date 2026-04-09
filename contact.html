@@ -6,6 +6,11 @@
   <title>Contact Wongu Health Center | Acupuncture Clinic Las Vegas, NV</title>
   <meta name="description" content="Request an appointment at Wongu Health Center in Las Vegas. Submit our online request form or call (702) 852-1280. We respond within 24 business hours (Mon–Fri). Located at 8630 S Eastern Ave.">
   <meta name="keywords" content="acupuncture clinic Las Vegas contact, Wongu Health Center phone, acupuncture near me Las Vegas, S Eastern Ave acupuncture">
+  <meta property="og:title" content="Request an Appointment | Wongu Health Center Las Vegas">
+  <meta property="og:description" content="Book acupuncture in Las Vegas. Fill out our online form and we'll confirm within 24 business hours. Located at 8630 S Eastern Ave. Call (702) 852-1280.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wonguhealthcenter.com/contact">
+  <meta property="og:locale" content="en_US">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -29,12 +34,12 @@
             <span class="logo-tagline">University Acupuncture Clinic</span>
           </div>
         </a>
-      <nav><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="student-clinic.html">Student Clinic</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html" class="active">Contact</a></li></ul></nav>
+      <nav aria-label="Main navigation"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="student-clinic.html">Student Clinic</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html" class="active">Contact</a></li></ul></nav>
       <a href="contact.html#appointment-form" class="btn btn-primary nav-cta">Book Appointment</a>
       <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div></div>
   </header>
-  <div class="mobile-menu" role="dialog"><button class="mobile-close">&times;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="student-clinic.html">Student Clinic</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a></div>
+  <div class="mobile-menu" role="dialog" aria-label="Navigation menu" aria-modal="true"><button class="mobile-close">&times;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="student-clinic.html">Student Clinic</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a></div>
 
   <section id="main-content" class="hero hero-page">
     <div class="container">
@@ -57,8 +62,6 @@
 
           <div class="card" style="padding:32px;">
             <form action="/api/contact" method="POST" id="appointmentForm" novalidate>
-              <input type="hidden" name="_subject" value="New Appointment Request – Wongu Health Center">
-              <input type="hidden" name="_replyto" value="">
               <input type="hidden" name="form_started_at" id="appt-started-at" value="">
               <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
                 <label for="appt-website">Leave this field blank</label>
@@ -113,7 +116,7 @@
                     <option>Cupping Therapy</option>
                     <option>Herbal Medicine Consultation</option>
                     <option>Pain Management</option>
-                    <option>General Consultation</option>
+                    <option>Wellness Consultation</option>
                     <option>Not sure yet</option>
                   </select>
                 </div>
@@ -153,11 +156,13 @@
               </div>
 
               <div style="margin-bottom:24px;">
-                <label for="appt-notes" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Additional Notes <span style="font-weight:400;color:var(--gray-light);">(optional)</span></label>
-                <textarea id="appt-notes" name="notes" rows="3" maxlength="2000" placeholder="Any details about your condition, questions, or scheduling preferences..."
+                <label for="appt-notes" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Scheduling Notes <span style="font-weight:400;color:var(--gray-light);">(optional)</span></label>
+                <textarea id="appt-notes" name="notes" rows="3" maxlength="2000" placeholder="Scheduling preferences, parking questions, or anything else we should know before confirming your appointment..."
                   style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;resize:vertical;"
                   onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'"></textarea>
               </div>
+
+              <div id="formError" role="alert" aria-live="assertive" tabindex="-1" style="display:none;margin-bottom:16px;padding:12px 16px;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:8px;color:#991b1b;font-size:0.9rem;line-height:1.5;"></div>
 
               <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1.05rem;padding:14px;">
                 Submit Appointment Request
@@ -234,7 +239,7 @@
           <!-- Google Maps Embed -->
           <div style="border-radius:var(--radius-lg);overflow:hidden;margin-top:28px;border:1px solid var(--border);">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3226.5!2d-115.119!3d36.054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s8630+S+Eastern+Ave%2C+Las+Vegas%2C+NV+89123!5e0!3m2!1sen!2sus!4v1700000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3226.123!2d-115.1205702!3d36.0325752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8ce4aa6ef877f%3A0x25fca03ddbb9c813!2sWongu%3A%20Acupuncture%20%26%20Oriental%20Medicine%20Clinic!5e0!3m2!1sen!2sus!4v1708900000000!5m2!1sen!2sus"
               width="100%"
               height="280"
               style="border:0;display:block;"
@@ -336,21 +341,41 @@
 </footer>
   <script src="main.js"></script>
   <script>
-    // Set min date on date picker to today
+    // Set min date on date picker to today (local date, not UTC)
     (function() {
       var d = document.getElementById('appt-date1');
-      if (d) d.min = new Date().toISOString().split('T')[0];
+      if (!d) return;
+      var now = new Date();
+      var y = now.getFullYear();
+      var m = String(now.getMonth() + 1).padStart(2, '0');
+      var day = String(now.getDate()).padStart(2, '0');
+      d.min = y + '-' + m + '-' + day;
     })();
 
     // Appointment form — submits to Vercel serverless function /api/contact
     (function() {
       var form = document.getElementById('appointmentForm');
       var success = document.getElementById('formSuccess');
+      var errorDiv = document.getElementById('formError');
       var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
       var startedAt = document.getElementById('appt-started-at');
       var phoneInput = document.getElementById('appt-phone');
       if (!form) return;
       if (startedAt) startedAt.value = String(Date.now());
+
+      function showFormError(msg) {
+        if (!errorDiv) return;
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        errorDiv.focus();
+      }
+
+      function hideFormError() {
+        if (!errorDiv) return;
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+      }
 
       function isValidUsPhone(value) {
         var digits = String(value || '').replace(/\D/g, '');
@@ -376,6 +401,7 @@
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
+        hideFormError();
         updatePhoneValidity();
         if (!form.reportValidity()) return;
         // Collect form fields as JSON
@@ -403,12 +429,12 @@
           } else {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit Appointment Request';
-            alert(result.payload && result.payload.error ? result.payload.error : 'Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
+            showFormError(result.payload && result.payload.error ? result.payload.error : 'Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
           }
         }).catch(function() {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Appointment Request';
-          alert('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
+          showFormError('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
         });
       });
     })();
