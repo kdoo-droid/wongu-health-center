@@ -316,7 +316,7 @@ export default async function handler(req, res) {
             <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeService}</td>
           </tr>
           <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Insurance</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Insurance / Payment Type</td>
             <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeInsurance}</td>
           </tr>
           <tr>

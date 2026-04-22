@@ -121,7 +121,7 @@
                   </select>
                 </div>
                 <div>
-                  <label for="appt-insurance" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Insurance</label>
+                  <label for="appt-insurance" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Insurance / Payment Type</label>
                   <select id="appt-insurance" name="insurance"
                     style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
                     onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
@@ -157,7 +157,7 @@
 
               <div style="margin-bottom:24px;">
                 <label for="appt-notes" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Scheduling Notes <span style="font-weight:400;color:var(--gray-light);">(optional)</span></label>
-                <textarea id="appt-notes" name="notes" rows="3" maxlength="2000" placeholder="Scheduling preferences, parking questions, or anything else we should know before confirming your appointment..."
+                <textarea id="appt-notes" name="notes" rows="3" maxlength="2000" placeholder="Scheduling preferences, parking questions, accessibility needs, or best times to reach you. Please do not include symptoms, diagnoses, medications, or other medical details."
                   style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;resize:vertical;"
                   onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'"></textarea>
               </div>
@@ -170,7 +170,7 @@
               </button>
 
               <p style="text-align:center;margin-top:12px;font-size:0.82rem;color:var(--gray-light);">
-                🔒 Your information is kept private and never shared.
+                For scheduling only. Please do not include medical details in this form.
               </p>
               <p style="text-align:center;margin-top:6px;font-size:0.82rem;color:var(--gray-light);">
                 We respond within 24 business hours, Mon–Fri. Weekend requests are handled the following Monday.
@@ -261,15 +261,15 @@
     </div>
   </section>
 
-  <!-- HIPAA Notice -->
+  <!-- Appointment Privacy Notice -->
   <section class="section section-cream">
     <div class="container" style="max-width:800px;text-align:center;">
       <div class="card fade-in" style="background:white;border-left:4px solid var(--sage);">
         <h4 style="display:flex;align-items:center;gap:10px;justify-content:center;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          HIPAA &amp; Privacy Notice
+          Appointment Privacy Notice
         </h4>
-        <p style="color:var(--gray);margin-top:12px;line-height:1.8;">Wongu Health Center does not collect, store, or process any Protected Health Information (PHI) through this website. All patient intake forms, health records, and medical information are managed exclusively through our HIPAA-compliant Unified Practice platform. For privacy questions, please contact our office directly.</p>
+        <p style="color:var(--gray);margin-top:12px;line-height:1.8;">Use this form for scheduling only. It asks for basic contact information, appointment preferences, and a general service and insurance/payment category so our front desk can respond. Please do not include symptoms, diagnoses, medications, insurance member IDs, Social Security numbers, or other sensitive health information in the notes field. Patient intake forms, medical history, detailed insurance information, and health records are handled through our HIPAA-compliant Unified Practice platform or directly with our clinic team.</p>
       </div>
     </div>
   </section>
