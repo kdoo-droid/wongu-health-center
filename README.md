@@ -1,5 +1,17 @@
 # Wongu Health Center — Image Guide
 
+## Appointment Form Email
+
+The appointment form posts to `/api/contact`, which sends email through Resend.
+Production deployments need these environment variables:
+
+- `RESEND_API_KEY`: Resend API key with sending access.
+- `RESEND_FROM_EMAIL`: verified sender, normally `Wongu Health Center <appointments@wonguhealthcenter.com>`.
+- `CLINIC_APPOINTMENT_EMAIL`: optional recipient override; defaults to `clinic-office@wongu.edu`.
+
+Do not use `onboarding@resend.dev` in production. Resend treats it as a test sender
+and can reject real recipient emails with a 403.
+
 ## Folder Structure
 Put all your photos in this `/images` folder. Use the exact filenames below
 so they match what's already referenced in the HTML.

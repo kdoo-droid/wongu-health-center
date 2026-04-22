@@ -6,6 +6,8 @@ const MIN_FORM_FILL_MS = 2000;
 const MAX_FORM_AGE_MS = 1000 * 60 * 60 * 12;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
+const DEFAULT_CLINIC_EMAIL = 'clinic-office@wongu.edu';
+const DEFAULT_RESEND_FROM_EMAIL = 'Wongu Health Center <appointments@wonguhealthcenter.com>';
 
 const rateLimitStore = globalThis.__wonguRateLimitStore || new Map();
 globalThis.__wonguRateLimitStore = rateLimitStore;
@@ -48,6 +50,13 @@ function normalizeText(value, maxLength) {
   if (typeof value !== 'string') return '';
   const trimmed = value.replace(/\s+/g, ' ').trim();
   return trimmed.slice(0, maxLength);
+}
+
+function getEnvText(name, fallback = '') {
+  const value = process.env[name];
+  if (typeof value !== 'string') return fallback;
+  const trimmed = value.trim();
+  return trimmed || fallback;
 }
 
 function normalizeNotes(value) {
@@ -260,6 +269,14 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server is not configured to send email.' });
   }
 
+  const clinicEmail = getEnvText('CLINIC_APPOINTMENT_EMAIL', DEFAULT_CLINIC_EMAIL);
+  const resendFromEmail = getEnvText('RESEND_FROM_EMAIL', DEFAULT_RESEND_FROM_EMAIL);
+
+  if (/onboarding@resend\.dev/i.test(resendFromEmail)) {
+    console.error('RESEND_FROM_EMAIL must use a verified sending domain, not onboarding@resend.dev');
+    return res.status(500).json({ error: 'Server email sender is not configured.' });
+  }
+
   const safeName = escapeHtml(name);
   const safePhone = escapeHtml(phone);
   const safeEmail = escapeHtml(email);
@@ -356,8 +373,8 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Wongu Health Center <onboarding@resend.dev>',
-        to: ['clinic-office@wongu.edu'],
+        from: resendFromEmail,
+        to: [clinicEmail],
         reply_to: email,
         subject: `New Appointment Request - ${name} (${patientType})`,
         html
@@ -383,9 +400,9 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Wongu Health Center <onboarding@resend.dev>',
+        from: resendFromEmail,
         to: [email],
-        reply_to: 'clinic-office@wongu.edu',
+        reply_to: clinicEmail,
         subject: 'Your Appointment Request — Wongu Health Center',
         html: confirmationHtml
       })
