@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -19,11 +19,56 @@
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Wongu Health Center",
+    "description": "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, herbal medicine, and traditional Chinese medicine in Las Vegas.",
+    "url": "https://wonguhealthcenter.com/",
+    "telephone": "+1-702-852-1280",
+    "email": "clinic-office@wongu.edu",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "8630 S Eastern Ave",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89123",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 36.0326,
+      "longitude": -115.1206
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:00",
+        "closes": "16:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "08:00",
+        "closes": "12:00"
+      }
+    ],
+    "priceRange": "$$",
+    "hasMap": "https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "37"
+    }
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
   <header class="site-header" role="banner">
-    <div class="header-top"><div class="container"><span>Nevada's Only Oriental Medicine University Clinic · <em style="font-style:normal;opacity:0.85;">Se habla español</em></span><div style="display:flex;gap:24px;align-items:center;"><a href="tel:+17028521280">📞 (702) 852-1280</a><a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University →</a></div></div></div>
+    <div class="header-top"><div class="container"><span>Nevada's Only Oriental Medicine University Clinic · <em style="font-style:normal;opacity:0.85;">Spanish-speaking staff available</em></span><div style="display:flex;gap:24px;align-items:center;"><a href="tel:+17028521280">📞 (702) 852-1280</a><a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University →</a></div></div></div>
     <div class="header-main"><div class="container">
       <a href="index.html" class="logo" aria-label="Wongu Health Center Home">
           <div class="logo-icon">
@@ -39,13 +84,13 @@
       <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div></div>
   </header>
-  <div class="mobile-menu" role="dialog" aria-label="Navigation menu" aria-modal="true"><button class="mobile-close">&times;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="student-clinic.html">Student Clinic</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a></div>
+  <div class="mobile-menu" role="dialog" aria-label="Navigation menu" aria-modal="true"><button class="mobile-close" aria-label="Close menu">&times;</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="student-clinic.html">Student Clinic</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a></div>
 
   <section id="main-content" class="hero hero-page">
     <div class="container">
       <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Contact</span></div>
       <h1>Request an Appointment</h1>
-      <p class="section-subtitle" style="margin:0 auto;">Fill out the form below and we'll confirm within 24 business hours (Mon–Fri) — or call us directly.</p>
+      <p class="section-subtitle">Fill out the form below and we'll confirm within 24 business hours (Mon–Fri) — or call us directly.</p>
     </div>
   </section>
 
@@ -58,9 +103,9 @@
         <div>
           <span class="section-label">Request an Appointment</span>
           <h2>We'll Confirm Within 24 Business Hours</h2>
-          <p style="color:var(--gray);margin:16px 0 28px;line-height:1.8;">Fill out the form below and our front desk will follow up within one business day (Mon–Fri) to confirm your appointment time. Requests submitted on weekends will be responded to the following Monday. All services are by appointment only.</p>
+          <p class="prose" style="margin:16px 0 28px;">Fill out the form below and our front desk will follow up within one business day (Mon–Fri) to confirm your appointment time. Requests submitted on weekends will be responded to the following Monday. All services are by appointment only.</p>
 
-          <div class="card" style="padding:32px;">
+          <div class="card" style="padding:32px 28px;">
             <form action="/api/contact" method="POST" id="appointmentForm" novalidate>
               <input type="hidden" name="form_started_at" id="appt-started-at" value="">
               <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
@@ -68,49 +113,44 @@
                 <input type="text" id="appt-website" name="website" tabindex="-1" autocomplete="off">
               </div>
 
-              <!-- New vs Returning -->
-              <div style="margin-bottom:16px;">
-                <label style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:8px;color:var(--forest);">Are you a new or returning patient? <span style="color:#dc2626;">*</span></label>
-                <div style="display:flex;gap:12px;">
-                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.95rem;padding:10px 16px;border:1.5px solid var(--border);border-radius:8px;flex:1;justify-content:center;" id="label-new">
-                    <input type="radio" name="patient_type" value="New Patient" required style="accent-color:var(--sage);" onchange="document.getElementById('label-new').style.borderColor='var(--sage)';document.getElementById('label-returning').style.borderColor='var(--border)';">
-                    New Patient
-                  </label>
-                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.95rem;padding:10px 16px;border:1.5px solid var(--border);border-radius:8px;flex:1;justify-content:center;" id="label-returning">
-                    <input type="radio" name="patient_type" value="Returning Patient" style="accent-color:var(--sage);" onchange="document.getElementById('label-returning').style.borderColor='var(--sage)';document.getElementById('label-new').style.borderColor='var(--border)';">
-                    Returning Patient
-                  </label>
+              <!-- New vs Returning — segmented control -->
+              <div class="form-group">
+                <span class="form-label" id="patient-type-label">Are you a new or returning patient? <span style="color:#dc2626;">*</span></span>
+                <input type="hidden" name="patient_type" id="appt-patient-type" required>
+                <div class="patient-toggle" role="radiogroup" aria-labelledby="patient-type-label">
+                  <button type="button" class="patient-toggle-btn" data-value="New Patient" role="radio" aria-checked="false">New Patient</button>
+                  <button type="button" class="patient-toggle-btn" data-value="Returning Patient" role="radio" aria-checked="false">Returning Patient</button>
                 </div>
               </div>
 
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px;">
+              <div class="form-row">
                 <div>
-                  <label for="appt-name" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Full Name <span style="color:#dc2626;">*</span></label>
+                  <label for="appt-name" class="form-label">Full Name <span style="color:#dc2626;">*</span></label>
                   <input type="text" id="appt-name" name="name" required maxlength="100" autocomplete="name" placeholder="Jane Smith"
-                    style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
-                    onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                    class="form-input"
+                   >
                 </div>
                 <div>
-                  <label for="appt-phone" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Phone Number <span style="color:#dc2626;">*</span></label>
-                  <input type="tel" id="appt-phone" name="phone" required maxlength="25" autocomplete="tel" inputmode="numeric" placeholder="(702) 555-0100"
-                    style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
-                    onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                  <label for="appt-phone" class="form-label">Phone Number <span style="color:#dc2626;">*</span></label>
+                  <input type="tel" id="appt-phone" name="phone" required maxlength="25" autocomplete="tel" placeholder="(702) 555-0100"
+                    class="form-input"
+                   >
                 </div>
               </div>
 
-              <div style="margin-bottom:16px;">
-                <label for="appt-email" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Email Address <span style="color:#dc2626;">*</span></label>
+              <div class="form-group">
+                <label for="appt-email" class="form-label">Email Address <span style="color:#dc2626;">*</span></label>
                 <input type="email" id="appt-email" name="email" required maxlength="254" autocomplete="email" placeholder="you@email.com"
-                  style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
-                  onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                  class="form-input"
+                 >
               </div>
 
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px;">
+              <div class="form-row">
                 <div>
-                  <label for="appt-service" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Service Requested</label>
+                  <label for="appt-service" class="form-label">Service Requested</label>
                   <select id="appt-service" name="service"
-                    style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
-                    onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                    class="form-input"
+                   >
                     <option value="">Select a service...</option>
                     <option>Acupuncture</option>
                     <option>Cupping Therapy</option>
@@ -121,10 +161,10 @@
                   </select>
                 </div>
                 <div>
-                  <label for="appt-insurance" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Insurance / Payment Type</label>
+                  <label for="appt-insurance" class="form-label">Insurance / Payment Type</label>
                   <select id="appt-insurance" name="insurance"
-                    style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
-                    onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                    class="form-input"
+                   >
                     <option value="">Select...</option>
                     <option>VA (Veterans Affairs)</option>
                     <option>Culinary Insurance</option>
@@ -134,18 +174,18 @@
                 </div>
               </div>
 
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px;">
+              <div class="form-row">
                 <div>
-                  <label for="appt-date1" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Preferred Date</label>
+                  <label for="appt-date1" class="form-label">Preferred Date</label>
                   <input type="date" id="appt-date1" name="preferred_date"
-                    style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;"
-                    onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                    class="form-input"
+                   >
                 </div>
                 <div>
-                  <label for="appt-time" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Preferred Time</label>
+                  <label for="appt-time" class="form-label">Preferred Time</label>
                   <select id="appt-time" name="preferred_time"
-                    style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:white;"
-                    onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'">
+                    class="form-input"
+                   >
                     <option value="">Any time</option>
                     <option>Morning (8:00 - 10:00 AM)</option>
                     <option>Mid-Morning (10:00 AM - 12:00 PM)</option>
@@ -155,33 +195,33 @@
                 </div>
               </div>
 
-              <div style="margin-bottom:24px;">
-                <label for="appt-notes" style="display:block;font-weight:600;font-size:0.875rem;margin-bottom:6px;color:var(--forest);">Scheduling Notes <span style="font-weight:400;color:var(--gray-light);">(optional)</span></label>
+              <div class="form-group">
+                <label for="appt-notes" class="form-label">Scheduling Notes <span class="form-hint">(optional)</span></label>
                 <textarea id="appt-notes" name="notes" rows="3" maxlength="2000" placeholder="Scheduling preferences, parking questions, accessibility needs, or best times to reach you. Please do not include symptoms, diagnoses, medications, or other medical details."
-                  style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;box-sizing:border-box;resize:vertical;"
-                  onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+                  class="form-input" style="resize:vertical;"
+                 ></textarea>
               </div>
 
-              <div id="formError" role="alert" aria-live="assertive" tabindex="-1" style="display:none;margin-bottom:16px;padding:12px 16px;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:8px;color:#991b1b;font-size:0.9rem;line-height:1.5;"></div>
+              <div id="formError" role="alert" aria-live="assertive" tabindex="-1" class="alert-error"></div>
 
-              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1.05rem;padding:14px;">
+              <button type="submit" class="btn btn-primary btn-full" style="font-size:1.05rem;padding:14px;">
                 Submit Appointment Request
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
 
-              <p style="text-align:center;margin-top:12px;font-size:0.82rem;color:var(--gray-light);">
+              <p class="form-footer-note">
                 For scheduling only. Please do not include medical details in this form.
               </p>
-              <p style="text-align:center;margin-top:6px;font-size:0.82rem;color:var(--gray-light);">
+              <p class="form-footer-note">
                 We respond within 24 business hours, Mon–Fri. Weekend requests are handled the following Monday.
               </p>
             </form>
 
             <!-- Success message (shown after submission) -->
-            <div id="formSuccess" style="display:none;text-align:center;padding:32px 16px;">
-              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" style="margin-bottom:16px;"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-              <h3 style="color:var(--forest);margin-bottom:8px;">Request Received!</h3>
-              <p style="color:var(--gray);line-height:1.8;">Thank you — our front desk will reach out within 24 business hours (Mon–Fri) to confirm your appointment. Requests submitted on weekends will be handled the following Monday. To reach us sooner, call <a href="tel:+17028521280" style="color:var(--sage);font-weight:600;">(702) 852-1280</a>.</p>
+            <div id="formSuccess" class="text-center" style="display:none;padding:32px 16px;">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" style="margin-bottom:16px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+              <h3 class="text-forest mb-8">Request Received!</h3>
+              <p class="prose">Thank you — our front desk will reach out within 24 business hours (Mon–Fri) to confirm your appointment. Requests submitted on weekends will be handled the following Monday. To reach us sooner, call <a href="tel:+17028521280" class="text-sage fw-600">(702) 852-1280</a>.</p>
             </div>
           </div>
         </div>
@@ -190,7 +230,7 @@
         <div>
           <span class="section-label">Contact Info</span>
           <h2>Other Ways to Reach Us</h2>
-          <p style="color:var(--gray);margin:16px 0 28px;line-height:1.8;">Prefer to call or text? Our front desk is happy to help.</p>
+          <p class="prose" style="margin:16px 0 28px;">Prefer to call or text? Our front desk is happy to help.</p>
 
           <div class="contact-info-item">
             <div class="contact-info-icon">
@@ -199,8 +239,8 @@
             <div class="contact-info-text">
               <h4>Phone &amp; Text</h4>
               <p><a href="tel:+17028521280">(702) 852-1280</a></p>
-              <p style="margin-top:4px;"><strong>Text Only:</strong> <a href="sms:+17025509483">702-550-9483</a></p>
-              <p style="margin-top:4px;"><strong>Fax:</strong> 844-444-0753</p>
+              <p class="mt-8"><strong>Text Only:</strong> <a href="sms:+17025509483">702-550-9483</a></p>
+              <p class="mt-8"><strong>Fax:</strong> 844-444-0753</p>
             </div>
           </div>
 
@@ -210,7 +250,7 @@
             </div>
             <div class="contact-info-text">
               <h4>Email</h4>
-              <p><a href="mailto:clinic-office@wongu.edu" style="color:var(--sage);">clinic-office@wongu.edu</a></p>
+              <p><a href="mailto:clinic-office@wongu.edu" class="text-sage">clinic-office@wongu.edu</a></p>
             </div>
           </div>
 
@@ -221,7 +261,7 @@
             <div class="contact-info-text">
               <h4>Address</h4>
               <p>8630 S Eastern Ave<br>Las Vegas, NV 89123</p>
-              <p style="margin-top:4px;"><a href="https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123" target="_blank" rel="noopener" style="color:var(--sage);font-weight:600;">Get Directions →</a></p>
+              <p class="mt-8"><a href="https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123" target="_blank" rel="noopener" class="text-sage fw-600">Get Directions →</a></p>
             </div>
           </div>
 
@@ -232,12 +272,12 @@
             <div class="contact-info-text">
               <h4>Clinic Hours</h4>
               <p>Monday – Friday: 8:00 AM – 4:30 PM<br>Saturday: 8:00 AM – 12:00 PM<br>Sunday: Closed</p>
-              <p style="margin-top:8px;font-weight:600;color:var(--sage-dark);font-size:0.85rem;">All services by appointment only</p>
+              <p class="mt-8 fw-600 text-sm" style="color:var(--sage-dark);">All services by appointment only</p>
             </div>
           </div>
 
           <!-- Google Maps Embed -->
-          <div style="border-radius:var(--radius-lg);overflow:hidden;margin-top:28px;border:1px solid var(--border);">
+          <div class="map-wrapper" style="margin-top:28px;border:1px solid var(--border);">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3226.123!2d-115.1205702!3d36.0325752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8ce4aa6ef877f%3A0x25fca03ddbb9c813!2sWongu%3A%20Acupuncture%20%26%20Oriental%20Medicine%20Clinic!5e0!3m2!1sen!2sus!4v1708900000000!5m2!1sen!2sus"
               width="100%"
@@ -253,7 +293,7 @@
           <!-- Parking Info -->
           <div class="card" style="margin-top:20px;">
             <h4>Parking &amp; Accessibility</h4>
-            <p style="color:var(--gray);line-height:1.8;">Free parking in the building lot. ADA accessible with ground-floor entry. Near the I-215 interchange — convenient from Henderson, Summerlin, and the entire Las Vegas Valley.</p>
+            <p class="prose">Free parking in the building lot. ADA accessible with ground-floor entry. Near the I-215 interchange — convenient from Henderson, Summerlin, and the entire Las Vegas Valley.</p>
           </div>
         </div>
 
@@ -264,7 +304,7 @@
   <!-- Appointment Privacy Notice -->
   <section class="section section-cream">
     <div class="container" style="max-width:800px;text-align:center;">
-      <div class="card fade-in" style="background:white;border-left:4px solid var(--sage);">
+      <div class="privacy-callout fade-in">
         <h4 style="display:flex;align-items:center;gap:10px;justify-content:center;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Appointment Privacy Notice
@@ -279,7 +319,7 @@
     <div class="container" style="max-width:700px;text-align:center;">
       <span class="section-label">Share Your Experience</span>
       <h2>Enjoying Your Care at Wongu?</h2>
-      <p style="color:var(--gray);margin:16px auto 32px;max-width:500px;line-height:1.8;">Your Google review helps others in Las Vegas find affordable, quality acupuncture care. It only takes a minute!</p>
+      <p class="prose max-600 mt-16 mb-32">Your Google review helps others in Las Vegas find affordable, quality acupuncture care. It only takes a minute!</p>
       <a href="https://g.page/r/CRPIuds9oPwlEBM/review" target="_blank" rel="noopener" class="btn btn-gold">
         ★ Leave a Google Review
       </a>
@@ -352,6 +392,31 @@
       d.min = y + '-' + m + '-' + day;
     })();
 
+    // Patient type segmented control
+    (function() {
+      var hiddenInput = document.getElementById('appt-patient-type');
+      var toggleButtons = document.querySelectorAll('.patient-toggle-btn');
+
+      function setPatientType(btn) {
+        toggleButtons.forEach(function(b) {
+          b.classList.remove('selected');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('selected');
+        btn.setAttribute('aria-checked', 'true');
+        if (hiddenInput) hiddenInput.value = btn.getAttribute('data-value');
+      }
+
+      toggleButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setPatientType(btn);
+        });
+        btn.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+        });
+      });
+    })();
+
     // Appointment form — submits to Vercel serverless function /api/contact
     (function() {
       var form = document.getElementById('appointmentForm');
@@ -375,6 +440,17 @@
         if (!errorDiv) return;
         errorDiv.style.display = 'none';
         errorDiv.textContent = '';
+      }
+
+      function validatePatientType() {
+        var selectedType = document.getElementById('appt-patient-type');
+        if (selectedType && !selectedType.value) {
+          showFormError('Please select whether you are a new or returning patient.');
+          var firstToggle = form.querySelector('.patient-toggle-btn');
+          if (firstToggle) firstToggle.focus();
+          return false;
+        }
+        return true;
       }
 
       function isValidUsPhone(value) {
@@ -402,6 +478,7 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         hideFormError();
+        if (!validatePatientType()) return;
         updatePhoneValidity();
         if (!form.reportValidity()) return;
         // Collect form fields as JSON
