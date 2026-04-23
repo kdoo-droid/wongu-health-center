@@ -167,6 +167,29 @@ function checkRateLimit(ip) {
   };
 }
 
+async function sendResendEmail(payload) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    let err = null;
+    try {
+      err = await response.json();
+    } catch {
+      err = { status: response.status, statusText: response.statusText };
+    }
+    throw err;
+  }
+
+  return response;
+}
+
 export default async function handler(req, res) {
   if (typeof res.setHeader === 'function') {
     res.setHeader('Cache-Control', 'no-store');
@@ -366,47 +389,32 @@ export default async function handler(req, res) {
   `;
 
   try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    try {
+      await sendResendEmail({
         from: resendFromEmail,
         to: [clinicEmail],
         reply_to: email,
         subject: `New Appointment Request - ${name} (${patientType})`,
         html
-      })
-    });
-
-    if (!response.ok) {
-      let err = null;
-      try {
-        err = await response.json();
-      } catch {
-        err = { status: response.status, statusText: response.statusText };
-      }
+      });
+    } catch (err) {
       console.error('Resend error (clinic email):', err);
       return res.status(500).json({ error: 'Failed to send email.' });
     }
 
-    // Send confirmation to patient — non-blocking; log but don't fail the request if it errors
-    fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    // Attempt the confirmation email too, but keep the appointment request
+    // successful even if the patient's inbox rejects it or Resend returns an error.
+    try {
+      await sendResendEmail({
         from: resendFromEmail,
         to: [email],
         reply_to: clinicEmail,
         subject: 'Your Appointment Request — Wongu Health Center',
         html: confirmationHtml
-      })
-    }).catch(err => console.error('Confirmation email error:', err));
+      });
+    } catch (err) {
+      console.error('Resend error (confirmation email):', err);
+    }
 
     return res.status(200).json({ success: true });
   } catch (err) {
