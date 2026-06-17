@@ -1248,6 +1248,97 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 /* Student Clinic Comparison */
+.student-intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.student-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.student-overview-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(122,158,126,0.16);
+  border-radius: var(--radius-lg);
+  background: rgba(122,158,126,0.16);
+  box-shadow: var(--shadow-card);
+}
+
+.student-overview-item {
+  min-height: 150px;
+  padding: 24px;
+  background: white;
+}
+
+.student-overview-item span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--sage-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.student-overview-item strong {
+  display: block;
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.05;
+  margin-bottom: 10px;
+}
+
+.student-overview-item p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.student-intern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.student-intern-card {
+  text-align: center;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.student-intern-card h3 {
+  font-size: 1.25rem;
+  margin: 14px 0 6px;
+}
+
+.student-intern-card .team-card-bio {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.student-community {
+  max-width: 800px;
+  text-align: center;
+}
+
+.student-community p {
+  color: var(--gray);
+  line-height: 1.8;
+  margin: 16px auto 0;
+}
+
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
@@ -1598,6 +1689,15 @@ button:focus-visible {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
 
+  .student-intro-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .student-intern-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .content-split {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1640,6 +1740,24 @@ button:focus-visible {
   .price-anchor-actions {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .student-overview-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .student-overview-item {
+    min-height: auto;
+    padding: 22px;
+  }
+
+  .student-intern-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .student-action-row {
+    gap: 10px;
   }
 
   .grid-2,
