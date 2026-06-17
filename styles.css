@@ -1255,6 +1255,10 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   align-items: start;
 }
 
+.student-intro-layout h2 {
+  max-width: 760px;
+}
+
 .student-action-row {
   display: flex;
   flex-wrap: wrap;
@@ -1313,9 +1317,14 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .student-intern-card {
+  background: white;
+  border: 1px solid rgba(122,158,126,0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
   text-align: center;
   max-width: 360px;
   margin: 0 auto;
+  padding: 28px 22px;
 }
 
 .student-intern-card h3 {
@@ -1341,6 +1350,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 
 .comparison-table {
   width: 100%;
+  min-width: 640px;
   border-collapse: collapse;
   background: white;
   border-radius: var(--radius);
@@ -1793,6 +1803,10 @@ button:focus-visible {
     font-size: 0.8rem;
   }
 
+  .table-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+
   .comparison-table th,
   .comparison-table td {
     padding: 12px 16px;
@@ -2025,6 +2039,70 @@ button:focus-visible {
 
   .section-header h2 {
     font-size: 1.2rem;
+  }
+
+  .hero-page {
+    padding: 32px 0 36px;
+  }
+
+  .hero-page h1 {
+    font-size: 2rem;
+  }
+
+  .hero-page .section-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .student-intro-layout h2 {
+    font-size: 1.55rem;
+    line-height: 1.22;
+  }
+
+  .student-action-row {
+    flex-direction: column;
+  }
+
+  .student-overview-panel {
+    border-radius: var(--radius);
+  }
+
+  .student-overview-item {
+    padding: 18px;
+  }
+
+  .student-overview-item strong {
+    font-size: 1.45rem;
+  }
+
+  .student-intern-card {
+    padding: 22px 18px;
+  }
+
+  .student-intern-card .team-card-bio {
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .step-card {
+    padding-left: 0;
+    padding-top: 46px;
+    margin-bottom: 34px;
+  }
+
+  .step-card::before {
+    top: 0;
+    font-size: 2rem;
+  }
+
+  .table-wrapper {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 0 16px 6px;
+  }
+
+  .comparison-table {
+    font-size: 0.78rem;
   }
 
   /* Scale team/intern photos smaller */
