@@ -138,10 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Conversion Tracking ---
   // Fires gtag events when visitors click key CTAs.
-  // To activate: add your GA4 snippet to each page's <head>:
-  //   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
-  //   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
-  // Then replace G-2E5GE8PD7D with your real Measurement ID.
   function trackEvent(action, label) {
     if (typeof gtag === 'function') {
       gtag('event', action, { event_category: 'CTA', event_label: label });

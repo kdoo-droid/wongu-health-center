@@ -4,13 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Wongu Health Center | Acupuncture Clinic Las Vegas, NV</title>
-  <meta name="description" content="Request an appointment at Wongu Health Center in Las Vegas. Submit our online request form or call (702) 852-1280. We respond within 24 business hours (Mon–Fri). Located at 8630 S Eastern Ave.">
+  <meta name="description" content="Request an appointment at Wongu Health Center in Las Vegas for acupuncture, cupping, herbal formulas, herbal teas, or OMD care. We respond within 24 business hours.">
   <meta name="keywords" content="acupuncture clinic Las Vegas contact, Wongu Health Center phone, acupuncture near me Las Vegas, S Eastern Ave acupuncture">
   <meta property="og:title" content="Request an Appointment | Wongu Health Center Las Vegas">
-  <meta property="og:description" content="Book acupuncture in Las Vegas. Fill out our online form and we'll confirm within 24 business hours. Located at 8630 S Eastern Ave. Call (702) 852-1280.">
+  <meta property="og:description" content="Book acupuncture, cupping, herbal formulas, herbal teas, or OMD care in Las Vegas. Fill out our online form and we'll confirm within 24 business hours.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wonguhealthcenter.com/contact">
   <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://wonguhealthcenter.com/images/hero-clinic.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Wongu Health Center acupuncture and herbal medicine clinic in Las Vegas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Wongu Health Center | Acupuncture Clinic Las Vegas, NV">
+  <meta name="twitter:description" content="Request an appointment at Wongu Health Center in Las Vegas for acupuncture, cupping, herbal formulas, herbal teas, or OMD care. We respond within 24 business hours.">
+  <meta name="twitter:image" content="https://wonguhealthcenter.com/images/hero-clinic.jpg">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -18,13 +26,13 @@
   <link rel="stylesheet" href="styles.css?v=14">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2E5GE8PD7D');</script>
+  <script defer src="analytics.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Wongu Health Center",
-    "description": "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, herbal medicine, and traditional Chinese medicine in Las Vegas.",
+    "description": "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine in Las Vegas.",
     "url": "https://wonguhealthcenter.com/",
     "telephone": "+1-702-852-1280",
     "email": "clinic-office@wongu.edu",
@@ -72,7 +80,7 @@
     <div class="header-main"><div class="container">
       <a href="/" class="logo" aria-label="Wongu Health Center Home">
           <div class="logo-icon">
-            <img src="images/logo.png" alt="Wongu Health Center Logo">
+            <img src="images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async">
           </div>
           <div class="logo-text">
             <span class="logo-name">Wongu Health Center</span>
@@ -154,7 +162,7 @@
                     <option value="">Select a service...</option>
                     <option>Acupuncture</option>
                     <option>Cupping Therapy</option>
-                    <option>Herbal Medicine Consultation</option>
+                    <option>Herbal Formula &amp; Tea Consultation</option>
                     <option>Pain Management</option>
                     <option>Wellness Consultation</option>
                     <option>Not sure yet</option>
@@ -309,7 +317,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Appointment Privacy Notice
         </h4>
-        <p style="color:var(--gray);margin-top:12px;line-height:1.8;">Use this form for scheduling only. It asks for basic contact information, appointment preferences, and a general service and insurance/payment category so our front desk can respond. Please do not include symptoms, diagnoses, medications, insurance member IDs, Social Security numbers, or other sensitive health information in the notes field. Patient intake forms, medical history, detailed insurance information, and health records are handled through our HIPAA-compliant Unified Practice platform or directly with our clinic team.</p>
+          <p style="color:var(--gray);margin-top:12px;line-height:1.8;">Use this form for scheduling only. It asks for basic contact information, appointment preferences, and a general service and insurance/payment category so our front desk can respond. Please do not include symptoms, diagnoses, medications, insurance member IDs, Social Security numbers, or other sensitive health information in the notes field. Patient intake forms, medical history, detailed insurance information, and health records are handled through our HIPAA-compliant clinic systems or directly with our clinic team.</p>
       </div>
     </div>
   </section>
@@ -343,7 +351,7 @@
         <ul>
           <li><a href="/services">Acupuncture</a></li>
           <li><a href="/services">Cupping Therapy</a></li>
-          <li><a href="/services">Herbal Medicine</a></li>
+            <li><a href="/services#herbal">Herbal Formulas &amp; Teas</a></li>
           <li><a href="/services">Pain Management</a></li>
         </ul>
       </div>
@@ -380,142 +388,7 @@
   </div>
 </footer>
   <script src="main.js"></script>
-  <script>
-    // Set min date on date picker to today (local date, not UTC)
-    (function() {
-      var d = document.getElementById('appt-date1');
-      if (!d) return;
-      var now = new Date();
-      var y = now.getFullYear();
-      var m = String(now.getMonth() + 1).padStart(2, '0');
-      var day = String(now.getDate()).padStart(2, '0');
-      d.min = y + '-' + m + '-' + day;
-    })();
-
-    // Patient type segmented control
-    (function() {
-      var hiddenInput = document.getElementById('appt-patient-type');
-      var toggleButtons = document.querySelectorAll('.patient-toggle-btn');
-
-      function setPatientType(btn) {
-        toggleButtons.forEach(function(b) {
-          b.classList.remove('selected');
-          b.setAttribute('aria-checked', 'false');
-        });
-        btn.classList.add('selected');
-        btn.setAttribute('aria-checked', 'true');
-        if (hiddenInput) hiddenInput.value = btn.getAttribute('data-value');
-      }
-
-      toggleButtons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          setPatientType(btn);
-        });
-        btn.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-        });
-      });
-    })();
-
-    // Appointment form — submits to Vercel serverless function /api/contact
-    (function() {
-      var form = document.getElementById('appointmentForm');
-      var success = document.getElementById('formSuccess');
-      var errorDiv = document.getElementById('formError');
-      var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
-      var startedAt = document.getElementById('appt-started-at');
-      var phoneInput = document.getElementById('appt-phone');
-      if (!form) return;
-      if (startedAt) startedAt.value = String(Date.now());
-
-      function showFormError(msg) {
-        if (!errorDiv) return;
-        errorDiv.textContent = msg;
-        errorDiv.style.display = 'block';
-        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        errorDiv.focus();
-      }
-
-      function hideFormError() {
-        if (!errorDiv) return;
-        errorDiv.style.display = 'none';
-        errorDiv.textContent = '';
-      }
-
-      function validatePatientType() {
-        var selectedType = document.getElementById('appt-patient-type');
-        if (selectedType && !selectedType.value) {
-          showFormError('Please select whether you are a new or returning patient.');
-          var firstToggle = form.querySelector('.patient-toggle-btn');
-          if (firstToggle) firstToggle.focus();
-          return false;
-        }
-        return true;
-      }
-
-      function isValidUsPhone(value) {
-        var digits = String(value || '').replace(/\D/g, '');
-        if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
-        return digits.length === 10;
-      }
-
-      function updatePhoneValidity() {
-        if (!phoneInput) return true;
-        if (!phoneInput.value.trim()) {
-          phoneInput.setCustomValidity('');
-          return false;
-        }
-        var valid = isValidUsPhone(phoneInput.value);
-        phoneInput.setCustomValidity(valid ? '' : 'Please enter a valid 10-digit phone number.');
-        return valid;
-      }
-
-      if (phoneInput) {
-        phoneInput.addEventListener('input', updatePhoneValidity);
-        phoneInput.addEventListener('blur', updatePhoneValidity);
-      }
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        hideFormError();
-        if (!validatePatientType()) return;
-        updatePhoneValidity();
-        if (!form.reportValidity()) return;
-        // Collect form fields as JSON
-        var fd = new FormData(form);
-        var data = {};
-        fd.forEach(function(val, key) { data[key] = val; });
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        fetch('/api/contact', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-        }).then(function(res) {
-          return res.json().catch(function() { return {}; }).then(function(payload) {
-            return { ok: res.ok, payload: payload };
-          });
-        }).then(function(result) {
-          if (result.ok) {
-            form.style.display = 'none';
-            success.style.display = 'block';
-            if (typeof gtag === 'function') {
-              gtag('event', 'appointment_request', { event_category: 'CTA', event_label: 'Contact Form' });
-            }
-          } else {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Appointment Request';
-            showFormError(result.payload && result.payload.error ? result.payload.error : 'Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
-          }
-        }).catch(function() {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Appointment Request';
-          showFormError('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
-        });
-      });
-    })();
-  </script>
+  <script src="contact-form.js"></script>
   <!-- Sticky Mobile Request Bar -->
   <div class="mobile-book-bar">
     <a href="#appointment-form">Request Appointment →</a>

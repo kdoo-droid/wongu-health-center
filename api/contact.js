@@ -16,7 +16,7 @@ const ALLOWED_PATIENT_TYPES = new Set(['New Patient', 'Returning Patient']);
 const ALLOWED_SERVICES = new Set([
   'Acupuncture',
   'Cupping Therapy',
-  'Herbal Medicine Consultation',
+  'Herbal Formula & Tea Consultation',
   'Pain Management',
   'Wellness Consultation',
   'Not sure yet'
