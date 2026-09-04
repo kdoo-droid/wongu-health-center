@@ -30,8 +30,7 @@ const ALLOWED_INSURANCE = new Set([
 const ALLOWED_TIMES = new Set([
   'Morning (8:00 - 10:00 AM)',
   'Mid-Morning (10:00 AM - 12:00 PM)',
-  'Afternoon (12:00 - 4:30 PM)',
-  'Saturday Morning (8:00 AM - 12:00 PM)'
+  'Afternoon (12:00 - 4:30 PM)'
 ]);
 
 function getBody(req) {
@@ -383,7 +382,7 @@ export default async function handler(req, res) {
         <p style="color:#374151;line-height:1.7;">Need to reach us sooner? Call or text us directly:</p>
         <p style="margin:0;"><a href="tel:+17028521280" style="color:#4a7c59;font-weight:600;">(702) 852-1280</a> &nbsp;|&nbsp; <a href="sms:+17025509483" style="color:#4a7c59;font-weight:600;">Text: 702-550-9483</a></p>
         <p style="color:#374151;line-height:1.7;margin-top:16px;">We look forward to seeing you!</p>
-        <p style="color:#6b7280;font-size:0.85rem;margin-top:24px;padding-top:16px;border-top:1px solid #f3f4f6;">Wongu Health Center &middot; 8630 S Eastern Ave, Las Vegas, NV 89123 &middot; Mon–Fri 8AM–4:30PM, Sat 8AM–12PM</p>
+        <p style="color:#6b7280;font-size:0.85rem;margin-top:24px;padding-top:16px;border-top:1px solid #f3f4f6;">Wongu Health Center &middot; 8630 S Eastern Ave, Las Vegas, NV 89123 &middot; Mon–Fri 8AM–4:30PM, Closed Sat–Sun</p>
       </div>
     </div>
   `;
