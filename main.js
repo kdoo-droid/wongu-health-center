@@ -153,5 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
     el.addEventListener('click', () => trackEvent('email_click', el.getAttribute('href')));
   });
+  document.querySelectorAll('.online-booking-btn').forEach(el => {
+    el.addEventListener('click', () => trackEvent('online_booking_click', el.textContent.trim()));
+  });
 
 });
