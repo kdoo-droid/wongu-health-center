@@ -275,60 +275,6 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   color: white;
 }
 
-/* --- Online Booking Announcement Banner --- */
-.promo-banner {
-  background: linear-gradient(135deg, var(--terracotta) 0%, var(--gold) 100%);
-  color: white;
-  padding: 10px 0;
-}
-
-.promo-banner-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  text-align: center;
-}
-
-.promo-banner-text {
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.promo-banner-text strong {
-  font-weight: 700;
-}
-
-.promo-banner-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-  background: white;
-  color: var(--terracotta);
-  font-weight: 700;
-  font-size: 0.85rem;
-  padding: 7px 18px;
-  border-radius: 50px;
-  white-space: nowrap;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.promo-banner-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-}
-
-.promo-banner-btn svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-}
-
 .header-main {
   padding: 12px 0;
 }
@@ -1643,33 +1589,6 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   line-height: 1.5;
 }
 
-/* Patient toggle (segmented control) */
-.patient-toggle { display: flex; gap: 12px; }
-.patient-toggle-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  padding: 10px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  flex: 1;
-  background: white;
-  font-family: inherit;
-  font-weight: 500;
-  color: var(--charcoal);
-  transition: border-color 0.15s, background 0.15s, color 0.15s;
-}
-.patient-toggle-btn:hover { border-color: var(--sage-light); }
-.patient-toggle-btn.selected {
-  border-color: var(--sage);
-  background: rgba(122,158,126,0.06);
-  color: var(--forest);
-}
-.patient-toggle-btn:focus { box-shadow: 0 0 0 3px rgba(122,158,126,0.25); outline: none; }
-
 /* Privacy callout (replaces border-left card) */
 .privacy-callout {
   background: white;
@@ -1678,6 +1597,46 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   padding: 28px;
 }
 .privacy-callout h4 { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; }
+
+/* --- Online Booking Confirmation Modal --- */
+.booking-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,44,44,0.55);
+  z-index: 100000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.booking-modal-overlay.active { display: flex; }
+.booking-modal {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 440px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+}
+.booking-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--gray);
+  cursor: pointer;
+  padding: 6px;
+}
+.booking-modal-close:hover { color: var(--charcoal); }
+.booking-modal h3 { color: var(--forest); margin-bottom: 14px; padding-right: 24px; }
+.booking-modal p { color: var(--slate); line-height: 1.7; font-size: 0.95rem; margin-bottom: 14px; }
+.booking-modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
 
 /* --- Blog editorial system --- */
 .blog-article { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
@@ -1779,11 +1738,6 @@ button:focus-visible {
 
 @media (max-width: 768px) {
   .header-top { display: none; }
-
-  .promo-banner { padding: 8px 0; }
-  .promo-banner-inner { gap: 8px 12px; }
-  .promo-banner-text { font-size: 0.8rem; flex-basis: 100%; }
-  .promo-banner-btn { font-size: 0.8rem; padding: 6px 14px; }
 
   .nav-links { display: none; }
   .nav-cta { display: none; }

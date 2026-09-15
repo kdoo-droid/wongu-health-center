@@ -157,4 +157,91 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', () => trackEvent('online_booking_click', el.textContent.trim()));
   });
 
+  // --- Online Booking Confirmation Modal ---
+  // Online booking is for self-pay patients only. VA/insurance patients need
+  // to call so the front desk can confirm eligibility before scheduling.
+  const bookingTriggers = document.querySelectorAll('a.online-booking-btn[href*="patient.unifiedpractice.com"]');
+  if (bookingTriggers.length) {
+    const bookingOverlay = document.createElement('div');
+    bookingOverlay.className = 'booking-modal-overlay';
+    bookingOverlay.setAttribute('role', 'dialog');
+    bookingOverlay.setAttribute('aria-modal', 'true');
+    bookingOverlay.setAttribute('aria-labelledby', 'bookingModalTitle');
+    bookingOverlay.innerHTML = `
+      <div class="booking-modal">
+        <button type="button" class="booking-modal-close" aria-label="Close">&times;</button>
+        <h3 id="bookingModalTitle">Before You Book Online</h3>
+        <p>Online booking is for <strong>self-pay</strong> patients.</p>
+        <p>If you plan to use <strong>VA or Culinary insurance</strong> (not self-pay), please call our office instead so we can confirm your eligibility and match you with a credentialed provider.</p>
+        <div class="booking-modal-actions">
+          <a href="tel:+17028521280" class="btn btn-secondary btn-full">Call (702) 852-1280</a>
+          <button type="button" class="btn btn-primary btn-full">Book Your Appointment</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(bookingOverlay);
+
+    const bookingClose = bookingOverlay.querySelector('.booking-modal-close');
+    const bookingCall = bookingOverlay.querySelector('a[href^="tel:"]');
+    const bookingContinue = bookingOverlay.querySelector('.booking-modal-actions button');
+    let pendingBookingUrl = null;
+    let bookingLastFocused = null;
+
+    function openBookingModal(url, trigger) {
+      pendingBookingUrl = url;
+      bookingLastFocused = trigger;
+      bookingOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      bookingClose.focus();
+    }
+
+    function closeBookingModal() {
+      bookingOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      pendingBookingUrl = null;
+      if (bookingLastFocused) bookingLastFocused.focus();
+    }
+
+    bookingTriggers.forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        e.preventDefault();
+        openBookingModal(trigger.href, trigger);
+      });
+    });
+
+    bookingClose.addEventListener('click', closeBookingModal);
+
+    bookingCall.addEventListener('click', () => {
+      trackEvent('phone_call', bookingCall.textContent.trim());
+      closeBookingModal();
+    });
+
+    bookingOverlay.addEventListener('click', e => {
+      if (e.target === bookingOverlay) closeBookingModal();
+    });
+
+    bookingOverlay.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeBookingModal(); return; }
+      if (e.key !== 'Tab') return;
+      const focusable = bookingOverlay.querySelectorAll('a[href], button:not([disabled])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    bookingContinue.addEventListener('click', () => {
+      const url = pendingBookingUrl;
+      closeBookingModal();
+      if (url) {
+        trackEvent('online_booking_confirmed', 'Booking Modal Continue');
+        window.open(url, '_blank', 'noopener');
+      }
+    });
+  }
+
 });

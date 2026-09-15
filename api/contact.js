@@ -12,25 +12,18 @@ const DEFAULT_RESEND_FROM_EMAIL = 'Wongu Health Center <appointments@wonguhealth
 const rateLimitStore = globalThis.__wonguRateLimitStore || new Map();
 globalThis.__wonguRateLimitStore = rateLimitStore;
 
-const ALLOWED_PATIENT_TYPES = new Set(['New Patient', 'Returning Patient']);
-const ALLOWED_SERVICES = new Set([
-  'Acupuncture',
-  'Cupping Therapy',
-  'Herbal Formula & Tea Consultation',
-  'Pain Management',
-  'Wellness Consultation',
-  'Not sure yet'
+const ALLOWED_TOPICS = new Set([
+  'General Question',
+  'Herbal Formula & Tea Request',
+  'VA / Insurance Eligibility Question',
+  'Billing Question',
+  'Other'
 ]);
 const ALLOWED_INSURANCE = new Set([
   'VA (Veterans Affairs)',
   'Culinary Insurance',
   'Self-Pay',
   'Other'
-]);
-const ALLOWED_TIMES = new Set([
-  'Morning (8:00 - 10:00 AM)',
-  'Mid-Morning (10:00 AM - 12:00 PM)',
-  'Afternoon (12:00 - 4:30 PM)'
 ]);
 
 function getBody(req) {
@@ -97,12 +90,6 @@ function isValidPhone(value) {
     return true;
   }
   return digits.length === 10;
-}
-
-function isValidDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const parsed = new Date(`${value}T00:00:00Z`);
-  return !Number.isNaN(parsed.getTime());
 }
 
 function getHeader(req, headerName) {
@@ -208,7 +195,7 @@ export default async function handler(req, res) {
       res.setHeader('X-RateLimit-Reset', String(rateLimit.resetAt));
     }
     return res.status(429).json({
-      error: 'Too many appointment requests from this connection. Please wait a few minutes and try again.'
+      error: 'Too many messages from this connection. Please wait a few minutes and try again.'
     });
   }
 
@@ -243,11 +230,8 @@ export default async function handler(req, res) {
   const name = normalizeText(body.name, MAX_NAME_LENGTH);
   const phone = normalizeText(body.phone, MAX_PHONE_LENGTH);
   const email = normalizeText(body.email, MAX_EMAIL_LENGTH).toLowerCase();
-  const patientType = normalizeChoice(body.patient_type, ALLOWED_PATIENT_TYPES);
-  const service = normalizeChoice(body.service, ALLOWED_SERVICES);
+  const topic = normalizeChoice(body.service, ALLOWED_TOPICS);
   const insurance = normalizeChoice(body.insurance, ALLOWED_INSURANCE);
-  const preferredDate = normalizeText(body.preferred_date, 10);
-  const preferredTime = normalizeChoice(body.preferred_time, ALLOWED_TIMES);
   const notes = normalizeNotes(body.notes);
 
   if (!name || !phone || !email) {
@@ -266,24 +250,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Please enter a valid phone number.' });
   }
 
-  if (!patientType) {
-    return res.status(400).json({ error: 'Please select whether you are a new or returning patient.' });
-  }
-
-  if (body.service && !service) {
-    return res.status(400).json({ error: 'Please choose a valid service option.' });
+  if (body.service && !topic) {
+    return res.status(400).json({ error: 'Please choose a valid topic option.' });
   }
 
   if (body.insurance && !insurance) {
     return res.status(400).json({ error: 'Please choose a valid insurance option.' });
-  }
-
-  if (preferredDate && !isValidDate(preferredDate)) {
-    return res.status(400).json({ error: 'Please choose a valid preferred date.' });
-  }
-
-  if (body.preferred_time && !preferredTime) {
-    return res.status(400).json({ error: 'Please choose a valid preferred time.' });
   }
 
   if (!process.env.RESEND_API_KEY) {
@@ -302,27 +274,20 @@ export default async function handler(req, res) {
   const safeName = escapeHtml(name);
   const safePhone = escapeHtml(phone);
   const safeEmail = escapeHtml(email);
-  const safePatientType = escapeHtml(patientType);
-  const safeService = escapeHtml(service || 'Not specified');
+  const safeTopic = escapeHtml(topic || 'Not specified');
   const safeInsurance = escapeHtml(insurance || 'Not specified');
-  const safePreferredDate = escapeHtml(preferredDate || 'Flexible');
-  const safePreferredTime = escapeHtml(preferredTime || 'Any time');
   const safeNotes = notes ? escapeMultilineHtml(notes) : '';
 
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
       <div style="background:#2d4a32;padding:24px 32px;">
-        <h1 style="color:white;margin:0;font-size:1.3rem;">New Appointment Request</h1>
+        <h1 style="color:white;margin:0;font-size:1.3rem;">New Contact Message</h1>
         <p style="color:rgba(255,255,255,0.7);margin:4px 0 0;font-size:0.9rem;">Wongu Health Center</p>
       </div>
       <div style="padding:32px;">
         <table style="width:100%;border-collapse:collapse;">
           <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;width:40%;color:#6b7280;font-size:0.9rem;">Patient Type</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safePatientType}</td>
-          </tr>
-          <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Full Name</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;width:40%;color:#6b7280;font-size:0.9rem;">Full Name</td>
             <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeName}</td>
           </tr>
           <tr>
@@ -334,25 +299,17 @@ export default async function handler(req, res) {
             <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeEmail}</td>
           </tr>
           <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Service</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeService}</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Reason for Contact</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeTopic}</td>
           </tr>
           <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Insurance / Payment Type</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safeInsurance}</td>
-          </tr>
-          <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Preferred Date</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safePreferredDate}</td>
-          </tr>
-          <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;">Preferred Time</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;font-weight:600;color:#111827;">${safePreferredTime}</td>
+            <td style="padding:10px 0;color:#6b7280;font-size:0.9rem;">Insurance / Payment Type</td>
+            <td style="padding:10px 0;font-weight:600;color:#111827;">${safeInsurance}</td>
           </tr>
           ${safeNotes ? `
           <tr>
-            <td style="padding:10px 0;color:#6b7280;font-size:0.9rem;vertical-align:top;">Notes</td>
-            <td style="padding:10px 0;color:#111827;">${safeNotes}</td>
+            <td style="padding:10px 0;border-top:1px solid #f3f4f6;color:#6b7280;font-size:0.9rem;vertical-align:top;">Message</td>
+            <td style="padding:10px 0;border-top:1px solid #f3f4f6;color:#111827;">${safeNotes}</td>
           </tr>` : ''}
         </table>
         <div style="margin-top:24px;padding:16px;background:#f9fafb;border-radius:8px;">
@@ -365,23 +322,22 @@ export default async function handler(req, res) {
   const confirmationHtml = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
       <div style="background:#2d4a32;padding:24px 32px;">
-        <h1 style="color:white;margin:0;font-size:1.3rem;">Appointment Request Received</h1>
+        <h1 style="color:white;margin:0;font-size:1.3rem;">Message Received</h1>
         <p style="color:rgba(255,255,255,0.7);margin:4px 0 0;font-size:0.9rem;">Wongu Health Center</p>
       </div>
       <div style="padding:32px;">
         <p style="color:#111827;font-size:1rem;line-height:1.7;">Hi ${safeName},</p>
-        <p style="color:#374151;line-height:1.7;">Thank you for requesting an appointment at Wongu Health Center. Our front desk has received your request and will follow up within <strong>24 business hours (Mon–Fri)</strong> to confirm your appointment time.</p>
-        <p style="color:#374151;line-height:1.7;">Requests submitted on weekends will be handled the following Monday.</p>
+        <p style="color:#374151;line-height:1.7;">Thank you for contacting Wongu Health Center. Our front desk has received your message and will get back to you within <strong>24 business hours (Mon–Fri)</strong>.</p>
+        <p style="color:#374151;line-height:1.7;">Messages sent on weekends will be answered the following Monday.</p>
         <div style="margin:24px 0;padding:16px 20px;background:#f0f4f0;border-left:4px solid #4a7c59;border-radius:0 8px 8px 0;">
-          <p style="margin:0;font-weight:600;color:#2d4a32;margin-bottom:8px;">Your Request Summary</p>
-          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Patient Type:</strong> ${safePatientType}</p>
-          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Service:</strong> ${safeService}</p>
-          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Preferred Date:</strong> ${safePreferredDate}</p>
-          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Preferred Time:</strong> ${safePreferredTime}</p>
+          <p style="margin:0;font-weight:600;color:#2d4a32;margin-bottom:8px;">Your Message Summary</p>
+          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Reason for Contact:</strong> ${safeTopic}</p>
+          <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Insurance / Payment Type:</strong> ${safeInsurance}</p>
         </div>
+        <p style="color:#374151;line-height:1.7;">Ready to book an appointment? Self-pay patients can book instantly through our <a href="https://patient.unifiedpractice.com/wongu-health-center" style="color:#4a7c59;font-weight:600;">online patient portal</a>. VA &amp; Culinary insurance patients: our front desk will confirm eligibility with you first.</p>
         <p style="color:#374151;line-height:1.7;">Need to reach us sooner? Call or text us directly:</p>
         <p style="margin:0;"><a href="tel:+17028521280" style="color:#4a7c59;font-weight:600;">(702) 852-1280</a> &nbsp;|&nbsp; <a href="sms:+17025509483" style="color:#4a7c59;font-weight:600;">Text: 702-550-9483</a></p>
-        <p style="color:#374151;line-height:1.7;margin-top:16px;">We look forward to seeing you!</p>
+        <p style="color:#374151;line-height:1.7;margin-top:16px;">We look forward to hearing from you!</p>
         <p style="color:#6b7280;font-size:0.85rem;margin-top:24px;padding-top:16px;border-top:1px solid #f3f4f6;">Wongu Health Center &middot; 8630 S Eastern Ave, Las Vegas, NV 89123 &middot; Mon–Fri 8AM–4:30PM, Closed Sat–Sun</p>
       </div>
     </div>
@@ -393,7 +349,7 @@ export default async function handler(req, res) {
         from: resendFromEmail,
         to: [clinicEmail],
         reply_to: email,
-        subject: `New Appointment Request - ${name} (${patientType})`,
+        subject: `New Contact Message - ${name} (${topic || 'General Question'})`,
         html
       });
     } catch (err) {
@@ -401,14 +357,14 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Failed to send email.' });
     }
 
-    // Attempt the confirmation email too, but keep the appointment request
+    // Attempt the confirmation email too, but keep the contact message
     // successful even if the patient's inbox rejects it or Resend returns an error.
     try {
       await sendResendEmail({
         from: resendFromEmail,
         to: [email],
         reply_to: clinicEmail,
-        subject: 'Your Appointment Request — Wongu Health Center',
+        subject: 'We Received Your Message — Wongu Health Center',
         html: confirmationHtml
       });
     } catch (err) {

@@ -1,40 +1,6 @@
-// Appointment form behavior for the contact page.
+// Contact form behavior for general questions and herbal formula requests.
 (function() {
-  var dateInput = document.getElementById('appt-date1');
-  if (dateInput) {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = String(now.getMonth() + 1).padStart(2, '0');
-    var day = String(now.getDate()).padStart(2, '0');
-    dateInput.min = year + '-' + month + '-' + day;
-  }
-
-  var hiddenInput = document.getElementById('appt-patient-type');
-  var toggleButtons = document.querySelectorAll('.patient-toggle-btn');
-
-  function setPatientType(btn) {
-    toggleButtons.forEach(function(b) {
-      b.classList.remove('selected');
-      b.setAttribute('aria-checked', 'false');
-    });
-    btn.classList.add('selected');
-    btn.setAttribute('aria-checked', 'true');
-    if (hiddenInput) hiddenInput.value = btn.getAttribute('data-value');
-  }
-
-  toggleButtons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      setPatientType(btn);
-    });
-    btn.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        btn.click();
-      }
-    });
-  });
-
-  var form = document.getElementById('appointmentForm');
+  var form = document.getElementById('contactForm');
   var success = document.getElementById('formSuccess');
   var errorDiv = document.getElementById('formError');
   var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
@@ -55,17 +21,6 @@
     if (!errorDiv) return;
     errorDiv.style.display = 'none';
     errorDiv.textContent = '';
-  }
-
-  function validatePatientType() {
-    var selectedType = document.getElementById('appt-patient-type');
-    if (selectedType && !selectedType.value) {
-      showFormError('Please select whether you are a new or returning patient.');
-      var firstToggle = form.querySelector('.patient-toggle-btn');
-      if (firstToggle) firstToggle.focus();
-      return false;
-    }
-    return true;
   }
 
   function isValidUsPhone(value) {
@@ -93,7 +48,6 @@
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     hideFormError();
-    if (!validatePatientType()) return;
     updatePhoneValidity();
     if (!form.reportValidity()) return;
 
@@ -116,19 +70,19 @@
         form.style.display = 'none';
         if (success) success.style.display = 'block';
         if (typeof window.gtag === 'function') {
-          window.gtag('event', 'appointment_request', {
+          window.gtag('event', 'contact_message', {
             event_category: 'CTA',
             event_label: 'Contact Form'
           });
         }
       } else {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Appointment Request';
+        submitBtn.textContent = 'Send Message';
         showFormError(result.payload && result.payload.error ? result.payload.error : 'Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
       }
     }).catch(function() {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Appointment Request';
+      submitBtn.textContent = 'Send Message';
       showFormError('Something went wrong. Please call us at (702) 852-1280 or email clinic-office@wongu.edu.');
     });
   });
