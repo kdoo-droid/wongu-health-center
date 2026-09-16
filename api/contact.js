@@ -9,6 +9,11 @@ const RATE_LIMIT_MAX_REQUESTS = 5;
 const DEFAULT_CLINIC_EMAIL = 'clinic-office@wongu.edu';
 const DEFAULT_RESEND_FROM_EMAIL = 'Wongu Health Center <appointments@wonguhealthcenter.com>';
 
+// In-memory store: only rate-limits requests handled by the same warm
+// serverless instance, not globally across Vercel's instance pool. It still
+// catches bursts from one instance and works alongside the honeypot/timing
+// checks below, but for a hard per-IP cap across all instances this needs a
+// shared store (e.g. Vercel KV / Upstash Redis).
 const rateLimitStore = globalThis.__wonguRateLimitStore || new Map();
 globalThis.__wonguRateLimitStore = rateLimitStore;
 

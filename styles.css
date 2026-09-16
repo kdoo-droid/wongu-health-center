@@ -153,7 +153,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sage-dark);
+  color: var(--forest);
   margin-bottom: 14px;
   display: block;
 }
@@ -186,13 +186,13 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .btn-primary {
-  background: var(--sage);
+  background: var(--sage-dark);
   color: white;
   box-shadow: 0 4px 16px rgba(122,158,126,0.3);
 }
 
 .btn-primary:hover {
-  background: var(--sage-dark);
+  background: var(--forest);
   box-shadow: 0 6px 24px rgba(122,158,126,0.4);
   transform: translateY(-2px);
 }
@@ -204,14 +204,14 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .btn-secondary:hover {
-  background: var(--sage);
+  background: var(--sage-dark);
   color: white;
-  border-color: var(--sage);
+  border-color: var(--sage-dark);
 }
 
 .btn-gold {
   background: var(--gold);
-  color: white;
+  color: var(--charcoal);
   box-shadow: 0 4px 16px rgba(196,163,90,0.3);
 }
 
@@ -525,7 +525,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 
 .hero h1 em {
   font-style: italic;
-  color: var(--sage);
+  color: var(--sage-dark);
 }
 
 .hero-desc {
@@ -678,7 +678,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .hero-page .breadcrumb a:hover {
-  color: var(--sage);
+  color: var(--sage-dark);
 }
 
 .hero-page .breadcrumb .sep {
@@ -749,6 +749,16 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 
 .card h3 {
   margin-bottom: 12px;
+}
+
+/* Card/step titles use h3 for a correct heading outline, but keep the
+   compact look these components were designed with (formerly h4). The
+   pricing discount card is the one h3 that's meant to read large. */
+.card:not(.discount-card) h3,
+.step-card h3 {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
 .card p {
@@ -897,7 +907,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--sage);
+  color: var(--sage-dark);
   margin-bottom: 8px;
 }
 
@@ -937,7 +947,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 
 .pricing-features li::before {
   content: '✓';
-  color: var(--sage);
+  color: var(--sage-dark);
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -1110,7 +1120,16 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   fill: white;
 }
 
-.footer-col h4 {
+/* Instagram's icon is drawn as outline shapes (rect + circles), not a
+   solid silhouette like the other social icons, so it needs a stroke
+   instead of a fill or the shapes are indistinguishable from each other. */
+.footer-social a[aria-label="Instagram"] svg {
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+}
+
+.footer-col h3 {
   color: white;
   font-family: var(--font-body);
   font-weight: 600;
@@ -1229,7 +1248,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   stroke-width: 1.5;
 }
 
-.contact-info-text h4 {
+.contact-info-text h3 {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
@@ -1242,7 +1261,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .contact-info-text a:hover {
-  color: var(--sage);
+  color: var(--sage-dark);
 }
 
 /* Map placeholder */
@@ -1541,7 +1560,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   color: var(--gray);
 }
 .legal-contact { color: var(--gray); line-height: 1.8; margin-bottom: 4px; }
-.legal-contact a { color: var(--sage); }
+.legal-contact a { color: var(--sage-dark); }
 
 /* --- Pricing system --- */
 .btn-full { width: 100%; justify-content: center; }
@@ -1624,7 +1643,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   border-radius: var(--radius);
   padding: 28px;
 }
-.privacy-callout h4 { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; }
+.privacy-callout h3 { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 12px; font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-weight: 700; }
 
 /* --- Online Booking Confirmation Modal --- */
 .booking-modal-overlay {
@@ -1686,7 +1705,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 .blog-cta-box { text-align: center; padding: 40px; background: rgba(45,74,50,0.04); border-radius: var(--radius-lg); }
 
 /* Team card system */
-.team-role { color: var(--sage); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; }
+.team-role { color: var(--sage-dark); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; }
 
 /* Footer links row */
 .footer-links-row { display: flex; gap: 24px; }
@@ -1905,7 +1924,7 @@ button:focus-visible {
     padding: 16px !important;
   }
 
-  .grid-4 .card h4 {
+  .grid-4 .card h3 {
     font-size: 0.88rem;
   }
 
@@ -2015,7 +2034,7 @@ button:focus-visible {
     font-size: 0.85rem;
   }
 
-  .footer-col h4 {
+  .footer-col h3 {
     font-size: 0.9rem;
   }
 
@@ -2245,7 +2264,8 @@ button:focus-visible {
 /* Utility classes to replace common homepage inline styles */
 .text-center { text-align: center; }
 .text-gray { color: var(--gray); }
-.text-sage { color: var(--sage); }
+.text-sage { color: var(--sage-dark); }
+.section-cream .text-sage { color: var(--forest); }
 .text-forest { color: var(--forest); }
 .text-sm { font-size: 0.88rem; }
 .text-xs { font-size: 0.82rem; }
@@ -2275,7 +2295,7 @@ button:focus-visible {
 
 /* Team card typography */
 .team-card-role {
-  color: var(--sage);
+  color: var(--sage-dark);
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 8px;
@@ -2483,6 +2503,7 @@ select.form-input {
   margin-top: 2px;
 }
 .faq-section-heading {
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
   margin: 48px 0 24px;
   padding-bottom: 16px;
   border-bottom: 2px solid var(--sage-light);
