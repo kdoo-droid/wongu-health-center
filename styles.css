@@ -162,6 +162,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   font-size: 1.1rem;
   color: var(--gray);
   max-width: 600px;
+  margin: 0 auto;
   line-height: 1.7;
   text-wrap: balance;
 }
