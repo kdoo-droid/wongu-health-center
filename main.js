@@ -244,20 +244,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Unified Practice Chat Widget ---
-  // The vendor bundle reads this global when it initializes the web component.
-  window.UP_CLINIC_ID = 'c83af1ba-e51b-45c3-af47-ed5625d5aa67';
-
-  if (!document.querySelector('up-chat-widget')) {
-    document.body.appendChild(document.createElement('up-chat-widget'));
-  }
-
-  if (!document.querySelector('script[data-up-chat-widget]')) {
-    const upChatScript = document.createElement('script');
-    upChatScript.src = 'https://ehr.unifiedpractice.com/Public/Scripts/dist/up-chat-lib/chat-lib-bundle.js';
-    upChatScript.async = true;
-    upChatScript.dataset.upChatWidget = '';
-    document.body.appendChild(upChatScript);
-  }
-
 });
