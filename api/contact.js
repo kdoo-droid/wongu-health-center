@@ -1,3 +1,5 @@
+import { hoursSummaryText, insuranceText } from '../data/clinic.js';
+
 const MAX_NAME_LENGTH = 100;
 const MAX_PHONE_LENGTH = 25;
 const MAX_EMAIL_LENGTH = 254;
@@ -25,7 +27,8 @@ const ALLOWED_TOPICS = new Set([
   'Other'
 ]);
 const ALLOWED_INSURANCE = new Set([
-  'VA (Veterans Affairs)',
+  'VA Community Care',
+  'VA (Veterans Affairs)', // label used before the Community Care wording; kept for cached pages
   'Culinary Insurance',
   'Self-Pay',
   'Other'
@@ -339,11 +342,11 @@ export default async function handler(req, res) {
           <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Reason for Contact:</strong> ${safeTopic}</p>
           <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Insurance / Payment Type:</strong> ${safeInsurance}</p>
         </div>
-        <p style="color:#374151;line-height:1.7;">Ready to book an appointment? Self-pay patients can book instantly through our <a href="https://patient.unifiedpractice.com/wongu-health-center" style="color:#4a7c59;font-weight:600;">online patient portal</a>. VA &amp; Culinary insurance patients: our front desk will confirm eligibility with you first.</p>
+        <p style="color:#374151;line-height:1.7;">Ready to book an appointment? Self-pay patients can book instantly through our <a href="https://patient.unifiedpractice.com/wongu-health-center" style="color:#4a7c59;font-weight:600;">online patient portal</a>. ${escapeHtml(insuranceText())}</p>
         <p style="color:#374151;line-height:1.7;">Need to reach us sooner? Call or text us directly:</p>
         <p style="margin:0;"><a href="tel:+17028521280" style="color:#4a7c59;font-weight:600;">(702) 852-1280</a> &nbsp;|&nbsp; <a href="sms:+17025509483" style="color:#4a7c59;font-weight:600;">Text: 702-550-9483</a></p>
         <p style="color:#374151;line-height:1.7;margin-top:16px;">We look forward to hearing from you!</p>
-        <p style="color:#6b7280;font-size:0.85rem;margin-top:24px;padding-top:16px;border-top:1px solid #f3f4f6;">Wongu Health Center &middot; 8630 S Eastern Ave, Las Vegas, NV 89123 &middot; Mon–Fri 8AM–4:30PM, Closed Sat–Sun</p>
+        <p style="color:#6b7280;font-size:0.85rem;margin-top:24px;padding-top:16px;border-top:1px solid #f3f4f6;">Wongu Health Center &middot; 8630 S Eastern Ave, Las Vegas, NV 89123 &middot; ${escapeHtml(hoursSummaryText())}</p>
       </div>
     </div>
   `;

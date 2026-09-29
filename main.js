@@ -127,14 +127,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Team Carousel: clone cards at runtime for seamless infinite scroll ---
-  document.querySelectorAll('.team-carousel-track').forEach(function(track) {
-    var cards = Array.from(track.children);
-    cards.forEach(function(card) {
-      var clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
+  // The HTML lists each person once. The visual loop needs a second copy, which
+  // is added here only when the animation runs, and is hidden from assistive tech.
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    document.querySelectorAll('.team-carousel-track').forEach(function(track) {
+      var cards = Array.from(track.children);
+      cards.forEach(function(card) {
+        var clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('inert', '');
+        clone.querySelectorAll('img').forEach(function(img) { img.alt = ''; });
+        track.appendChild(clone);
+      });
     });
-  });
+  }
 
   // --- Conversion Tracking ---
   // Fires gtag events when visitors click key CTAs.
@@ -158,8 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Online Booking Confirmation Modal ---
-  // Online booking is for self-pay patients only. VA/insurance patients need
-  // to call so the front desk can confirm eligibility before scheduling.
+  // Online booking is for self-pay patients only. VA Community Care/Culinary
+  // patients need to contact the clinic so eligibility can be verified first.
+  // The insurance wording below is generated from data/clinic.js (npm run build).
   const bookingTriggers = document.querySelectorAll('a.online-booking-btn[href*="patient.unifiedpractice.com"]');
   if (bookingTriggers.length) {
     const bookingOverlay = document.createElement('div');
@@ -172,7 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <button type="button" class="booking-modal-close" aria-label="Close">&times;</button>
         <h3 id="bookingModalTitle">Before You Book Online</h3>
         <p>Online booking is for <strong>self-pay</strong> patients.</p>
-        <p>If you plan to use <strong>VA or Culinary insurance</strong> (not self-pay), please call our office instead so we can confirm your eligibility and match you with a credentialed provider.</p>
+        <p><!-- build:insurance-note --><strong>VA Community Care and Culinary patients:</strong> Please <a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact the clinic</a> before scheduling so we can verify eligibility, authorization, and provider availability.<!-- /build:insurance-note --></p>
+        <p><!-- build:insurance-coverage -->Coverage is subject to authorization, eligibility, and plan requirements.<!-- /build:insurance-coverage --></p>
         <div class="booking-modal-actions">
           <a href="tel:+17028521280" class="btn btn-secondary btn-full">Call (702) 852-1280</a>
           <button type="button" class="btn btn-primary btn-full">Book Your Appointment</button>

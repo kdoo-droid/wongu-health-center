@@ -24,19 +24,20 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="canonical" href="https://wonguhealthcenter.com/">
-  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="styles.css?v=15">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
   <script defer src="analytics.js"></script>
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data (generated from data/clinic.js) -->
+  <!-- build:clinic-jsonld -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     "name": "Wongu Health Center",
     "alternateName": "Wongu University Health Center",
-    "description": "Nevada's only Oriental medicine university clinic offering affordable acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine treatments in Las Vegas.",
+    "description": "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine in Las Vegas.",
     "url": "https://wonguhealthcenter.com/",
     "telephone": "+1-702-852-1280",
     "email": "clinic-office@wongu.edu",
@@ -56,11 +57,18 @@
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "opens": "08:00",
         "closes": "16:30"
       }
     ],
+    "hasMap": "https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123",
     "priceRange": "$$",
     "medicalSpecialty": "Acupuncture",
     "parentOrganization": {
@@ -79,6 +87,7 @@
     }
   }
   </script>
+  <!-- /build:clinic-jsonld -->
 </head>
 <body>
   <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
@@ -152,7 +161,7 @@
 
           <h1>Feel Better Naturally. We'll Take Good Care of You.</h1>
 
-          <p class="hero-desc">Whether you're dealing with chronic pain, recovering from a stroke, struggling with anxiety, or simply ready to feel like yourself again &mdash; our team of licensed practitioners and dedicated interns is here to help. Walk in as a patient, leave as part of our community. Starting at just $80.</p>
+          <p class="hero-desc">Whether you're dealing with chronic pain, working toward recovery and mobility goals alongside your medical care, feeling the weight of stress, or simply ready to feel like yourself again &mdash; our team of licensed practitioners and supervised interns is here to help. Walk in as a patient, leave as part of our community. Starting at just $80.</p>
 
           <div class="hero-actions">
             <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary btn-lg online-booking-btn">
@@ -161,7 +170,7 @@
             </a>
             <a href="tel:+17028521280" class="btn btn-secondary">Or Call: (702) 852-1280</a>
           </div>
-          <p style="font-size:0.85rem;opacity:0.75;margin-top:12px;">VA &amp; insurance patients: please <a href="/contact" style="color:inherit;text-decoration:underline;">contact us</a> first to confirm eligibility before booking online.</p>
+          <p style="font-size:0.85rem;opacity:0.75;margin-top:12px;"><!-- build:insurance-note --><strong>VA Community Care and Culinary patients:</strong> Please <a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact the clinic</a> before scheduling so we can verify eligibility, authorization, and provider availability.<!-- /build:insurance-note --></p>
 
           <div class="hero-stats">
             <div class="hero-stat">
@@ -191,7 +200,7 @@
               </div>
               <div>
                 <div class="float-card-text">Licensed OMDs</div>
-                <div class="float-card-sub">Board-certified practitioners</div>
+                <div class="float-card-sub">Supervising every intern visit</div>
               </div>
             </div>
           </div>
@@ -229,32 +238,32 @@
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          VA Insurance Accepted
+          VA Community Care &amp; Culinary: Call to Verify
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Drug-Free Pain Relief
+          Drug-Free Care Options
         </div>
       </div>
     </div>
   </section>
 
   <!-- ==================== CONDITIONS WE TREAT ==================== -->
-  <section class="section" aria-label="Conditions we treat">
+  <section class="section" aria-label="Why patients visit">
     <div class="container">
       <div class="conditions-split">
         <div class="conditions-intro">
           <span class="section-label">We Can Help</span>
           <h2>Whatever brought you here, we'll listen first.</h2>
-          <p>Our patients come to us after years of pain, failed treatments, or simply not knowing where else to turn. We meet you where you are.</p>
-          <a href="/services" class="btn btn-primary" style="margin-top:24px;">See All Conditions We Treat →</a>
+          <p>Our patients come to us after years of pain, frustrating treatment experiences, or simply not knowing where else to turn. We meet you where you are &mdash; and work alongside the care you already receive from your other healthcare providers.</p>
+          <a href="/services" class="btn btn-primary" style="margin-top:24px;">See How We Can Help →</a>
         </div>
         <ul class="conditions-list">
           <li><strong>Chronic Pain</strong> &mdash; Back, joints, migraines, sciatica, arthritis</li>
-          <li><strong>Stress &amp; Sleep</strong> &mdash; Anxiety, burnout, insomnia &amp; nervous-system support</li>
-          <li><strong>Recovery Support</strong> &mdash; Mobility goals, tension, pain patterns, quality of life</li>
-          <li><strong>Treatment Comfort</strong> &mdash; Nausea, fatigue, sleep, stress, and comfort-focused support</li>
-          <li><strong>Women's Health</strong> &mdash; Fertility, pregnancy, menopause, hormonal balance</li>
+          <li><strong>Stress &amp; Sleep</strong> &mdash; Supportive care for stress, sleep, anxious feelings &amp; emotional wellness</li>
+          <li><strong>Recovery Support</strong> &mdash; Adjunctive care for mobility, comfort &amp; rehabilitation goals alongside your medical care</li>
+          <li><strong>Treatment Comfort</strong> &mdash; Supportive care for nausea, fatigue, sleep &amp; stress during medical treatment</li>
+          <li><strong>Women's Health</strong> &mdash; Supportive care for fertility, pregnancy, menopause &amp; hormonal balance</li>
           <li><strong>Long-Term Wellness</strong> &mdash; Digestive health, fatigue, flare patterns, steady support</li>
         </ul>
       </div>
@@ -269,7 +278,7 @@
         <div>
           <span class="section-label">Why Patients Choose Us</span>
           <h2>Real Care From People Who Actually Know Your Name</h2>
-          <p class="prose mt-16 mb-24">We're not a revolving-door clinic. When you come to Wongu, your practitioner takes the time to understand your full health picture &mdash; not just the symptom that brought you in. As the teaching clinic of <a href="https://wongu.edu" class="text-sage fw-600" target="_blank" rel="noopener">Wongu University</a>, our interns spend 1.5 to 2 hours on your first visit because thorough care takes time. And every single session is supervised by a licensed OMD who reviews your diagnosis and approves your treatment plan.</p>
+          <p class="prose mt-16 mb-24">We're not a revolving-door clinic. When you come to Wongu, your practitioner takes the time to understand your full health picture &mdash; not just the symptom that brought you in. As the teaching clinic of <a href="https://wongu.edu" class="text-sage fw-600" target="_blank" rel="noopener">Wongu University</a>, our interns spend 1.5 to 2 hours on your first visit because thorough care takes time. And every intern session is supervised by a licensed OMD who reviews your diagnosis and approves your treatment plan.</p>
           <p class="prose mb-24">The result? You get unhurried, attentive care at prices that won't break the bank &mdash; starting at <strong>$80 for your first visit</strong>. That's the Wongu difference.</p>
 
           <div class="check-list">
@@ -279,7 +288,7 @@
             </div>
             <div class="check-item">
               <div class="check-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="check-body"><strong>Every Treatment Is Supervised</strong><p>A licensed OMD is present for every intern session. Your safety is never compromised.</p></div>
+              <div class="check-body"><strong>Every Treatment Is Supervised</strong><p>Every student treatment is reviewed and supervised by a licensed Oriental Medicine Doctor.</p></div>
             </div>
             <div class="check-item">
               <div class="check-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -316,6 +325,7 @@
               <div class="check-body"><strong>Herbal Teas &amp; Formulas</strong><p>We offer teas, classical formulas, granules, pills, powders, tinctures, and topical options when available.</p></div>
             </div>
           </div>
+          <p class="safety-note"><!-- build:herbal-safety -->Tell your practitioner about all medications and supplements you take. Herbal formulas may interact with medications and may not be appropriate during pregnancy or for certain medical conditions.<!-- /build:herbal-safety --></p>
           <a href="/services#herbal" class="btn btn-primary">Explore Herbal Medicine</a>
         </div>
         <div class="content-image">
@@ -345,104 +355,56 @@
       </div>
 
       <h3 class="text-center" style="margin-bottom:24px;">Our OMDs</h3>
-      <div class="team-carousel-wrapper">
-        <div class="team-carousel-track">
-          <div class="card">
-            <div class="team-photo"><img src="images/dr-yu.webp" width="800" height="800" alt="Dr. Yu, Licensed Oriental Medicine Doctor and Clinic Director at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Dr. Yu</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/dr-sekine.webp" width="800" height="800" alt="Dr. Sekine, Licensed Oriental Medicine Doctor at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Dr. Sekine</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/dr-joanne-eng.webp" width="800" height="800" alt="Dr. Eng, Licensed Oriental Medicine Doctor at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Dr. Eng</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/dr-kelso.webp" width="800" height="1043" alt="Dr. Kelso, Licensed Oriental Medicine Doctor at Wongu Health Center" class="staff-headshot" style="object-position:center top;" loading="lazy" decoding="async"></div>
-            <h4>Dr. Kelso</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/dr-yu.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Dr. Yu</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/dr-sekine.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Dr. Sekine</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/dr-joanne-eng.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Dr. Eng</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/dr-kelso.webp" width="800" height="1043" alt="" class="staff-headshot" style="object-position:center top;" loading="lazy" decoding="async"></div>
-            <h4>Dr. Kelso</h4>
-          </div>
+      <!-- build:providers-home -->
+      <div class="provider-grid">
+        <div class="card">
+          <div class="team-photo"><img src="images/dr-yu.webp" width="800" height="800" alt="Dr. Yu, Clinic Director, Licensed OMD at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
+          <h4>Dr. Yu</h4>
+          <p class="team-card-role">Clinic Director · Licensed OMD</p>
+        </div>
+        <div class="card">
+          <div class="team-photo"><img src="images/dr-sekine.webp" width="800" height="800" alt="Dr. Keita Sekine, Licensed OMD, Clinical Supervisor at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
+          <h4>Dr. Keita Sekine</h4>
+          <p class="team-card-role">Licensed OMD · Clinical Supervisor</p>
         </div>
       </div>
+      <!-- /build:providers-home -->
 
+      <!-- build:interns-home -->
       <h3 class="text-center" style="margin:48px 0 24px;">Our Interns</h3>
       <div class="team-carousel-wrapper">
         <div class="team-carousel-track">
           <div class="card">
-            <div class="team-photo"><img src="images/intern-francisca.webp" width="800" height="800" alt="Wongu student intern Franica Mangione" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Franica Mangione</h4>
+            <div class="team-photo"><img src="images/intern-francisca.webp" width="800" height="800" alt="Wongu student intern Franica M." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Franica M.</h4>
           </div>
           <div class="card">
-            <div class="team-photo"><img src="images/intern-tchelle.webp" width="800" height="800" alt="Wongu student intern Tichelle Harris" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Tichelle Harris</h4>
+            <div class="team-photo"><img src="images/intern-tchelle.webp" width="800" height="800" alt="Wongu student intern Tichelle H." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Tichelle H.</h4>
           </div>
           <div class="card">
-            <div class="team-photo"><img src="images/intern-joyce.webp" width="800" height="800" alt="Wongu student intern Joyce White" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Joyce White</h4>
+            <div class="team-photo"><img src="images/intern-joyce.webp" width="800" height="800" alt="Wongu student intern Joyce W." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Joyce W.</h4>
           </div>
           <div class="card">
-            <div class="team-photo"><img src="images/intern-bria.webp" width="800" height="800" alt="Wongu student intern Bria Harmon" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Bria Harmon</h4>
+            <div class="team-photo"><img src="images/intern-bria.webp" width="800" height="800" alt="Wongu student intern Bria H." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Bria H.</h4>
           </div>
           <div class="card">
-            <div class="team-photo"><img src="images/intern-brittany.webp" width="800" height="800" alt="Wongu student intern Brittany Testa" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Brittany Testa</h4>
+            <div class="team-photo"><img src="images/intern-brittany.webp" width="800" height="800" alt="Wongu student intern Brittany T." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Brittany T.</h4>
           </div>
           <div class="card">
-            <div class="team-photo"><img src="images/intern-amy.webp" width="800" height="800" alt="Wongu student intern Amy Paolinelli" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Amy Paolinelli</h4>
+            <div class="team-photo"><img src="images/intern-roman.webp" width="800" height="800" alt="Wongu student intern Roman G." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Roman G.</h4>
           </div>
           <div class="card">
-            <div class="team-photo"><img src="images/intern-roman.webp" width="800" height="800" alt="Wongu student intern Roman Gramarye" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Roman Gramarye</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-francisca.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Franica Mangione</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-tchelle.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Tichelle Harris</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-joyce.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Joyce White</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-bria.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Bria Harmon</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-brittany.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Brittany Testa</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-amy.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Amy Paolinelli</h4>
-          </div>
-          <div class="card" aria-hidden="true">
-            <div class="team-photo"><img src="images/intern-roman.webp" width="800" height="800" alt="" class="staff-headshot" loading="lazy" decoding="async"></div>
-            <h4>Roman Gramarye</h4>
+            <div class="team-photo"><img src="images/intern-amy.webp" width="800" height="800" alt="Wongu student intern Amy P." class="staff-headshot" loading="lazy" decoding="async"></div>
+            <h4>Amy P.</h4>
           </div>
         </div>
       </div>
+      <!-- /build:interns-home -->
 
       <p class="section-note text-sage fw-600">Want to put a face to the name? Visit us at 8630 S Eastern Ave &mdash; we'd love to meet you.</p>
     </div>
@@ -452,7 +414,7 @@
   <section class="section" aria-label="Patient testimonials">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Real Patients, Real Results</span>
+        <span class="section-label">Real Patients, Real Experiences</span>
         <h2>Don't Just Take Our Word for It</h2>
         <p class="section-subtitle">Here's what our patients have to say about their experience at Wongu Health Center.</p>
       </div>
@@ -479,6 +441,7 @@
           <p class="testimonial-role">September 2025</p>
         </div>
       </div>
+      <p class="section-note-sm text-center">Reviews reflect individual patient experiences. Results vary from person to person.</p>
 
       <!-- Google Review CTA -->
       <div class="review-cta fade-in" style="max-width:600px;margin:40px auto 0;">
@@ -588,7 +551,7 @@
             <li><a href="sms:+17025509483">Text: 702-550-9483</a></li>
             <li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li>
             <li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li>
-            <li>Mon–Fri: 8AM–4:30PM<br>Sat: Closed</li>
+            <!-- build:hours-footer --><li>Mon–Fri: 8AM–4:30PM<br>Sat: Closed (mornings only starting October 10)<br>Sun: Closed</li><!-- /build:hours-footer -->
           </ul>
         </div>
       </div>
