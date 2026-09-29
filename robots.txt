@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wonguhealthcenter.com/sitemap.xml
+Sitemap: https://www.wonguhealthcenter.com/sitemap.xml

@@ -8,7 +8,7 @@ export const clinic = {
   name: 'Wongu Health Center',
   alternateName: 'Wongu University Health Center',
   description: "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine in Las Vegas.",
-  url: 'https://wonguhealthcenter.com/',
+  url: 'https://www.wonguhealthcenter.com/',
   phone: '+1-702-852-1280',
   email: 'clinic-office@wongu.edu',
   address: {
