@@ -6,7 +6,7 @@
    Quarterly roster change:
      1. Set active: false on departing interns/providers (keep the entry for history).
      2. Add new entries with a headshot in /images.
-     3. Run `npm run build`.
+     3. Run `npm run generate`.
    ============================================ */
 
 /* category: 'clinicLeadership' | 'clinicalSupervisors' | 'licensedProviders'

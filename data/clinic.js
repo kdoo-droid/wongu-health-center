@@ -1,7 +1,7 @@
 /* ============================================
    WONGU HEALTH CENTER - Clinic configuration
    Single source of truth for hours, insurance wording, and policies.
-   After editing, run `npm run build` to update every page.
+   After editing, run `npm run generate` to update every page.
    ============================================ */
 
 export const clinic = {
@@ -38,7 +38,7 @@ export const clinic = {
            'closed'
    upcoming: a scheduled change. Before startsOn (Las Vegas date) the page shows the current
    status plus "... starting <date>"; from startsOn on, the upcoming status replaces it.
-   Pages are static, so run `npm run build` and redeploy on or after startsOn. */
+   Pages are static, so run `npm run generate` and redeploy on or after startsOn. */
 export const hours = [
   { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], label: 'Monday – Friday', short: 'Mon–Fri', status: 'open', opens: '08:00', closes: '16:30' },
   // Once exact Saturday times are known, give upcoming status: 'open' with opens/closes

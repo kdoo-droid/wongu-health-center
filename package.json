@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.js",
-    "build:check": "node scripts/build.js --check"
+    "generate": "node scripts/build.js",
+    "generate:check": "node scripts/build.js --check"
   }
 }

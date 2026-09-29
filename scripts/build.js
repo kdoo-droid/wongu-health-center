@@ -4,8 +4,8 @@
    site files from the shared data in /data. Pages stay plain static HTML,
    so search engines see the rendered content.
 
-     npm run build          update files in place
-     npm run build:check    exit 1 if any file is out of date (for CI)
+     npm run generate          update files in place
+     npm run generate:check    exit 1 if any file is out of date (for CI)
    ============================================ */
 
 import { readFile, writeFile, readdir } from 'node:fs/promises';
@@ -239,7 +239,7 @@ async function main() {
   }
 
   if (checkOnly && stale.length) {
-    console.error(`Out of date (run npm run build): ${stale.join(', ')}`);
+    console.error(`Out of date (run npm run generate): ${stale.join(', ')}`);
     process.exit(1);
   }
   console.log(stale.length ? `${checkOnly ? 'Stale' : 'Updated'}: ${stale.join(', ')}` : 'All generated content is up to date.');
