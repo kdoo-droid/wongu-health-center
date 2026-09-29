@@ -180,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <button type="button" class="booking-modal-close" aria-label="Close">&times;</button>
         <h3 id="bookingModalTitle">Before You Book Online</h3>
         <p>Online booking is for <strong>self-pay</strong> patients.</p>
-        <p><!-- build:insurance-note --><strong>VA Community Care and Culinary patients:</strong> Please <a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact the clinic</a> before scheduling so we can verify eligibility, authorization, and provider availability.<!-- /build:insurance-note --></p>
-        <p><!-- build:insurance-coverage -->Coverage is subject to authorization, eligibility, and plan requirements.<!-- /build:insurance-coverage --></p>
+        <p><!-- build:insurance-note --><strong>VA Community Care and Culinary patients</strong> should <a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact Wongu Health Center</a> before scheduling so we can verify eligibility, authorization, and provider availability.<!-- /build:insurance-note --></p>
+        <p><!-- build:insurance-coverage -->Coverage is subject to applicable authorization, eligibility, and plan requirements.<!-- /build:insurance-coverage --></p>
         <div class="booking-modal-actions">
           <a href="tel:+17028521280" class="btn btn-secondary btn-full">Call (702) 852-1280</a>
           <button type="button" class="btn btn-primary btn-full">Book Your Appointment</button>

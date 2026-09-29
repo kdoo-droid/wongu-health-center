@@ -342,7 +342,7 @@ export default async function handler(req, res) {
           <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Reason for Contact:</strong> ${safeTopic}</p>
           <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Insurance / Payment Type:</strong> ${safeInsurance}</p>
         </div>
-        <p style="color:#374151;line-height:1.7;">Ready to book an appointment? Self-pay patients can book instantly through our <a href="https://patient.unifiedpractice.com/wongu-health-center" style="color:#4a7c59;font-weight:600;">online patient portal</a>. ${escapeHtml(insuranceText())}</p>
+        <p style="color:#374151;line-height:1.7;">Ready to book an appointment? Self-pay patients can book online through our <a href="https://patient.unifiedpractice.com/wongu-health-center" style="color:#4a7c59;font-weight:600;">online patient portal</a>. ${escapeHtml(insuranceText())}</p>
         <p style="color:#374151;line-height:1.7;">Need to reach us sooner? Call or text us directly:</p>
         <p style="margin:0;"><a href="tel:+17028521280" style="color:#4a7c59;font-weight:600;">(702) 852-1280</a> &nbsp;|&nbsp; <a href="sms:+17025509483" style="color:#4a7c59;font-weight:600;">Text: 702-550-9483</a></p>
         <p style="color:#374151;line-height:1.7;margin-top:16px;">We look forward to hearing from you!</p>

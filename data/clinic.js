@@ -27,8 +27,8 @@ export const clinic = {
   parentOrganization: {
     name: 'Wongu University of Oriental Medicine',
     url: 'https://wongu.edu'
-  },
-  rating: { value: '5.0', count: '64' }
+  }
+  // No review count here: it can't be kept in sync with Google, so it isn't published.
 };
 
 /* Clinic hours.
@@ -69,9 +69,9 @@ export function currentHours(date = new Date()) {
 export const LIMITED_HOURS_TEXT = 'Limited appointments — please contact the clinic for availability';
 
 export const insurance = {
-  lead: 'VA Community Care and Culinary patients:',
-  body: 'Please contact the clinic before scheduling so we can verify eligibility, authorization, and provider availability.',
-  coverage: 'Coverage is subject to authorization, eligibility, and plan requirements.'
+  lead: 'VA Community Care and Culinary patients',
+  body: 'should contact Wongu Health Center before scheduling so we can verify eligibility, authorization, and provider availability.',
+  coverage: 'Coverage is subject to applicable authorization, eligibility, and plan requirements.'
 };
 
 /* Late-cancellation window applies equally to cancelling and rescheduling. */

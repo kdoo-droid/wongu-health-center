@@ -110,7 +110,7 @@ const renderers = {
 
   'hours-text': () => escapeHtml(hoursSummaryText()),
 
-  'insurance-note': () => `<strong>${escapeHtml(insurance.lead)}</strong> ${escapeHtml(insurance.body).replace('contact the clinic', '<a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact the clinic</a>')}`,
+  'insurance-note': () => `<strong>${escapeHtml(insurance.lead)}</strong> ${escapeHtml(insurance.body).replace('contact Wongu Health Center', '<a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact Wongu Health Center</a>')}`,
 
   'insurance-coverage': () => escapeHtml(insurance.coverage),
 
@@ -122,8 +122,8 @@ const renderers = {
       '<table class="comparison-table">',
       '  <thead><tr><th>Policy</th><th>Intern</th><th>Licensed OMD</th></tr></thead>',
       '  <tbody>',
-      `    <tr><td>Canceled or Rescheduled &mdash; ${h}+ Hours in Advance</td><td class="highlight">No Fee</td><td class="highlight">No Fee</td></tr>`,
-      `    <tr><td>Late Cancellation / Rescheduling &mdash; Less than ${h} Hours</td><td>${money(fees.intern.late)}</td><td>${money(fees.omd.late)}</td></tr>`,
+      `    <tr><td>${h}+ hours before appointment</td><td class="highlight">No Fee</td><td class="highlight">No Fee</td></tr>`,
+      `    <tr><td>Late Cancellation / Rescheduling (&lt;${h} Hours)</td><td>${money(fees.intern.late)}</td><td>${money(fees.omd.late)}</td></tr>`,
       `    <tr><td>No-Show</td><td>${money(fees.intern.noShow)}</td><td>${money(fees.omd.noShow)}</td></tr>`,
       '  </tbody>',
       '</table>'
@@ -132,7 +132,7 @@ const renderers = {
 
   'cancellation-text': () => {
     const { noticeHours: h, fees } = cancellationPolicy;
-    return `Appointments canceled or rescheduled at least ${h} hours in advance have no fee. Rescheduling with less than ${h} hours' notice is treated the same as a late cancellation: $${fees.intern.late} for intern appointments and $${fees.omd.late} for licensed OMD appointments. Missed appointments without notice (no-shows) are $${fees.intern.noShow} for intern appointments and $${fees.omd.noShow} for licensed OMD appointments.`;
+    return `Appointments canceled or rescheduled at least ${h} hours in advance have no fee. Late Cancellation / Rescheduling (&lt;${h} Hours): rescheduling with less than ${h} hours' notice is treated the same as a late cancellation — $${fees.intern.late} for intern appointments and $${fees.omd.late} for licensed OMD appointments. Missed appointments without notice (no-shows) are $${fees.intern.noShow} for intern appointments and $${fees.omd.noShow} for licensed OMD appointments.`;
   },
 
   'clinic-jsonld': () => {
@@ -162,8 +162,7 @@ const renderers = {
       priceRange: '$$',
       medicalSpecialty: 'Acupuncture',
       parentOrganization: { '@type': 'CollegeOrUniversity', name: clinic.parentOrganization.name, url: clinic.parentOrganization.url },
-      sameAs: clinic.sameAs,
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: clinic.rating.value, reviewCount: clinic.rating.count }
+      sameAs: clinic.sameAs
     };
     return jsonLdScript(data);
   },
