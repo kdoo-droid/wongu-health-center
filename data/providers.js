@@ -10,7 +10,9 @@
    ============================================ */
 
 /* category: 'clinicLeadership' | 'clinicalSupervisors' | 'licensedProviders'
-   bookingEnabled: whether patients can currently request this provider. */
+   bookingEnabled: whether patients can currently request this provider.
+   slug: profile page at /practitioners/<slug>.html (only for providers who have one).
+   focus: areas named in the provider's own bio; used for structured data (knowsAbout). */
 export const providers = [
   {
     id: 'yu',
@@ -20,6 +22,8 @@ export const providers = [
     category: 'clinicLeadership',
     active: true,
     bookingEnabled: true,
+    slug: 'dr-yu',
+    focus: ['Acupuncture', 'Chinese herbal medicine', 'Fertility support', "Women's health", 'Chronic conditions'],
     photo: { src: 'images/dr-yu.webp', width: 800, height: 800 },
     bio: "Dr. Yu leads our clinic with a deep commitment to patient-centered care. With years of experience in fertility, women's health, and chronic conditions, she brings both expertise and genuine compassion to every treatment."
   },
@@ -31,6 +35,8 @@ export const providers = [
     category: 'clinicalSupervisors',
     active: true,
     bookingEnabled: true,
+    slug: 'dr-keita-sekine',
+    focus: ['Acupuncture', 'Japanese acupuncture', 'Chronic internal conditions'],
     photo: { src: 'images/dr-sekine.webp', width: 800, height: 800 },
     bio: 'Dr. Sekine specializes in Japanese acupuncture techniques and chronic internal conditions. Known for his gentle approach and thorough evaluations, patients consistently describe him as attentive and deeply knowledgeable.'
   },

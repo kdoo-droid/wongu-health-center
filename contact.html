@@ -9,7 +9,40 @@
   <meta property="og:title" content="Contact Wongu Health Center | Las Vegas">
   <meta property="og:description" content="Questions about acupuncture, cupping, herbal formulas, herbal teas, insurance, or OMD care in Las Vegas? Contact us here. Book appointments online through our patient portal.">
   <meta property="og:type" content="website">
+  <!-- build:head-assets -->
+  <link rel="canonical" href="https://www.wonguhealthcenter.com/contact">
   <meta property="og:url" content="https://www.wonguhealthcenter.com/contact">
+  <meta property="og:site_name" content="Wongu Health Center">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Figtree:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/styles.css?v=17">
+  <!-- Google Analytics 4 (loaded after page load by analytics.js) -->
+  <script defer src="/analytics.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.wonguhealthcenter.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://www.wonguhealthcenter.com/contact"
+      }
+    ]
+  }
+  </script>
+  <!-- /build:head-assets -->
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://www.wonguhealthcenter.com/images/hero-clinic.jpg">
   <meta property="og:image:width" content="800">
@@ -19,24 +52,19 @@
   <meta name="twitter:title" content="Contact Wongu Health Center | Questions &amp; Herbal Requests | Las Vegas, NV">
   <meta name="twitter:description" content="Have a question about acupuncture, herbal formulas, insurance, or your visit at Wongu Health Center in Las Vegas? Contact us here. Ready to book? Use our online patient booking portal.">
   <meta name="twitter:image" content="https://www.wonguhealthcenter.com/images/hero-clinic.jpg">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="canonical" href="https://www.wonguhealthcenter.com/contact">
-  <link rel="stylesheet" href="styles.css?v=15">
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
-  <script defer src="analytics.js"></script>
   <!-- JSON-LD Structured Data (generated from data/clinic.js) -->
   <!-- build:clinic-jsonld -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
+    "@id": "https://www.wonguhealthcenter.com/#clinic",
     "name": "Wongu Health Center",
     "alternateName": "Wongu University Health Center",
     "description": "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine in Las Vegas.",
     "url": "https://www.wonguhealthcenter.com/",
+    "logo": "https://www.wonguhealthcenter.com/images/logo.png",
+    "image": "https://www.wonguhealthcenter.com/images/clinic-exterior.jpg",
     "telephone": "+1-702-852-1280",
     "email": "clinic-office@wongu.edu",
     "address": {
@@ -69,6 +97,37 @@
     "hasMap": "https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123",
     "priceRange": "$$",
     "medicalSpecialty": "Acupuncture",
+    "availableService": [
+      {
+        "@type": "MedicalTherapy",
+        "name": "Acupuncture",
+        "url": "https://www.wonguhealthcenter.com/acupuncture-las-vegas"
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Cupping therapy",
+        "url": "https://www.wonguhealthcenter.com/cupping-las-vegas"
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Chinese herbal medicine",
+        "url": "https://www.wonguhealthcenter.com/chinese-herbal-medicine-las-vegas"
+      }
+    ],
+    "employee": [
+      {
+        "@type": "Person",
+        "@id": "https://www.wonguhealthcenter.com/practitioners/dr-yu#person",
+        "name": "Dr. Yu",
+        "url": "https://www.wonguhealthcenter.com/practitioners/dr-yu"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.wonguhealthcenter.com/practitioners/dr-keita-sekine#person",
+        "name": "Dr. Keita Sekine",
+        "url": "https://www.wonguhealthcenter.com/practitioners/dr-keita-sekine"
+      }
+    ],
     "parentOrganization": {
       "@type": "CollegeOrUniversity",
       "name": "Wongu University of Oriental Medicine",
@@ -83,25 +142,57 @@
   <!-- /build:clinic-jsonld -->
 </head>
 <body>
+  <!-- build:site-header -->
   <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
   <header class="site-header" role="banner">
-    <div class="header-top"><div class="container"><span>Nevada's Only Oriental Medicine University Clinic</span><div style="display:flex;gap:24px;align-items:center;"><a href="tel:+17028521280">📞 (702) 852-1280</a><a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University →</a></div></div></div>
-    <div class="header-main"><div class="container">
-      <a href="/" class="logo" aria-label="Wongu Health Center Home">
-          <div class="logo-icon">
-            <img src="images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async">
-          </div>
-          <div class="logo-text">
-            <span class="logo-name">Wongu Health Center</span>
-            <span class="logo-tagline">University Acupuncture Clinic</span>
-          </div>
+    <div class="header-top">
+      <div class="container">
+        <span>Nevada's Only Oriental Medicine University Clinic</span>
+        <div style="display:flex;gap:24px;align-items:center;">
+          <a href="tel:+17028521280">&#128222; (702) 852-1280</a>
+          <a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <a href="/" class="logo" aria-label="Wongu Health Center Home">
+          <div class="logo-icon"><img src="/images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async"></div>
+          <div class="logo-text"><span class="logo-name">Wongu Health Center</span><span class="logo-tagline">University Acupuncture Clinic</span></div>
         </a>
-      <nav aria-label="Main navigation"><ul class="nav-links"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/services">Services</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/student-clinic">Student Clinic</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact" class="active">Contact</a></li></ul></nav>
-      <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary nav-cta online-booking-btn">Book Appointment</a>
-      <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
-    </div></div>
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="/services">Services</a></li>
+            <li><a href="/conditions">Conditions</a></li>
+            <li><a href="/student-clinic">Student Clinic</a></li>
+            <li><a href="/practitioners">Practitioners</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact" class="active" aria-current="page">Contact</a></li>
+          </ul>
+        </nav>
+        <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary nav-cta online-booking-btn">Book Appointment</a>
+        <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
   </header>
-  <div class="mobile-menu" role="dialog" aria-label="Navigation menu" aria-modal="true"><button class="mobile-close" aria-label="Close menu">&times;</button><a href="/">Home</a><a href="/about">About Us</a><a href="/services">Services</a><a href="/pricing">Pricing</a><a href="/student-clinic">Student Clinic</a><a href="/faq">FAQ</a><a href="/contact">Contact</a><a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a></div>
+
+  <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <button class="mobile-close" aria-label="Close menu">&times;</button>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/conditions">Conditions</a>
+    <a href="/what-to-expect">What to Expect</a>
+    <a href="/student-clinic">Student Clinic</a>
+    <a href="/practitioners">Practitioners</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/contact" aria-current="page">Contact</a>
+    <a href="/faq">FAQ</a>
+    <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary online-booking-btn">Book Online</a>
+    <a href="tel:+17028521280" class="btn btn-secondary">Call (702) 852-1280</a>
+  </div>
+  <!-- /build:site-header -->
 
   <main id="main-content">
   <section class="hero hero-page">
@@ -115,6 +206,13 @@
   <!-- Ready to Book Callout -->
   <section class="section" style="padding-top:0;">
     <div class="container">
+      <!-- Phone-sized screens: the contact details column sits below the form, so surface the main actions first -->
+      <nav class="contact-quick-actions" aria-label="Quick contact options">
+        <a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a>
+        <a href="sms:+17025509483" class="btn btn-secondary">Text 702-550-9483</a>
+        <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-secondary online-booking-btn">Book Online</a>
+        <a href="https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123" target="_blank" rel="noopener" class="btn btn-secondary">Get Directions</a>
+      </nav>
       <div class="card" style="padding:28px 32px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;border:1px solid var(--border);background:var(--cream);">
         <div style="flex:1 1 320px;">
           <h2 style="margin-bottom:6px;font-size:clamp(1.25rem, 2.5vw, 1.7rem);font-weight:500;">Ready to Book an Appointment?</h2>
@@ -271,7 +369,7 @@
             </div>
             <div class="contact-info-text">
               <h3>Clinic Hours</h3>
-              <!-- build:hours-contact --><p>Monday – Friday: 8:00 AM – 4:30 PM<br>Saturday: Closed (mornings only starting October 10)<br>Sunday: Closed</p><!-- /build:hours-contact -->
+              <!-- build:hours-contact --><p>Monday – Friday: 8:00 AM – 4:30 PM<br>Saturday: Closed (mornings only starting October 17)<br>Sunday: Closed</p><!-- /build:hours-contact -->
               <p class="mt-8 fw-600 text-sm" style="color:var(--sage-dark);">All services by appointment only — <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="online-booking-btn" style="color:var(--sage-dark);">book online</a></p>
             </div>
           </div>
@@ -328,65 +426,75 @@
   </section>
   </main>
 
+  <!-- build:site-footer -->
   <footer class="site-footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo-name">Wongu Health Center</div>
-        <p>Nevada's only Oriental medicine university clinic. Affordable, expert acupuncture and traditional Chinese medicine in Las Vegas.</p>
-        <div class="footer-social">
-          <a href="https://www.facebook.com/WonguUniversity" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="https://www.instagram.com/wonguuniversity" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
-          <a href="https://g.page/r/CRPIuds9oPwlEBM" target="_blank" rel="noopener" aria-label="Google Business"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-name">Wongu Health Center</div>
+          <p>Nevada's only Oriental medicine university clinic. Acupuncture, cupping, and Chinese herbal medicine in Las Vegas, with licensed OMDs and supervised senior interns.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/WonguUniversity" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://www.instagram.com/wonguuniversity" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="https://g.page/r/CRPIuds9oPwlEBM" target="_blank" rel="noopener" aria-label="Google Business"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="/acupuncture-las-vegas">Acupuncture</a></li>
+            <li><a href="/cupping-las-vegas">Cupping Therapy</a></li>
+            <li><a href="/chinese-herbal-medicine-las-vegas">Chinese Herbal Medicine</a></li>
+            <li><a href="/student-clinic">Student Clinic</a></li>
+            <li><a href="/services">All Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Conditions</h3>
+          <ul>
+            <li><a href="/conditions/back-pain">Back Pain</a></li>
+            <li><a href="/conditions/sciatica">Sciatica</a></li>
+            <li><a href="/conditions/headaches-migraines">Headaches &amp; Migraines</a></li>
+            <li><a href="/conditions">All Conditions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Clinic</h3>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/practitioners">Practitioners</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/what-to-expect">What to Expect</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="tel:+17028521280">(702) 852-1280</a></li>
+            <li><a href="sms:+17025509483">Text: 702-550-9483</a></li>
+            <li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li>
+            <li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li>
+            <li>Mon–Fri: 8AM–4:30PM<br>Sat: Closed (mornings only starting October 17)<br>Sun: Closed</li>
+          </ul>
         </div>
       </div>
-      <div class="footer-col">
-        <h3>Services</h3>
-        <ul>
-          <li><a href="/services">Acupuncture</a></li>
-          <li><a href="/services">Cupping Therapy</a></li>
-            <li><a href="/services#herbal">Herbal Formulas &amp; Teas</a></li>
-          <li><a href="/services">Pain Management</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Clinic</h3>
-        <ul>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/student-clinic">Student Clinic</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/blog">Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Contact</h3>
-        <ul>
-          <li><a href="tel:+17028521280">(702) 852-1280</a></li>
-          <li><a href="sms:+17025509483">Text: 702-550-9483</a></li>
-          <li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li>
-          <li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li>
-          <!-- build:hours-footer --><li>Mon–Fri: 8AM–4:30PM<br>Sat: Closed (mornings only starting October 10)<br>Sun: Closed</li><!-- /build:hours-footer -->
-        </ul>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Wongu Health Center. Part of <a href="https://wongu.edu" target="_blank" rel="noopener" style="text-decoration:underline;">Wongu University of Oriental Medicine</a>.</span>
+        <div class="footer-links-row"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/hipaa">HIPAA Notice</a></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Wongu Health Center. Part of <a href="https://wongu.edu" target="_blank" rel="noopener" style="text-decoration:underline;">Wongu University of Oriental Medicine</a>.</span>
-      <div style="display:flex;gap:24px;">
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-        <a href="/hipaa">HIPAA Notice</a>
-      </div>
-    </div>
-  </div>
-</footer>
-  <script src="main.js"></script>
-  <script src="contact-form.js"></script>
+  </footer>
+
+  <script src="/main.js"></script>
   <!-- Sticky Mobile Book Now Bar -->
   <div class="mobile-book-bar">
-    <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">📞 Call</a>
-    <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="online-booking-btn">Book Online →</a>
+    <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">&#128222; Call</a>
+    <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="online-booking-btn">Book Online &rarr;</a>
   </div>
+  <!-- /build:site-footer -->
+  <script src="/contact-form.js"></script>
 </body>
 </html>

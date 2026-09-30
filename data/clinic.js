@@ -4,11 +4,18 @@
    After editing, run `npm run generate` to update every page.
    ============================================ */
 
+/* The one production hostname. Every canonical tag, sitemap entry, Open Graph URL, and
+   structured-data URL is built from this; the apex domain 308-redirects here (Vercel domain settings). */
+export const SITE_URL = 'https://www.wonguhealthcenter.com';
+
+export const BOOKING_URL = 'https://patient.unifiedpractice.com/wongu-health-center';
+
 export const clinic = {
+  id: `${SITE_URL}/#clinic`,
   name: 'Wongu Health Center',
   alternateName: 'Wongu University Health Center',
   description: "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine in Las Vegas.",
-  url: 'https://www.wonguhealthcenter.com/',
+  url: `${SITE_URL}/`,
   phone: '+1-702-852-1280',
   email: 'clinic-office@wongu.edu',
   address: {
@@ -43,7 +50,7 @@ export const hours = [
   { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], label: 'Monday – Friday', short: 'Mon–Fri', status: 'open', opens: '08:00', closes: '16:30' },
   // Once exact Saturday times are known, give upcoming status: 'open' with opens/closes
   // so Saturday is also published to Google via structured data.
-  { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'closed', upcoming: { status: 'morning', startsOn: '2026-10-10' } },
+  { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'closed', upcoming: { status: 'morning', startsOn: '2026-10-17' } },
   { days: ['Sunday'], label: 'Sunday', short: 'Sun', status: 'closed' }
 ];
 
@@ -72,6 +79,14 @@ export const insurance = {
   lead: 'VA Community Care and Culinary patients',
   body: 'should contact Wongu Health Center before scheduling so we can verify eligibility, authorization, and provider availability.',
   coverage: 'Coverage is subject to applicable authorization, eligibility, and plan requirements.'
+};
+
+/* Visit prices shown in the summary tables on service, condition, and practitioner pages.
+   The full /pricing page is hand-written; update it too when these change. */
+export const prices = {
+  intern: { initial: 80, initialLength: '1.5–2 hours', followUp: 50, followUpLength: 'about 1 hour', cupping: 50 },
+  omd: { initial: 120, initialLength: 'about 1 hour', followUp: 80, followUpLength: '30–55 minutes', cupping: 100, consultation: 100 },
+  herbsPerDay: 15
 };
 
 /* Late-cancellation window applies equally to cancelling and rescheduling. */

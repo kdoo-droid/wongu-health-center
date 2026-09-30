@@ -1,25 +1,30 @@
 /* ============================================
    WONGU HEALTH CENTER - Content build
    Rewrites every <!-- build:NAME --> ... <!-- /build:NAME --> region in the
-   site files from the shared data in /data. Pages stay plain static HTML,
-   so search engines see the rendered content.
+   site files from the shared data in /data, then regenerates sitemap.xml.
+   Pages stay plain static HTML, so search engines see the rendered content.
 
      npm run generate          update files in place
      npm run generate:check    exit 1 if any file is out of date (for CI)
    ============================================ */
 
 import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  clinic, currentHours, insurance, cancellationPolicy, herbalSafetyNote,
-  hoursEntryText, hoursSummaryText
+  SITE_URL, BOOKING_URL, clinic, currentHours, insurance, cancellationPolicy, herbalSafetyNote,
+  prices, hoursEntryText, hoursSummaryText
 } from '../data/clinic.js';
 import { activeProviders, activeInterns } from '../data/providers.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
+const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
+// Bump when styles.css changes so browsers and the CDN pick up the new file.
+const CSS_VERSION = 17;
 
 const escapeHtml = value => String(value)
   .replace(/&/g, '&amp;')
@@ -29,24 +34,239 @@ const escapeHtml = value => String(value)
 
 const money = amount => `$${amount.toFixed(2)}`;
 
+/* 'index.html' -> '/', 'about.html' -> '/about', 'conditions/sciatica.html' -> '/conditions/sciatica' */
+function pagePath(file) {
+  const clean = file.replace(/\\/g, '/').replace(/\.html$/, '');
+  return clean === 'index' ? '/' : `/${clean.replace(/\/index$/, '')}`;
+}
+
+const pageUrl = file => SITE_URL + pagePath(file);
+
+/* ---------- Site chrome (header, footer) ---------- */
+
+const NAV = [
+  { href: '/services', label: 'Services' },
+  { href: '/conditions', label: 'Conditions' },
+  { href: '/student-clinic', label: 'Student Clinic' },
+  { href: '/practitioners', label: 'Practitioners' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' }
+];
+
+// The mobile menu has room for the pages that only live in the footer on desktop.
+const MOBILE_NAV = [
+  { href: '/', label: 'Home' },
+  ...NAV.slice(0, 2),
+  { href: '/what-to-expect', label: 'What to Expect' },
+  ...NAV.slice(2),
+  { href: '/faq', label: 'FAQ' }
+];
+
+const FOOTER_COLUMNS = [
+  { title: 'Services', links: [
+    ['/acupuncture-las-vegas', 'Acupuncture'],
+    ['/cupping-las-vegas', 'Cupping Therapy'],
+    ['/chinese-herbal-medicine-las-vegas', 'Chinese Herbal Medicine'],
+    ['/student-clinic', 'Student Clinic'],
+    ['/services', 'All Services']
+  ] },
+  { title: 'Conditions', links: [
+    ['/conditions/back-pain', 'Back Pain'],
+    ['/conditions/sciatica', 'Sciatica'],
+    ['/conditions/headaches-migraines', 'Headaches &amp; Migraines'],
+    ['/conditions', 'All Conditions']
+  ] },
+  { title: 'Clinic', links: [
+    ['/about', 'About Us'],
+    ['/practitioners', 'Practitioners'],
+    ['/pricing', 'Pricing'],
+    ['/what-to-expect', 'What to Expect'],
+    ['/faq', 'FAQ'],
+    ['/blog', 'Blog'],
+    ['/contact', 'Contact']
+  ] }
+];
+
+/* A nav item is active on its own page and on pages nested under it (e.g. /conditions/sciatica). */
+function navState(href, current) {
+  if (href === current) return ' class="active" aria-current="page"';
+  if (href !== '/' && current.startsWith(`${href}/`)) return ' class="active"';
+  return '';
+}
+
+function renderHeader(file) {
+  const current = pagePath(file);
+  return [
+    '<a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>',
+    '<header class="site-header" role="banner">',
+    '  <div class="header-top">',
+    '    <div class="container">',
+    "      <span>Nevada's Only Oriental Medicine University Clinic</span>",
+    '      <div style="display:flex;gap:24px;align-items:center;">',
+    `        <a href="tel:${clinic.phone.replace(/-/g, '')}">&#128222; (702) 852-1280</a>`,
+    `        <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>`,
+    '      </div>',
+    '    </div>',
+    '  </div>',
+    '  <div class="header-main">',
+    '    <div class="container">',
+    '      <a href="/" class="logo" aria-label="Wongu Health Center Home">',
+    '        <div class="logo-icon"><img src="/images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async"></div>',
+    '        <div class="logo-text"><span class="logo-name">Wongu Health Center</span><span class="logo-tagline">University Acupuncture Clinic</span></div>',
+    '      </a>',
+    '      <nav aria-label="Main Navigation">',
+    '        <ul class="nav-links">',
+    ...NAV.map(n => `          <li><a href="${n.href}"${navState(n.href, current)}>${n.label}</a></li>`),
+    '        </ul>',
+    '      </nav>',
+    `      <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="btn btn-primary nav-cta online-booking-btn">Book Appointment</a>`,
+    '      <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>',
+    '    </div>',
+    '  </div>',
+    '</header>',
+    '',
+    '<div class="mobile-menu" role="dialog" aria-label="Mobile navigation">',
+    '  <button class="mobile-close" aria-label="Close menu">&times;</button>',
+    ...MOBILE_NAV.map(n => `  <a href="${n.href}"${n.href === current ? ' aria-current="page"' : ''}>${n.label}</a>`),
+    `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="btn btn-primary online-booking-btn">Book Online</a>`,
+    '  <a href="tel:+17028521280" class="btn btn-secondary">Call (702) 852-1280</a>',
+    '</div>'
+  ].join('\n');
+}
+
+function renderFooter() {
+  const hours = currentHours().map(h => `${h.short}: ${hoursEntryText(h, { short: true })}`).join('<br>');
+  return [
+    '<footer class="site-footer" role="contentinfo">',
+    '  <div class="container">',
+    '    <div class="footer-grid">',
+    '      <div class="footer-brand">',
+    '        <div class="logo-name">Wongu Health Center</div>',
+    "        <p>Nevada's only Oriental medicine university clinic. Acupuncture, cupping, and Chinese herbal medicine in Las Vegas, with licensed OMDs and supervised senior interns.</p>",
+    '        <div class="footer-social">',
+    '          <a href="https://www.facebook.com/WonguUniversity" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>',
+    '          <a href="https://www.instagram.com/wonguuniversity" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>',
+    '          <a href="https://g.page/r/CRPIuds9oPwlEBM" target="_blank" rel="noopener" aria-label="Google Business"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></a>',
+    '        </div>',
+    '      </div>',
+    ...FOOTER_COLUMNS.map(col => [
+      '      <div class="footer-col">',
+      `        <h3>${col.title}</h3>`,
+      '        <ul>',
+      ...col.links.map(([href, label]) => `          <li><a href="${href}">${label}</a></li>`),
+      '        </ul>',
+      '      </div>'
+    ].join('\n')),
+    '      <div class="footer-col">',
+    '        <h3>Contact</h3>',
+    '        <ul>',
+    '          <li><a href="tel:+17028521280">(702) 852-1280</a></li>',
+    '          <li><a href="sms:+17025509483">Text: 702-550-9483</a></li>',
+    `          <li><a href="mailto:${clinic.email}">${clinic.email}</a></li>`,
+    `          <li>${clinic.address.street}<br>${clinic.address.city}, ${clinic.address.region} ${clinic.address.postalCode}</li>`,
+    `          <li>${hours}</li>`,
+    '        </ul>',
+    '      </div>',
+    '    </div>',
+    '    <div class="footer-bottom">',
+    `      <span>&copy; ${new Date().getFullYear()} Wongu Health Center. Part of <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener" style="text-decoration:underline;">${clinic.parentOrganization.name}</a>.</span>`,
+    '      <div class="footer-links-row"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/hipaa">HIPAA Notice</a></div>',
+    '    </div>',
+    '  </div>',
+    '</footer>',
+    '',
+    '<script src="/main.js"></script>',
+    '<!-- Sticky Mobile Book Now Bar -->',
+    '<div class="mobile-book-bar">',
+    '  <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">&#128222; Call</a>',
+    `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="online-booking-btn">Book Online &rarr;</a>`,
+    '</div>'
+  ].join('\n');
+}
+
+/* Canonical URL, og:url, shared assets, and BreadcrumbList. The canonical comes from the file
+   path, so a page can never point at the wrong host or a stale URL. */
+function renderHeadAssets({ content, file }) {
+  const url = pageUrl(file);
+  const lines = [
+    `<link rel="canonical" href="${url}">`,
+    `<meta property="og:url" content="${url}">`,
+    '<meta property="og:site_name" content="Wongu Health Center">',
+    '<link rel="icon" type="image/x-icon" href="/images/favicon.ico">',
+    '<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">',
+    '<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">',
+    '<link rel="preconnect" href="https://fonts.googleapis.com">',
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Figtree:wght@400;500;600;700;800&display=swap">',
+    `<link rel="stylesheet" href="/styles.css?v=${CSS_VERSION}">`,
+    '<!-- Google Analytics 4 (loaded after page load by analytics.js) -->',
+    '<script defer src="/analytics.js"></script>'
+  ];
+  const crumbs = breadcrumbItems(content, url);
+  if (crumbs.length > 1) {
+    lines.push(jsonLdScript({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url }))
+    }));
+  }
+  return lines.join('\n');
+}
+
+/* Reads the visible breadcrumb trail: links for ancestors, a plain <span> for the current page. */
+function breadcrumbItems(content, url) {
+  const trail = content.match(/<(div|nav) class="breadcrumb"[^>]*>([\s\S]*?)<\/\1>/);
+  if (!trail) return [];
+  const items = [...trail[2].matchAll(/<a href="([^"]+)">([\s\S]*?)<\/a>|<span(?! class="sep")[^>]*>([\s\S]*?)<\/span>/g)];
+  return items.map(([, href, linkText, spanText]) => ({
+    name: toPlainText(linkText ?? spanText),
+    url: href ? SITE_URL + (href === '/' ? '/' : href) : url
+  }));
+}
+
 /* ---------- Renderers ---------- */
 
+// Headshots display at 150–240px, so phones get the 480px variant when it exists.
 function headshot(photo, alt) {
   const style = photo.position ? ` style="object-position:${photo.position};"` : '';
-  return `<img src="${photo.src}" width="${photo.width}" height="${photo.height}" alt="${escapeHtml(alt)}" class="staff-headshot"${style} loading="lazy" decoding="async">`;
+  const src = `/${photo.src}`;
+  const small = src.replace(/\.webp$/, '-480.webp');
+  const srcset = existsSync(path.join(ROOT, small)) ? ` srcset="${small} 480w, ${src} ${photo.width}w" sizes="240px"` : '';
+  return `<img src="${src}"${srcset} width="${photo.width}" height="${photo.height}" alt="${escapeHtml(alt)}" class="staff-headshot"${style} loading="lazy" decoding="async">`;
 }
 
 function providerAlt(p) {
   return `${p.name}, ${p.role.replace(' · ', ', ')} at Wongu Health Center`;
 }
 
+const profileHref = p => (p.slug ? `/practitioners/${p.slug}` : null);
+
+function providerName(p, tag) {
+  const href = profileHref(p);
+  return href ? `<${tag}><a href="${href}">${escapeHtml(p.name)}</a></${tag}>` : `<${tag}>${escapeHtml(p.name)}</${tag}>`;
+}
+
+function providerFor(file) {
+  const slug = path.basename(file, '.html');
+  const provider = activeProviders().find(p => p.slug === slug);
+  if (!provider) throw new Error(`${file}: no active provider with slug "${slug}"`);
+  return provider;
+}
+
 const renderers = {
+  'site-header': ({ file }) => renderHeader(file),
+
+  'site-footer': () => renderFooter(),
+
+  'head-assets': renderHeadAssets,
+
   'providers-home': () => [
     '<div class="provider-grid">',
     ...activeProviders().map(p => [
       '  <div class="card">',
       `    <div class="team-photo">${headshot(p.photo, providerAlt(p))}</div>`,
-      `    <h4>${escapeHtml(p.name)}</h4>`,
+      `    ${providerName(p, 'h4')}`,
       `    <p class="team-card-role">${escapeHtml(p.role)}</p>`,
       '  </div>'
     ].join('\n')),
@@ -58,29 +278,48 @@ const renderers = {
     ...activeProviders().map(p => [
       '  <div class="card card--center">',
       `    <div class="team-photo">${headshot(p.photo, providerAlt(p))}</div>`,
-      `    <h3>${escapeHtml(p.name)}</h3>`,
+      `    ${providerName(p, 'h3')}`,
       `    <p class="team-card-role">${escapeHtml(p.role)}${p.credentials ? ` &middot; ${escapeHtml(p.credentials)}` : ''}</p>`,
       `    <p>${escapeHtml(p.bio)}</p>`,
+      profileHref(p) ? `    <p><a href="${profileHref(p)}" class="text-sage fw-600">Meet ${escapeHtml(p.name)} &rarr;</a></p>` : null,
       '  </div>'
-    ].join('\n')),
+    ].filter(Boolean).join('\n')),
     '</div>'
   ].join('\n'),
 
-  // Rendered once; main.js adds aria-hidden clones at runtime for the scrolling effect.
+  // Person markup for a practitioner profile page; the provider is chosen by the file name.
+  'provider-jsonld': ({ file }) => {
+    const p = providerFor(file);
+    return jsonLdScript({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': `${pageUrl(file)}#person`,
+      name: p.name,
+      honorificPrefix: 'Dr.',
+      jobTitle: p.role.replace(' · ', ', '),
+      description: p.bio,
+      image: `${SITE_URL}/${p.photo.src}`,
+      url: pageUrl(file),
+      knowsAbout: p.focus,
+      worksFor: { '@type': 'MedicalClinic', '@id': clinic.id, name: clinic.name }
+    });
+  },
+
+  // Swipeable row on phones, wrapped grid on larger screens. No auto-scrolling.
   'interns-home': () => {
     const interns = activeInterns();
     if (!interns.length) return '';
     return [
-      '<h3 class="text-center" style="margin:48px 0 24px;">Our Interns</h3>',
-      '<div class="team-carousel-wrapper">',
-      '  <div class="team-carousel-track">',
+      '<h3 class="text-center" id="interns-heading" style="margin:48px 0 24px;">Our Interns</h3>',
+      '<div class="intern-strip" role="region" aria-labelledby="interns-heading" tabindex="0">',
+      '  <ul class="intern-strip-list">',
       ...interns.map(i => [
-        '    <div class="card">',
+        '    <li class="card">',
         `      <div class="team-photo">${headshot(i.profileImage, `Wongu student intern ${i.name}`)}</div>`,
         `      <h4>${escapeHtml(i.name)}</h4>`,
-        '    </div>'
+        '    </li>'
       ].join('\n')),
-      '  </div>',
+      '  </ul>',
       '</div>'
     ].join('\n');
   },
@@ -104,6 +343,22 @@ const renderers = {
     ].join('\n');
   },
 
+  // Compact intern-vs-OMD price table for service, condition, and practitioner pages.
+  'price-summary': () => {
+    const { intern, omd } = prices;
+    return [
+      '<table class="comparison-table stack-table" role="table">',
+      '  <thead role="rowgroup"><tr role="row"><th role="columnheader">Visit</th><th role="columnheader">Supervised Intern</th><th role="columnheader">Licensed OMD</th></tr></thead>',
+      '  <tbody role="rowgroup">',
+      `    <tr role="row"><td role="rowheader">Initial visit (consultation + treatment)</td><td role="cell" data-label="Supervised Intern">$${intern.initial} &middot; ${intern.initialLength}</td><td role="cell" data-label="Licensed OMD">$${omd.initial} &middot; ${omd.initialLength}</td></tr>`,
+      `    <tr role="row"><td role="rowheader">Follow-up visit</td><td role="cell" data-label="Supervised Intern">$${intern.followUp} &middot; ${intern.followUpLength}</td><td role="cell" data-label="Licensed OMD">$${omd.followUp} &middot; ${omd.followUpLength}</td></tr>`,
+      `    <tr role="row"><td role="rowheader">Cupping (up to 30 min)</td><td role="cell" data-label="Supervised Intern">$${intern.cupping}</td><td role="cell" data-label="Licensed OMD">$${omd.cupping} (includes OMD consultation)</td></tr>`,
+      `    <tr role="row"><td role="rowheader">Custom herbal formulas &amp; teas</td><td role="cell" data-label="Supervised Intern">From $${prices.herbsPerDay}/day</td><td role="cell" data-label="Licensed OMD">From $${prices.herbsPerDay}/day</td></tr>`,
+      '  </tbody>',
+      '</table>'
+    ].join('\n');
+  },
+
   'hours-footer': () => `<li>${currentHours().map(h => `${h.short}: ${hoursEntryText(h, { short: true })}`).join('<br>')}</li>`,
 
   'hours-contact': () => `<p>${currentHours().map(h => `${h.label}: ${hoursEntryText(h)}`).join('<br>')}</p>`,
@@ -119,12 +374,16 @@ const renderers = {
   'cancellation-table': () => {
     const { noticeHours: h, fees } = cancellationPolicy;
     return [
-      '<table class="comparison-table">',
-      '  <thead><tr><th>Policy</th><th>Intern</th><th>Licensed OMD</th></tr></thead>',
-      '  <tbody>',
-      `    <tr><td>${h}+ hours before appointment</td><td class="highlight">No Fee</td><td class="highlight">No Fee</td></tr>`,
-      `    <tr><td>Late Cancellation / Rescheduling (&lt;${h} Hours)</td><td>${money(fees.intern.late)}</td><td>${money(fees.omd.late)}</td></tr>`,
-      `    <tr><td>No-Show</td><td>${money(fees.intern.noShow)}</td><td>${money(fees.omd.noShow)}</td></tr>`,
+      // stack-table + data-label: rows become labeled cards on narrow screens (see styles.css)
+      '<table class="comparison-table stack-table" role="table">',
+      '  <thead role="rowgroup"><tr role="row"><th role="columnheader">Policy</th><th role="columnheader">Intern</th><th role="columnheader">Licensed OMD</th></tr></thead>',
+      '  <tbody role="rowgroup">',
+      ...[
+        [`${h}+ hours before appointment`, 'No Fee', 'No Fee', ' class="highlight"'],
+        [`Late Cancellation / Rescheduling (&lt;${h} Hours)`, money(fees.intern.late), money(fees.omd.late), ''],
+        ['No-Show', money(fees.intern.noShow), money(fees.omd.noShow), '']
+      ].map(([policy, intern, omd, cls]) =>
+        `    <tr role="row"><td role="rowheader">${policy}</td><td role="cell" data-label="Intern"${cls}>${intern}</td><td role="cell" data-label="Licensed OMD"${cls}>${omd}</td></tr>`),
       '  </tbody>',
       '</table>'
     ].join('\n');
@@ -139,10 +398,13 @@ const renderers = {
     const data = {
       '@context': 'https://schema.org',
       '@type': 'MedicalClinic',
+      '@id': clinic.id,
       name: clinic.name,
       alternateName: clinic.alternateName,
       description: clinic.description,
       url: clinic.url,
+      logo: `${SITE_URL}/images/logo.png`,
+      image: `${SITE_URL}/images/clinic-exterior.jpg`,
       telephone: clinic.phone,
       email: clinic.email,
       address: {
@@ -161,6 +423,14 @@ const renderers = {
       hasMap: clinic.mapUrl,
       priceRange: '$$',
       medicalSpecialty: 'Acupuncture',
+      availableService: [
+        ['Acupuncture', '/acupuncture-las-vegas'],
+        ['Cupping therapy', '/cupping-las-vegas'],
+        ['Chinese herbal medicine', '/chinese-herbal-medicine-las-vegas']
+      ].map(([name, href]) => ({ '@type': 'MedicalTherapy', name, url: SITE_URL + href })),
+      employee: activeProviders().filter(p => p.slug).map(p => ({
+        '@type': 'Person', '@id': `${SITE_URL}/practitioners/${p.slug}#person`, name: p.name, url: `${SITE_URL}/practitioners/${p.slug}`
+      })),
       parentOrganization: { '@type': 'CollegeOrUniversity', name: clinic.parentOrganization.name, url: clinic.parentOrganization.url },
       sameAs: clinic.sameAs
     };
@@ -181,6 +451,9 @@ const renderers = {
     });
   }
 };
+
+// Regions that read other rendered content on the page run in a second pass.
+const LATE_REGIONS = new Set(['faq-jsonld', 'head-assets']);
 
 function jsonLdScript(data) {
   const json = JSON.stringify(data, null, 2).replace(/<\//g, '<\\/');
@@ -207,9 +480,8 @@ function lineIndent(content, offset) {
 }
 
 function renderRegions(content, file) {
-  // faq-jsonld reads the rendered answers, so it runs after every other region.
-  const pass = (source, onlyJsonLd) => source.replace(REGION, (match, name, _inner, offset) => {
-    if ((name === 'faq-jsonld') !== onlyJsonLd) return match;
+  const pass = (source, late) => source.replace(REGION, (match, name, _inner, offset) => {
+    if (LATE_REGIONS.has(name) !== late) return match;
     const render = renderers[name];
     if (!render) throw new Error(`${file}: unknown build region "${name}"`);
     const output = render({ content: source, file });
@@ -221,20 +493,74 @@ function renderRegions(content, file) {
   return pass(pass(content, false), true);
 }
 
+/* ---------- Sitemap ---------- */
+
+/* Last-modified date: today for files with uncommitted changes, otherwise the last commit date. */
+function lastModified(file) {
+  const git = args => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+  try {
+    if (git(['status', '--porcelain', '--', file])) return new Date().toISOString().slice(0, 10);
+    return git(['log', '-1', '--format=%cs', '--', file]) || new Date().toISOString().slice(0, 10);
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
+}
+
+function renderSitemap(pages) {
+  const urls = pages
+    .filter(p => !/<meta name="robots" content="[^"]*noindex/.test(p.content))
+    .map(p => ({ loc: pageUrl(p.file), lastmod: lastModified(p.file) }))
+    .sort((a, b) => (a.loc === `${SITE_URL}/` ? -1 : b.loc === `${SITE_URL}/` ? 1 : a.loc.localeCompare(b.loc)));
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<!-- Generated by scripts/build.js (npm run generate). Do not edit by hand. -->',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...urls.map(u => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n  </url>`),
+    '</urlset>',
+    ''
+  ].join('\n');
+}
+
+/* ---------- Main ---------- */
+
+async function pageFiles() {
+  const files = [];
+  for (const dir of PAGE_DIRS) {
+    const full = path.join(ROOT, dir);
+    if (!existsSync(full)) continue;
+    for (const name of await readdir(full)) {
+      if (name.endsWith('.html')) files.push(dir ? `${dir}/${name}` : name);
+    }
+  }
+  return files;
+}
+
 async function main() {
   const checkOnly = process.argv.includes('--check');
-  const files = (await readdir(ROOT)).filter(f => f.endsWith('.html')).concat(EXTRA_FILES);
+  const htmlFiles = await pageFiles();
   const stale = [];
+  const pages = [];
 
-  for (const file of files) {
+  for (const file of htmlFiles.concat(EXTRA_FILES)) {
     const fullPath = path.join(ROOT, file);
     const original = await readFile(fullPath, 'utf8');
     const crlf = original.includes('\r\n');
     const rendered = renderRegions(crlf ? original.replace(/\r\n/g, '\n') : original, file);
     const updated = crlf ? rendered.replace(/\n/g, '\r\n') : rendered;
+    if (file.endsWith('.html')) pages.push({ file, content: rendered });
     if (updated === original) continue;
     stale.push(file);
     if (!checkOnly) await writeFile(fullPath, updated);
+  }
+
+  // Sitemap dates depend on git state, so --check compares URLs only.
+  const sitemapPath = path.join(ROOT, 'sitemap.xml');
+  const sitemap = renderSitemap(pages);
+  const existing = existsSync(sitemapPath) ? await readFile(sitemapPath, 'utf8') : '';
+  const locs = xml => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]).join('\n');
+  if (checkOnly ? locs(existing) !== locs(sitemap) : existing !== sitemap) {
+    stale.push('sitemap.xml');
+    if (!checkOnly) await writeFile(sitemapPath, sitemap);
   }
 
   if (checkOnly && stale.length) {

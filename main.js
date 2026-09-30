@@ -12,9 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileToggle && mobileMenu) {
     const focusableSelectors = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+    if (!mobileMenu.id) mobileMenu.id = 'mobile-menu';
+    mobileToggle.setAttribute('aria-controls', mobileMenu.id);
+
+    // iOS Safari ignores overflow:hidden on <body> alone, so lock <html> too
+    function setScrollLock(locked) {
+      document.documentElement.style.overflow = locked ? 'hidden' : '';
+      document.body.style.overflow = locked ? 'hidden' : '';
+    }
+
     function openMenu() {
       mobileMenu.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      setScrollLock(true);
       mobileToggle.setAttribute('aria-expanded', 'true');
       mobileMenu.setAttribute('aria-hidden', 'false');
       // Move focus into the menu
@@ -22,13 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (firstFocusable) firstFocusable.focus();
     }
 
-    function closeMenu() {
+    function closeMenu(restoreFocus = true) {
+      if (!mobileMenu.classList.contains('active')) return;
       mobileMenu.classList.remove('active');
-      document.body.style.overflow = '';
+      setScrollLock(false);
       mobileToggle.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileToggle.focus();
+      if (restoreFocus) mobileToggle.focus();
     }
+
+    // If the screen widens past the collapsed-nav breakpoint (e.g. rotating a
+    // tablet), close the overlay so it can't linger over the desktop nav.
+    const wideNav = window.matchMedia('(min-width: 1200px)');
+    const onWide = e => { if (e.matches) closeMenu(false); };
+    if (wideNav.addEventListener) wideNav.addEventListener('change', onWide);
 
     // Trap focus within the open menu
     mobileMenu.addEventListener('keydown', e => {
@@ -54,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeMenu);
+      // The booking link opens the confirmation dialog, which manages focus itself
+      link.addEventListener('click', () => closeMenu(!link.classList.contains('online-booking-btn')));
     });
 
     // Initial ARIA state
@@ -67,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (header) {
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    }, { passive: true });
   }
 
   // --- Scroll Reveal Animation ---
@@ -116,32 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.faq-item.active').forEach(openItem => {
         openItem.classList.remove('active');
         openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        openItem.querySelector('.faq-answer').style.maxHeight = '';
       });
 
-      // Toggle clicked
+      // Toggle clicked. Size to the content so long answers aren't clipped on narrow screens.
       if (!wasActive) {
         item.classList.add('active');
         btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
       }
     });
   });
-
-  // --- Team Carousel: clone cards at runtime for seamless infinite scroll ---
-  // The HTML lists each person once. The visual loop needs a second copy, which
-  // is added here only when the animation runs, and is hidden from assistive tech.
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduceMotion) {
-    document.querySelectorAll('.team-carousel-track').forEach(function(track) {
-      var cards = Array.from(track.children);
-      cards.forEach(function(card) {
-        var clone = card.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        clone.setAttribute('inert', '');
-        clone.querySelectorAll('img').forEach(function(img) { img.alt = ''; });
-        track.appendChild(clone);
-      });
-    });
-  }
 
   // --- Conversion Tracking ---
   // Fires gtag events when visitors click key CTAs.
@@ -200,15 +202,19 @@ document.addEventListener('DOMContentLoaded', () => {
       pendingBookingUrl = url;
       bookingLastFocused = trigger;
       bookingOverlay.classList.add('active');
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
       bookingClose.focus();
     }
 
     function closeBookingModal() {
       bookingOverlay.classList.remove('active');
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
       pendingBookingUrl = null;
-      if (bookingLastFocused) bookingLastFocused.focus();
+      // The trigger may be inside the (now closed) mobile menu; fall back to the menu button
+      const target = bookingLastFocused && bookingLastFocused.offsetParent !== null ? bookingLastFocused : document.querySelector('.mobile-toggle');
+      if (target && target.offsetParent !== null) target.focus();
     }
 
     bookingTriggers.forEach(trigger => {

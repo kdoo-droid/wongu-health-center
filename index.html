@@ -10,7 +10,20 @@
   <meta property="og:title" content="Acupuncture Las Vegas | Wongu Health Center">
   <meta property="og:description" content="University teaching clinic offering supervised acupuncture, cupping, and herbal medicine in Las Vegas. Initial visits from $80–$120.">
   <meta property="og:type" content="website">
+  <!-- build:head-assets -->
+  <link rel="canonical" href="https://www.wonguhealthcenter.com/">
   <meta property="og:url" content="https://www.wonguhealthcenter.com/">
+  <meta property="og:site_name" content="Wongu Health Center">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Figtree:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/styles.css?v=17">
+  <!-- Google Analytics 4 (loaded after page load by analytics.js) -->
+  <script defer src="/analytics.js"></script>
+  <!-- /build:head-assets -->
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://www.wonguhealthcenter.com/images/hero-clinic.jpg">
   <meta property="og:image:width" content="800">
@@ -20,14 +33,6 @@
   <meta name="twitter:title" content="Acupuncture Las Vegas | Wongu Health Center">
   <meta name="twitter:description" content="Wongu Health Center offers acupuncture, cupping, custom herbal formulas, and herbal teas in Las Vegas. Initial visits from $80-$120 with licensed OMDs and supervised interns.">
   <meta name="twitter:image" content="https://www.wonguhealthcenter.com/images/hero-clinic.jpg">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="canonical" href="https://www.wonguhealthcenter.com/">
-  <link rel="stylesheet" href="styles.css?v=15">
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2E5GE8PD7D"></script>
-  <script defer src="analytics.js"></script>
 
   <!-- JSON-LD Structured Data (generated from data/clinic.js) -->
   <!-- build:clinic-jsonld -->
@@ -35,10 +40,13 @@
   {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
+    "@id": "https://www.wonguhealthcenter.com/#clinic",
     "name": "Wongu Health Center",
     "alternateName": "Wongu University Health Center",
     "description": "Nevada's only Oriental medicine university clinic offering acupuncture, cupping, custom herbal formulas, herbal teas, and traditional Chinese medicine in Las Vegas.",
     "url": "https://www.wonguhealthcenter.com/",
+    "logo": "https://www.wonguhealthcenter.com/images/logo.png",
+    "image": "https://www.wonguhealthcenter.com/images/clinic-exterior.jpg",
     "telephone": "+1-702-852-1280",
     "email": "clinic-office@wongu.edu",
     "address": {
@@ -71,6 +79,37 @@
     "hasMap": "https://maps.google.com/?q=8630+S+Eastern+Ave+Las+Vegas+NV+89123",
     "priceRange": "$$",
     "medicalSpecialty": "Acupuncture",
+    "availableService": [
+      {
+        "@type": "MedicalTherapy",
+        "name": "Acupuncture",
+        "url": "https://www.wonguhealthcenter.com/acupuncture-las-vegas"
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Cupping therapy",
+        "url": "https://www.wonguhealthcenter.com/cupping-las-vegas"
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Chinese herbal medicine",
+        "url": "https://www.wonguhealthcenter.com/chinese-herbal-medicine-las-vegas"
+      }
+    ],
+    "employee": [
+      {
+        "@type": "Person",
+        "@id": "https://www.wonguhealthcenter.com/practitioners/dr-yu#person",
+        "name": "Dr. Yu",
+        "url": "https://www.wonguhealthcenter.com/practitioners/dr-yu"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.wonguhealthcenter.com/practitioners/dr-keita-sekine#person",
+        "name": "Dr. Keita Sekine",
+        "url": "https://www.wonguhealthcenter.com/practitioners/dr-keita-sekine"
+      }
+    ],
     "parentOrganization": {
       "@type": "CollegeOrUniversity",
       "name": "Wongu University of Oriental Medicine",
@@ -85,65 +124,58 @@
   <!-- /build:clinic-jsonld -->
 </head>
 <body>
+  <!-- build:site-header -->
   <a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>
-  <!-- ==================== HEADER ==================== -->
   <header class="site-header" role="banner">
     <div class="header-top">
       <div class="container">
         <span>Nevada's Only Oriental Medicine University Clinic</span>
         <div style="display:flex;gap:24px;align-items:center;">
-          <a href="tel:+17028521280">📞 (702) 852-1280</a>
-          <a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University →</a>
+          <a href="tel:+17028521280">&#128222; (702) 852-1280</a>
+          <a href="https://wongu.edu" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>
         </div>
       </div>
     </div>
     <div class="header-main">
       <div class="container">
         <a href="/" class="logo" aria-label="Wongu Health Center Home">
-          <div class="logo-icon">
-            <img src="images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async">
-          </div>
-          <div class="logo-text">
-            <span class="logo-name">Wongu Health Center</span>
-            <span class="logo-tagline">University Acupuncture Clinic</span>
-          </div>
+          <div class="logo-icon"><img src="/images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async"></div>
+          <div class="logo-text"><span class="logo-name">Wongu Health Center</span><span class="logo-tagline">University Acupuncture Clinic</span></div>
         </a>
-
         <nav aria-label="Main Navigation">
           <ul class="nav-links">
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/about">About</a></li>
             <li><a href="/services">Services</a></li>
-            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/conditions">Conditions</a></li>
             <li><a href="/student-clinic">Student Clinic</a></li>
-            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/practitioners">Practitioners</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
         </nav>
-
         <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary nav-cta online-booking-btn">Book Appointment</a>
-
-        <button class="mobile-toggle" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
+        <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
     <button class="mobile-close" aria-label="Close menu">&times;</button>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
+    <a href="/" aria-current="page">Home</a>
     <a href="/services">Services</a>
-    <a href="/pricing">Pricing</a>
+    <a href="/conditions">Conditions</a>
+    <a href="/what-to-expect">What to Expect</a>
     <a href="/student-clinic">Student Clinic</a>
-    <a href="/faq">FAQ</a>
+    <a href="/practitioners">Practitioners</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
     <a href="/contact">Contact</a>
-    <a href="tel:+17028521280" class="btn btn-primary">Call (702) 852-1280</a>
+    <a href="/faq">FAQ</a>
+    <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary online-booking-btn">Book Online</a>
+    <a href="tel:+17028521280" class="btn btn-secondary">Call (702) 852-1280</a>
   </div>
+  <!-- /build:site-header -->
 
-  <!-- ==================== HERO ==================== -->
   <main id="main-content">
   <section class="hero hero-home" aria-label="Welcome">
     <div class="container">
@@ -185,7 +217,7 @@
 
         <div class="hero-image">
           <div class="hero-image-main">
-            <img src="images/hero-clinic.jpg" width="800" height="1000" alt="Licensed acupuncturist providing treatment at Wongu Health Center in Las Vegas" decoding="async" fetchpriority="high">
+            <picture><source type="image/webp" srcset="/images/hero-clinic-480.webp 480w, /images/hero-clinic.webp 800w" sizes="(max-width: 1024px) calc(100vw - 48px), 560px"><img src="/images/hero-clinic.jpg" width="800" height="1000" alt="Licensed acupuncturist providing treatment at Wongu Health Center in Las Vegas" decoding="async" fetchpriority="high"></picture>
 
           </div>
           <div class="hero-float-card card-1">
@@ -202,7 +234,7 @@
           <div class="hero-float-card card-2">
             <div class="float-card-row">
               <div class="float-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               </div>
               <div>
                 <div class="float-card-text">Unhurried Visits</div>
@@ -251,10 +283,10 @@
           <span class="section-label">We Can Help</span>
           <h2>Whatever brought you here, we'll listen first.</h2>
           <p>Our patients come to us after years of pain, frustrating treatment experiences, or simply not knowing where else to turn. We meet you where you are &mdash; and work alongside the care you already receive from your other healthcare providers.</p>
-          <a href="/services" class="btn btn-primary" style="margin-top:24px;">See How We Can Help →</a>
+          <a href="/conditions" class="btn btn-primary" style="margin-top:24px;">See Conditions We Treat →</a>
         </div>
         <ul class="conditions-list">
-          <li><strong>Chronic Pain</strong> &mdash; Back, joints, migraines, sciatica, arthritis</li>
+          <li><strong>Chronic Pain</strong> &mdash; <a href="/conditions/back-pain">Back pain</a>, <a href="/conditions/sciatica">sciatica</a>, <a href="/conditions/headaches-migraines">headaches &amp; migraines</a>, joints, arthritis</li>
           <li><strong>Stress &amp; Sleep</strong> &mdash; Supportive care for stress, sleep, anxious feelings &amp; emotional wellness</li>
           <li><strong>Recovery Support</strong> &mdash; Adjunctive care for mobility, comfort &amp; rehabilitation goals alongside your medical care</li>
           <li><strong>Treatment Comfort</strong> &mdash; Supportive care for nausea, fatigue, sleep &amp; stress during medical treatment</li>
@@ -266,6 +298,23 @@
   </section>
 
   
+  <!-- ==================== SERVICES ==================== -->
+  <section class="section" aria-labelledby="services-heading" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Services</span>
+        <h2 id="services-heading">Acupuncture &amp; Chinese Medicine in Las Vegas</h2>
+        <p class="section-subtitle">Traditional Chinese medicine from licensed OMDs and supervised senior interns, at Wongu University's teaching clinic.</p>
+      </div>
+      <div class="link-cards">
+        <a class="link-card" href="/acupuncture-las-vegas"><strong>Acupuncture</strong><span>Our core service. Personalized treatment for pain, stress, sleep, and more, from $80.</span></a>
+        <a class="link-card" href="/cupping-las-vegas"><strong>Cupping Therapy</strong><span>Traditional glass fire cupping for muscle tension and soreness, from $50.</span></a>
+        <a class="link-card" href="/chinese-herbal-medicine-las-vegas"><strong>Chinese Herbal Medicine</strong><span>Custom formulas and teas from our on-site dispensary, from $15/day.</span></a>
+        <a class="link-card" href="/what-to-expect"><strong>New to Acupuncture?</strong><span>What happens at your first visit, step by step.</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== WHY CHOOSE US ==================== -->
   <section class="section section-cream" aria-label="Why choose Wongu">
     <div class="container">
@@ -294,7 +343,7 @@
         </div>
 
         <div class="content-image">
-          <img src="images/clinic-room.jpg" width="800" height="600" alt="Modern treatment room at Wongu Health Center" class="img-cover img-rounded" loading="lazy" decoding="async">
+          <picture><source type="image/webp" srcset="/images/clinic-room-480.webp 480w, /images/clinic-room.webp 800w" sizes="(max-width: 1024px) calc(100vw - 48px), 560px"><img src="/images/clinic-room.jpg" width="800" height="600" alt="Modern treatment room at Wongu Health Center" class="img-cover img-rounded" loading="lazy" decoding="async"></picture>
         </div>
       </div>
     </div>
@@ -320,10 +369,10 @@
             </div>
           </div>
           <p class="safety-note"><!-- build:herbal-safety -->Tell your practitioner about all medications and supplements you take. Herbal formulas may interact with medications and may not be appropriate during pregnancy or for certain medical conditions.<!-- /build:herbal-safety --></p>
-          <a href="/services#herbal" class="btn btn-primary">Explore Herbal Medicine</a>
+          <a href="/chinese-herbal-medicine-las-vegas" class="btn btn-primary">Explore Herbal Medicine</a>
         </div>
         <div class="content-image">
-          <img src="images/service-herbal.jpg" width="800" height="600" alt="Chinese herbal formulas and herbal teas at Wongu Health Center" class="img-cover img-rounded" loading="lazy" decoding="async">
+          <picture><source type="image/webp" srcset="/images/service-herbal-480.webp 480w, /images/service-herbal.webp 800w" sizes="(max-width: 1024px) calc(100vw - 48px), 560px"><img src="/images/service-herbal.jpg" width="800" height="600" alt="Chinese herbal formulas and herbal teas at Wongu Health Center" class="img-cover img-rounded" loading="lazy" decoding="async"></picture>
         </div>
       </div>
     </div>
@@ -352,51 +401,51 @@
       <!-- build:providers-home -->
       <div class="provider-grid">
         <div class="card">
-          <div class="team-photo"><img src="images/dr-yu.webp" width="800" height="800" alt="Dr. Yu, Clinic Director, Licensed OMD at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
-          <h4>Dr. Yu</h4>
+          <div class="team-photo"><img src="/images/dr-yu.webp" srcset="/images/dr-yu-480.webp 480w, /images/dr-yu.webp 800w" sizes="240px" width="800" height="800" alt="Dr. Yu, Clinic Director, Licensed OMD at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
+          <h4><a href="/practitioners/dr-yu">Dr. Yu</a></h4>
           <p class="team-card-role">Clinic Director · Licensed OMD</p>
         </div>
         <div class="card">
-          <div class="team-photo"><img src="images/dr-sekine.webp" width="800" height="800" alt="Dr. Keita Sekine, Licensed OMD, Clinical Supervisor at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
-          <h4>Dr. Keita Sekine</h4>
+          <div class="team-photo"><img src="/images/dr-sekine.webp" srcset="/images/dr-sekine-480.webp 480w, /images/dr-sekine.webp 800w" sizes="240px" width="800" height="800" alt="Dr. Keita Sekine, Licensed OMD, Clinical Supervisor at Wongu Health Center" class="staff-headshot" loading="lazy" decoding="async"></div>
+          <h4><a href="/practitioners/dr-keita-sekine">Dr. Keita Sekine</a></h4>
           <p class="team-card-role">Licensed OMD · Clinical Supervisor</p>
         </div>
       </div>
       <!-- /build:providers-home -->
 
       <!-- build:interns-home -->
-      <h3 class="text-center" style="margin:48px 0 24px;">Our Interns</h3>
-      <div class="team-carousel-wrapper">
-        <div class="team-carousel-track">
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-francisca.webp" width="800" height="800" alt="Wongu student intern Franica M." class="staff-headshot" loading="lazy" decoding="async"></div>
+      <h3 class="text-center" id="interns-heading" style="margin:48px 0 24px;">Our Interns</h3>
+      <div class="intern-strip" role="region" aria-labelledby="interns-heading" tabindex="0">
+        <ul class="intern-strip-list">
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-francisca.webp" srcset="/images/intern-francisca-480.webp 480w, /images/intern-francisca.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Franica M." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Franica M.</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-tchelle.webp" width="800" height="800" alt="Wongu student intern Tichelle H." class="staff-headshot" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-tchelle.webp" srcset="/images/intern-tchelle-480.webp 480w, /images/intern-tchelle.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Tichelle H." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Tichelle H.</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-joyce.webp" width="800" height="800" alt="Wongu student intern Joyce W." class="staff-headshot" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-joyce.webp" srcset="/images/intern-joyce-480.webp 480w, /images/intern-joyce.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Joyce W." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Joyce W.</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-bria.webp" width="800" height="800" alt="Wongu student intern Bria H." class="staff-headshot" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-bria.webp" srcset="/images/intern-bria-480.webp 480w, /images/intern-bria.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Bria H." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Bria H.</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-brittany.webp" width="800" height="800" alt="Wongu student intern Brittany T." class="staff-headshot" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-brittany.webp" srcset="/images/intern-brittany-480.webp 480w, /images/intern-brittany.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Brittany T." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Brittany T.</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-roman.webp" width="800" height="800" alt="Wongu student intern Roman G." class="staff-headshot" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-roman.webp" srcset="/images/intern-roman-480.webp 480w, /images/intern-roman.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Roman G." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Roman G.</h4>
-          </div>
-          <div class="card">
-            <div class="team-photo"><img src="images/intern-amy.webp" width="800" height="800" alt="Wongu student intern Amy P." class="staff-headshot" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="card">
+            <div class="team-photo"><img src="/images/intern-amy.webp" srcset="/images/intern-amy-480.webp 480w, /images/intern-amy.webp 800w" sizes="240px" width="800" height="800" alt="Wongu student intern Amy P." class="staff-headshot" loading="lazy" decoding="async"></div>
             <h4>Amy P.</h4>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
       <!-- /build:interns-home -->
 
@@ -503,41 +552,51 @@
 
   <!-- ==================== FOOTER ==================== -->
   </main>
+
+  <!-- build:site-footer -->
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo-name">Wongu Health Center</div>
-          <p>Nevada's only Oriental medicine university clinic. Affordable, expert acupuncture and traditional Chinese medicine in Las Vegas.</p>
+          <p>Nevada's only Oriental medicine university clinic. Acupuncture, cupping, and Chinese herbal medicine in Las Vegas, with licensed OMDs and supervised senior interns.</p>
           <div class="footer-social">
             <a href="https://www.facebook.com/WonguUniversity" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="https://www.instagram.com/wonguuniversity" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
             <a href="https://g.page/r/CRPIuds9oPwlEBM" target="_blank" rel="noopener" aria-label="Google Business"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></a>
           </div>
         </div>
-
         <div class="footer-col">
           <h3>Services</h3>
           <ul>
-            <li><a href="/services">Acupuncture</a></li>
-            <li><a href="/services">Cupping Therapy</a></li>
-            <li><a href="/services#herbal">Herbal Formulas &amp; Teas</a></li>
-            <li><a href="/services">Pain Management</a></li>
+            <li><a href="/acupuncture-las-vegas">Acupuncture</a></li>
+            <li><a href="/cupping-las-vegas">Cupping Therapy</a></li>
+            <li><a href="/chinese-herbal-medicine-las-vegas">Chinese Herbal Medicine</a></li>
+            <li><a href="/student-clinic">Student Clinic</a></li>
+            <li><a href="/services">All Services</a></li>
           </ul>
         </div>
-
+        <div class="footer-col">
+          <h3>Conditions</h3>
+          <ul>
+            <li><a href="/conditions/back-pain">Back Pain</a></li>
+            <li><a href="/conditions/sciatica">Sciatica</a></li>
+            <li><a href="/conditions/headaches-migraines">Headaches &amp; Migraines</a></li>
+            <li><a href="/conditions">All Conditions</a></li>
+          </ul>
+        </div>
         <div class="footer-col">
           <h3>Clinic</h3>
           <ul>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/student-clinic">Student Clinic</a></li>
+            <li><a href="/practitioners">Practitioners</a></li>
             <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/what-to-expect">What to Expect</a></li>
             <li><a href="/faq">FAQ</a></li>
-            <li><a href="/contact">Contact</a></li>
             <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
           <h3>Contact</h3>
           <ul>
@@ -545,27 +604,23 @@
             <li><a href="sms:+17025509483">Text: 702-550-9483</a></li>
             <li><a href="mailto:clinic-office@wongu.edu">clinic-office@wongu.edu</a></li>
             <li>8630 S Eastern Ave<br>Las Vegas, NV 89123</li>
-            <!-- build:hours-footer --><li>Mon–Fri: 8AM–4:30PM<br>Sat: Closed (mornings only starting October 10)<br>Sun: Closed</li><!-- /build:hours-footer -->
+            <li>Mon–Fri: 8AM–4:30PM<br>Sat: Closed (mornings only starting October 17)<br>Sun: Closed</li>
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <span>&copy; 2026 Wongu Health Center. Part of <a href="https://wongu.edu" target="_blank" rel="noopener" style="text-decoration:underline;">Wongu University of Oriental Medicine</a>.</span>
-        <div style="display:flex;gap:24px;">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
-          <a href="/hipaa">HIPAA Notice</a>
-        </div>
+        <div class="footer-links-row"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/hipaa">HIPAA Notice</a></div>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="/main.js"></script>
   <!-- Sticky Mobile Book Now Bar -->
   <div class="mobile-book-bar">
-    <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">📞 Call</a>
-    <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="online-booking-btn">Book Online →</a>
+    <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">&#128222; Call</a>
+    <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="online-booking-btn">Book Online &rarr;</a>
   </div>
+  <!-- /build:site-footer -->
 </body>
 </html>

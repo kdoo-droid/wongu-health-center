@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "wonguhealthcenter.com" }], "destination": "https://www.wonguhealthcenter.com/:path*", "statusCode": 301 },
+    { "source": "/blog-what-to-expect", "destination": "/what-to-expect", "statusCode": 301 },
+    { "source": "/blog-acupuncture-migraines", "destination": "/conditions/headaches-migraines", "statusCode": 301 }
+  ],
   "headers": [
     {
       "source": "/(.*)",
