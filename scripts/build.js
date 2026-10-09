@@ -25,6 +25,9 @@ const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
 const CSS_VERSION = 17;
+// Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
+// native Spanish speaker and its robots noindex tag removed.
+const SPANISH_PAGE_PUBLISHED = false;
 
 const escapeHtml = value => String(value)
   .replace(/&/g, '&amp;')
@@ -171,7 +174,7 @@ function renderFooter() {
     '    </div>',
     '    <div class="footer-bottom">',
     `      <span>&copy; ${new Date().getFullYear()} Wongu Health Center. Part of <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener" style="text-decoration:underline;">${clinic.parentOrganization.name}</a>.</span>`,
-    '      <div class="footer-links-row"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/hipaa">HIPAA Notice</a></div>',
+    `      <div class="footer-links-row"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/hipaa">HIPAA Notice</a>${SPANISH_PAGE_PUBLISHED ? '<a href="/es" lang="es" hreflang="es">Español</a>' : ''}</div>`,
     '    </div>',
     '  </div>',
     '</footer>',
@@ -223,6 +226,52 @@ function breadcrumbItems(content, url) {
     name: toPlainText(linkText ?? spanText),
     url: href ? SITE_URL + (href === '/' ? '/' : href) : url
   }));
+}
+
+/* ---------- Spanish (es.html) ---------- */
+
+const DAYS_ES = { 'Mon–Fri': 'Lunes a viernes', Sat: 'Sábado', Sun: 'Domingo' };
+
+function timeEs(hhmm) {
+  const [h, m] = hhmm.split(':').map(Number);
+  return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h >= 12 ? 'p. m.' : 'a. m.'}`;
+}
+
+function hoursEntryTextEs(entry, { short = false } = {}) {
+  if (entry.pendingChange) {
+    const { startsOn, ...next } = entry.pendingChange;
+    const date = new Date(`${startsOn}T12:00:00Z`).toLocaleDateString('es-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+    return `${hoursEntryTextEs({ ...entry, pendingChange: undefined })} (${hoursEntryTextEs(next, { short: true }).toLowerCase()} a partir del ${date})`;
+  }
+  if (entry.status === 'open') return `${timeEs(entry.opens)} – ${timeEs(entry.closes)}`;
+  if (entry.status === 'morning') return short ? 'Solo por la mañana' : 'Solo por la mañana; llame para consultar horarios';
+  if (entry.status === 'limited') return 'Citas limitadas; llame a la clínica';
+  if (entry.status === 'closed') return 'Cerrado';
+  throw new Error(`es.html: no Spanish text for hours status "${entry.status}"`);
+}
+
+function renderHoursEs() {
+  return `<p>${currentHours().map(h => {
+    const day = DAYS_ES[h.short];
+    if (!day) throw new Error(`es.html: add a Spanish name for "${h.short}" to DAYS_ES`);
+    return `${day}: ${hoursEntryTextEs(h)}`;
+  }).join('<br>')}</p>`;
+}
+
+function renderPriceSummaryEs() {
+  const { intern, omd } = prices;
+  const length = text => text.replace('hours', 'horas').replace('about 1 hour', 'aprox. 1 hora').replace('about', 'aprox.').replace('minutes', 'minutos');
+  return [
+    '<table class="comparison-table stack-table" role="table">',
+    '  <thead role="rowgroup"><tr role="row"><th role="columnheader">Visita</th><th role="columnheader">Estudiante supervisado</th><th role="columnheader">Doctor con licencia (OMD)</th></tr></thead>',
+    '  <tbody role="rowgroup">',
+    `    <tr role="row"><td role="rowheader">Primera visita (consulta + tratamiento)</td><td role="cell" data-label="Estudiante supervisado">$${intern.initial} &middot; ${length(intern.initialLength)}</td><td role="cell" data-label="Doctor con licencia (OMD)">$${omd.initial} &middot; ${length(omd.initialLength)}</td></tr>`,
+    `    <tr role="row"><td role="rowheader">Visita de seguimiento</td><td role="cell" data-label="Estudiante supervisado">$${intern.followUp} &middot; ${length(intern.followUpLength)}</td><td role="cell" data-label="Doctor con licencia (OMD)">$${omd.followUp} &middot; ${length(omd.followUpLength)}</td></tr>`,
+    `    <tr role="row"><td role="rowheader">Ventosas (hasta 30 min)</td><td role="cell" data-label="Estudiante supervisado">$${intern.cupping}</td><td role="cell" data-label="Doctor con licencia (OMD)">$${omd.cupping} (incluye consulta)</td></tr>`,
+    `    <tr role="row"><td role="rowheader">Fórmulas y tés de hierbas personalizados</td><td role="cell" data-label="Estudiante supervisado">Desde $${prices.herbsPerDay} por día</td><td role="cell" data-label="Doctor con licencia (OMD)">Desde $${prices.herbsPerDay} por día</td></tr>`,
+    '  </tbody>',
+    '</table>'
+  ].join('\n');
 }
 
 /* ---------- Renderers ---------- */
@@ -358,6 +407,10 @@ const renderers = {
       '</table>'
     ].join('\n');
   },
+
+  'price-summary-es': renderPriceSummaryEs,
+
+  'hours-es': renderHoursEs,
 
   'hours-footer': () => `<li>${currentHours().map(h => `${h.short}: ${hoursEntryText(h, { short: true })}`).join('<br>')}</li>`,
 

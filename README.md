@@ -28,9 +28,11 @@ so they match what's already referenced in the HTML.
 | Filename | Where It Shows | Recommended Size | What to Shoot |
 |----------|---------------|-----------------|---------------|
 | `clinic-exterior.jpg` | Mission section | 800x600px | Wongu Health Center building/entrance or reception area |
-| `team-director.jpg` | Team section | 400x400px | Clinical Director headshot (square crop) |
-| `team-omd-1.jpg` | Team section | 400x400px | Supervising OMD #1 headshot (square crop) |
-| `team-omd-2.jpg` | Team section | 400x400px | Supervising OMD #2 headshot (square crop) |
+
+### Practitioner & Intern Headshots
+Headshots are listed in `data/providers.js` (`photo` / `profileImage`) and rendered by
+`npm run generate`. Use square 800x800px `.webp` files, plus an optional `-480.webp`
+version (e.g. `dr-yu.webp` and `dr-yu-480.webp`) that phones load automatically.
 
 ### Services Page
 | Filename | Where It Shows | Recommended Size | What to Shoot |
@@ -38,11 +40,6 @@ so they match what's already referenced in the HTML.
 | `service-acupuncture.jpg` | Acupuncture section | 800x600px | Needles on patient's back, clean clinical setting |
 | `service-cupping.jpg` | Cupping section | 800x600px | Cupping therapy in progress |
 | `service-herbal.jpg` | Herbal Medicine section | 800x600px | Herbal dispensary / organized herb jars |
-
-### Student Clinic Page
-| Filename | Where It Shows | Recommended Size | What to Shoot |
-|----------|---------------|-----------------|---------------|
-| `intern-treatment.jpg` | How It Works section | 800x600px | Intern treating patient while OMD supervises |
 
 ## Photo Tips
 - Shoot in landscape (4:3 ratio) for content sections, square for headshots
