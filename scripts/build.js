@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 21;
+const CSS_VERSION = 22;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -46,26 +46,6 @@ function pagePath(file) {
 const pageUrl = file => SITE_URL + pagePath(file);
 
 /* ---------- Site chrome (header, footer) ---------- */
-
-const NAV = [
-  { href: '/services', label: 'Services' },
-  { href: '/conditions', label: 'Conditions' },
-  { href: '/student-clinic', label: 'Student Clinic' },
-  { href: '/practitioners', label: 'Practitioners' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/products', label: 'Products' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' }
-];
-
-// The mobile menu has room for the pages that only live in the footer on desktop.
-const MOBILE_NAV = [
-  { href: '/', label: 'Home' },
-  ...NAV.slice(0, 2),
-  { href: '/what-to-expect', label: 'What to Expect' },
-  ...NAV.slice(2),
-  { href: '/faq', label: 'FAQ' }
-];
 
 const FOOTER_COLUMNS = [
   { title: 'Services', links: [
@@ -93,11 +73,61 @@ const FOOTER_COLUMNS = [
   ] }
 ];
 
+// Top menu. Items with children render as dropdowns; Services and Conditions reuse the footer lists.
+const footerLinks = title => FOOTER_COLUMNS.find(c => c.title === title).links;
+const NAV = [
+  { label: 'Services', children: footerLinks('Services') },
+  { label: 'Conditions', children: footerLinks('Conditions') },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/products', label: 'Products' },
+  { label: 'About', children: [
+    ['/about', 'About Us'],
+    ['/practitioners', 'Practitioners'],
+    ['/what-to-expect', 'What to Expect'],
+    ['/faq', 'FAQ'],
+    ['/blog', 'Blog']
+  ] },
+  { href: '/contact', label: 'Contact' }
+];
+
+// The phone menu stays a flat list of the main pages.
+const MOBILE_NAV = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/conditions', label: 'Conditions' },
+  { href: '/what-to-expect', label: 'What to Expect' },
+  { href: '/student-clinic', label: 'Student Clinic' },
+  { href: '/practitioners', label: 'Practitioners' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/products', label: 'Products' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/faq', label: 'FAQ' }
+];
+
 /* A nav item is active on its own page and on pages nested under it (e.g. /conditions/sciatica). */
 function navState(href, current) {
   if (href === current) return ' class="active" aria-current="page"';
   if (href !== '/' && current.startsWith(`${href}/`)) return ' class="active"';
   return '';
+}
+
+const CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+/* Dropdowns are disclosure buttons (no link of their own); each group's overview page is in its list.
+   CSS opens them on hover; main.js adds click/tap, keyboard, and click-outside handling. */
+function renderNavItem(item, current) {
+  if (!item.children) return `          <li><a href="${item.href}"${navState(item.href, current)}>${item.label}</a></li>`;
+  const id = `nav-${item.label.toLowerCase()}`;
+  const inGroup = item.children.some(([href]) => href === current || current.startsWith(`${href}/`));
+  return [
+    '          <li class="has-dropdown">',
+    `            <button type="button" class="nav-dropdown-toggle${inGroup ? ' active' : ''}" aria-expanded="false" aria-controls="${id}">${item.label}${CHEVRON}</button>`,
+    `            <ul class="nav-dropdown" id="${id}">`,
+    ...item.children.map(([href, label]) => `              <li><a href="${href}"${href === current ? ' aria-current="page"' : ''}>${label}</a></li>`),
+    '            </ul>',
+    '          </li>'
+  ].join('\n');
 }
 
 // Sits above the sticky header so it scrolls away; shown on phones too, unlike .header-top.
@@ -133,7 +163,7 @@ function renderHeader(file) {
     '      </a>',
     '      <nav aria-label="Main Navigation">',
     '        <ul class="nav-links">',
-    ...NAV.map(n => `          <li><a href="${n.href}"${navState(n.href, current)}>${n.label}</a></li>`),
+    ...NAV.map(n => renderNavItem(n, current)),
     '        </ul>',
     '      </nav>',
     `      <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="btn btn-primary nav-cta online-booking-btn">Book Appointment</a>`,

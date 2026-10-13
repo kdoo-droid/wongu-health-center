@@ -366,6 +366,7 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .nav-links a {
+  display: block;
   padding: 8px 12px;
   font-size: 0.88rem;
   font-weight: 500;
@@ -390,10 +391,95 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   margin-left: 8px;
 }
 
-/* Laptop widths: tighten link padding so all eight links and the CTA fit before the menu collapses at 1199px */
-@media (min-width: 1200px) and (max-width: 1359px) {
-  .nav-links { gap: 2px; }
-  .nav-links a { padding: 8px 8px; }
+/* Dropdown menus (desktop). Built by scripts/build.js; main.js toggles aria-expanded. */
+.has-dropdown { position: relative; }
+
+.nav-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: inherit;
+  color: var(--slate);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.nav-dropdown-toggle:hover,
+.has-dropdown:hover .nav-dropdown-toggle,
+.nav-dropdown-toggle[aria-expanded="true"] {
+  color: var(--forest);
+  background: rgba(122,158,126,0.1);
+}
+
+.nav-dropdown-toggle.active {
+  color: var(--forest);
+  background: rgba(122,158,126,0.15);
+  font-weight: 600;
+}
+
+.nav-chevron {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s;
+}
+
+.has-dropdown:hover .nav-chevron,
+.nav-dropdown-toggle[aria-expanded="true"] .nav-chevron { transform: rotate(180deg); }
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 230px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  z-index: 1001;
+}
+
+/* Invisible bridge across the gap so the menu doesn't close while the pointer moves down to it */
+.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 10px;
+}
+
+.has-dropdown:hover .nav-dropdown,
+.nav-dropdown-toggle[aria-expanded="true"] + .nav-dropdown { display: block; }
+
+/* Without JS (main.js adds .js to <html>), keyboard focus opens the menu instead */
+html:not(.js) .has-dropdown:focus-within .nav-dropdown { display: block; }
+
+.nav-dropdown a {
+  display: block;
+  padding: 10px 12px;
+}
+
+.nav-dropdown a[aria-current="page"] {
+  color: var(--forest);
+  background: rgba(122,158,126,0.15);
+  font-weight: 600;
 }
 
 /* Mobile Nav */

@@ -260,6 +260,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Desktop dropdown menus ---
+  // CSS opens them on hover; this adds click/tap (touch screens), Escape, and click-outside.
+  document.documentElement.classList.add('js');
+  const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+  function closeDropdowns(except) {
+    dropdownToggles.forEach(t => { if (t !== except) t.setAttribute('aria-expanded', 'false'); });
+  }
+  dropdownToggles.forEach(toggle => {
+    const item = toggle.closest('.has-dropdown');
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      closeDropdowns(toggle);
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    item.addEventListener('focusout', e => {
+      if (!item.contains(e.relatedTarget)) toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.has-dropdown')) closeDropdowns();
+  });
+
   // --- Product Page: variant toggle + photo thumbnails ---
   // Without JS every variant and photo simply shows stacked; these only hide/show.
   document.querySelectorAll('[data-product]').forEach(product => {

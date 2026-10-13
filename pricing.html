@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Figtree:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=21">
+  <link rel="stylesheet" href="/styles.css?v=22">
   <!-- Google Analytics 4 (loaded after page load by analytics.js) -->
   <script defer src="/analytics.js"></script>
   <script type="application/ld+json">
@@ -77,13 +77,37 @@
         </a>
         <nav aria-label="Main Navigation">
           <ul class="nav-links">
-            <li><a href="/services">Services</a></li>
-            <li><a href="/conditions">Conditions</a></li>
-            <li><a href="/student-clinic">Student Clinic</a></li>
-            <li><a href="/practitioners">Practitioners</a></li>
+            <li class="has-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-services">Services<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              <ul class="nav-dropdown" id="nav-services">
+                <li><a href="/acupuncture-las-vegas">Acupuncture</a></li>
+                <li><a href="/cupping-las-vegas">Cupping Therapy</a></li>
+                <li><a href="/chinese-herbal-medicine-las-vegas">Chinese Herbal Medicine</a></li>
+                <li><a href="/student-clinic">Student Clinic</a></li>
+                <li><a href="/services">All Services</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-conditions">Conditions<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              <ul class="nav-dropdown" id="nav-conditions">
+                <li><a href="/conditions/back-pain">Back Pain</a></li>
+                <li><a href="/conditions/sciatica">Sciatica</a></li>
+                <li><a href="/conditions/headaches-migraines">Headaches &amp; Migraines</a></li>
+                <li><a href="/conditions">All Conditions</a></li>
+              </ul>
+            </li>
             <li><a href="/pricing" class="active" aria-current="page">Pricing</a></li>
             <li><a href="/products">Products</a></li>
-            <li><a href="/about">About</a></li>
+            <li class="has-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-about">About<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              <ul class="nav-dropdown" id="nav-about">
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/practitioners">Practitioners</a></li>
+                <li><a href="/what-to-expect">What to Expect</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/blog">Blog</a></li>
+              </ul>
+            </li>
             <li><a href="/contact">Contact</a></li>
           </ul>
         </nav>
