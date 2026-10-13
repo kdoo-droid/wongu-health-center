@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 20;
+const CSS_VERSION = 21;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -53,6 +53,7 @@ const NAV = [
   { href: '/student-clinic', label: 'Student Clinic' },
   { href: '/practitioners', label: 'Practitioners' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/products', label: 'Products' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' }
 ];

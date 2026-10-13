@@ -390,6 +390,12 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   margin-left: 8px;
 }
 
+/* Laptop widths: tighten link padding so all eight links and the CTA fit before the menu collapses at 1199px */
+@media (min-width: 1200px) and (max-width: 1359px) {
+  .nav-links { gap: 2px; }
+  .nav-links a { padding: 8px 8px; }
+}
+
 /* Mobile Nav */
 .mobile-toggle {
   display: none;
