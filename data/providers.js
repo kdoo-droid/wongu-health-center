@@ -65,72 +65,65 @@ export const providers = [
 ];
 
 /* quarter: academic quarter the intern is on the clinic floor, e.g. 'Fall 2026'.
-   supervisor: provider id from the list above, if assigned. */
+   supervisor: provider id from the list above, if assigned.
+   shortBio: optional; interns without one get the generic internBio() text below.
+   Interns are listed by first name and last initial only. */
 export const interns = [
   {
     name: 'Franica M.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-francisca.webp', width: 800, height: 800 },
-    shortBio: 'A 4th-year intern at Wongu University finishing up her clinical training, Franica brings a thorough, caring approach to every session. She is passionate about helping patients feel heard, supported, and cared for through traditional Oriental medicine.'
+    profileImage: { src: 'images/intern-francisca.webp', width: 800, height: 800 }
   },
   {
     name: 'Tichelle H.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-tchelle.webp', width: 800, height: 800 },
-    shortBio: 'Tichelle is a dedicated intern in her final year at Wongu University, committed to patient-centered care. She brings warmth and attentiveness to each treatment, helping patients pursue their wellness goals through traditional Oriental medicine.'
+    profileImage: { src: 'images/intern-tchelle.webp', width: 800, height: 800 }
   },
   {
     name: 'Joyce W.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-joyce.webp', width: 800, height: 800 },
-    shortBio: 'Joyce is finishing up her final year at Wongu University and brings a calm, attentive presence to patient visits. She is committed to thoughtful care, clear communication, and helping patients feel comfortable throughout treatment.'
+    profileImage: { src: 'images/intern-joyce.webp', width: 800, height: 800 }
   },
   {
     name: 'Bria H.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-bria.webp', width: 800, height: 800 },
-    shortBio: 'Bria is finishing up her final year at Wongu University and brings warmth and genuine care to every patient interaction. She is dedicated to thorough, attentive treatment grounded in traditional Oriental medicine.'
+    profileImage: { src: 'images/intern-bria.webp', width: 800, height: 800 }
   },
   {
     name: 'Brittany T.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-brittany.webp', width: 800, height: 800 },
-    shortBio: 'Brittany is finishing up her final year at Wongu University, committed to patient-centered care. She brings a thoughtful, detail-oriented approach to each session, helping patients feel supported throughout their treatment.'
+    profileImage: { src: 'images/intern-brittany.webp', width: 800, height: 800 }
   },
   {
     name: 'Roman G.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-roman.webp', width: 800, height: 800 },
-    shortBio: 'Roman is finishing up his final year at Wongu University and approaches patient care with focus and professionalism. He is dedicated to clear communication and helping patients reach their wellness goals.'
+    profileImage: { src: 'images/intern-roman.webp', width: 800, height: 800 }
   },
   {
     name: 'Amy P.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-amy.webp', width: 800, height: 800 },
-    shortBio: 'Amy is finishing up her final year at Wongu University and brings a warm, attentive approach to patient care. She is dedicated to helping patients feel comfortable and supported throughout treatment.'
+    profileImage: { src: 'images/intern-amy.webp', width: 800, height: 800 }
   },
   {
-    // Interns are listed by first name and last initial only.
     name: 'Rhenand M.',
     quarter: null,
     active: true,
     supervisor: null,
-    profileImage: { src: 'images/intern-rhenand.webp', width: 800, height: 800 },
-    shortBio: null // add once Rhenand has approved a short bio
+    profileImage: { src: 'images/intern-rhenand.webp', width: 800, height: 800 }
   }
 ];
 
@@ -140,6 +133,13 @@ export function activeProviders() {
   return providers
     .filter(p => p.active === true)
     .sort((a, b) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category));
+}
+
+// Generic on purpose: interns are at different points in the program, so no year or specialty.
+export function internBio(intern) {
+  if (intern.shortBio) return intern.shortBio;
+  const first = intern.name.split(' ')[0];
+  return `${first} is a student in Wongu University's master's program in Oriental medicine, training to become a licensed Oriental Medicine Doctor (OMD). All of ${first}'s patient care is supervised by licensed OMD faculty.`;
 }
 
 export function activeInterns() {

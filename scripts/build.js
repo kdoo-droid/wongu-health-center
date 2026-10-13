@@ -17,7 +17,7 @@ import {
   SITE_URL, BOOKING_URL, clinic, currentHours, insurance, cancellationPolicy, herbalSafetyNote,
   prices, hoursEntryText, hoursSummaryText, announcementActive, saturdayAnnouncementText
 } from '../data/clinic.js';
-import { activeProviders, activeInterns } from '../data/providers.js';
+import { activeProviders, activeInterns, internBio } from '../data/providers.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
@@ -400,7 +400,7 @@ const renderers = {
         `    <div class="intern-photo">${headshot(i.profileImage, `Wongu student intern ${i.name} at the student clinic`)}</div>`,
         `    <h3>${escapeHtml(i.name)}</h3>`,
         '    <p class="team-card-role">Senior Intern</p>',
-        i.shortBio ? `    <p class="team-card-bio">${escapeHtml(i.shortBio)}</p>` : null,
+        `    <p class="team-card-bio">${escapeHtml(internBio(i))}</p>`,
         '  </article>'
       ].filter(Boolean).join('\n')),
       '</div>'
