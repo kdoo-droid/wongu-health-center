@@ -84,6 +84,7 @@ const FOOTER_COLUMNS = [
     ['/about', 'About Us'],
     ['/practitioners', 'Practitioners'],
     ['/pricing', 'Pricing'],
+    ['/products', 'Products'],
     ['/what-to-expect', 'What to Expect'],
     ['/faq', 'FAQ'],
     ['/blog', 'Blog'],
