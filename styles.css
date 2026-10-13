@@ -237,6 +237,23 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
   flex-shrink: 0;
 }
 
+/* --- Announcement bar (generated from data/clinic.js) --- */
+.announcement-bar {
+  background: var(--gold-light);
+  color: var(--forest);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.announcement-bar a {
+  color: var(--forest);
+  font-weight: 700;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
 /* --- Header / Navigation --- */
 .site-header {
   position: sticky;

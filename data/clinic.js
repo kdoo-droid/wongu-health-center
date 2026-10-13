@@ -48,11 +48,29 @@ export const clinic = {
    Pages are static, so run `npm run generate` and redeploy on or after startsOn. */
 export const hours = [
   { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], label: 'Monday – Friday', short: 'Mon–Fri', status: 'open', opens: '08:00', closes: '16:30' },
-  // Once exact Saturday times are known, give upcoming status: 'open' with opens/closes
-  // so Saturday is also published to Google via structured data.
-  { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'closed', upcoming: { status: 'morning', startsOn: '2026-10-17' } },
+  // Saturday hours began October 17, 2026 (see `announcement` below).
+  { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'open', opens: '08:00', closes: '16:30' },
   { days: ['Sunday'], label: 'Sunday', short: 'Sun', status: 'closed' }
 ];
+
+/* Site-wide announcement bar shown above the header on every page.
+   showUntil: last Las Vegas date the bar is rendered. Pages are static, so the bar only
+   disappears the next time `npm run generate` runs after that date and the site redeploys.
+   Set announcement to null to turn it off right away. */
+export const announcement = {
+  saturdayStartsOn: '2026-10-17',
+  showUntil: '2026-11-30'
+};
+
+export function announcementActive(date = new Date()) {
+  return Boolean(announcement && lasVegasToday(date) <= announcement.showUntil);
+}
+
+// Worded to stay accurate both before and after the start date, since pages aren't rebuilt daily.
+export function saturdayAnnouncementText() {
+  const saturday = hours.find(h => h.short === 'Sat');
+  return `Now open Saturdays! ${hoursEntryText(saturday)}, starting ${formatStartDate(announcement.saturdayStartsOn)}.`;
+}
 
 function lasVegasToday(date) {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles' }).format(date); // YYYY-MM-DD

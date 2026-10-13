@@ -15,7 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   SITE_URL, BOOKING_URL, clinic, currentHours, insurance, cancellationPolicy, herbalSafetyNote,
-  prices, hoursEntryText, hoursSummaryText
+  prices, hoursEntryText, hoursSummaryText, announcementActive, saturdayAnnouncementText
 } from '../data/clinic.js';
 import { activeProviders, activeInterns } from '../data/providers.js';
 
@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 17;
+const CSS_VERSION = 18;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -98,10 +98,21 @@ function navState(href, current) {
   return '';
 }
 
+// Sits above the sticky header so it scrolls away; shown on phones too, unlike .header-top.
+function renderAnnouncement() {
+  if (!announcementActive()) return [];
+  return [
+    '<div class="announcement-bar" role="region" aria-label="Announcement">',
+    `  <p><strong>${escapeHtml(saturdayAnnouncementText())}</strong> <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="online-booking-btn">Book a Saturday visit &rarr;</a></p>`,
+    '</div>'
+  ];
+}
+
 function renderHeader(file) {
   const current = pagePath(file);
   return [
     '<a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>',
+    ...renderAnnouncement(),
     '<header class="site-header" role="banner">',
     '  <div class="header-top">',
     '    <div class="container">',
