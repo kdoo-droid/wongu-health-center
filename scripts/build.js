@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 18;
+const CSS_VERSION = 19;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -150,7 +150,7 @@ function renderHeader(file) {
   ].join('\n');
 }
 
-function renderFooter() {
+function renderFooter(file) {
   const hours = currentHours().map(h => `${h.short}: ${hoursEntryText(h, { short: true })}`).join('<br>');
   return [
     '<footer class="site-footer" role="contentinfo">',
@@ -195,7 +195,10 @@ function renderFooter() {
     '<!-- Sticky Mobile Book Now Bar -->',
     '<div class="mobile-book-bar">',
     '  <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">&#128222; Call</a>',
-    `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="online-booking-btn">Book Online &rarr;</a>`,
+    // The products page sells over the counter, so its bar offers a text instead of booking.
+    pagePath(file) === '/products'
+      ? '  <a href="sms:+17025509483">Text Us &rarr;</a>'
+      : `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="online-booking-btn">Book Online &rarr;</a>`,
     '</div>'
   ].join('\n');
 }
@@ -318,7 +321,7 @@ function providerFor(file) {
 const renderers = {
   'site-header': ({ file }) => renderHeader(file),
 
-  'site-footer': () => renderFooter(),
+  'site-footer': ({ file }) => renderFooter(file),
 
   'head-assets': renderHeadAssets,
 

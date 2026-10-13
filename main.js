@@ -260,4 +260,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Product Page: variant toggle + photo thumbnails ---
+  // Without JS every variant and photo simply shows stacked; these only hide/show.
+  document.querySelectorAll('[data-product]').forEach(product => {
+    const selectors = product.querySelectorAll('[data-select]');
+    function selectVariant(name) {
+      product.dataset.active = name;
+      selectors.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.select === name)));
+    }
+    selectors.forEach(btn => btn.addEventListener('click', () => {
+      selectVariant(btn.dataset.select);
+      trackEvent('product_variant', btn.dataset.select);
+    }));
+    product.querySelector('.product-variants')?.removeAttribute('hidden');
+    if (selectors.length) selectVariant(selectors[0].dataset.select);
+
+    product.querySelectorAll('.product-gallery-set').forEach(set => {
+      const slides = set.querySelectorAll('.product-slide');
+      const thumbs = set.querySelectorAll('.product-thumb');
+      function showSlide(i) {
+        slides.forEach((s, n) => { s.hidden = n !== i; });
+        thumbs.forEach((t, n) => t.setAttribute('aria-pressed', String(n === i)));
+      }
+      thumbs.forEach((t, n) => t.addEventListener('click', () => showSlide(n)));
+      set.querySelector('.product-thumbs')?.removeAttribute('hidden');
+      showSlide(0);
+    });
+  });
+
 });
