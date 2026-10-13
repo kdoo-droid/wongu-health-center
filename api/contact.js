@@ -335,8 +335,8 @@ export default async function handler(req, res) {
       </div>
       <div style="padding:32px;">
         <p style="color:#111827;font-size:1rem;line-height:1.7;">Hi ${safeName},</p>
-        <p style="color:#374151;line-height:1.7;">Thank you for contacting Wongu Health Center. Our front desk has received your message and will get back to you within <strong>24 business hours (Mon–Fri)</strong>.</p>
-        <p style="color:#374151;line-height:1.7;">Messages sent on weekends will be answered the following Monday.</p>
+        <p style="color:#374151;line-height:1.7;">Thank you for contacting Wongu Health Center. Our front desk has received your message and will get back to you within <strong>24 business hours (Mon–Sat)</strong>.</p>
+        <p style="color:#374151;line-height:1.7;">Messages sent on Sunday will be answered on Monday.</p>
         <div style="margin:24px 0;padding:16px 20px;background:#f0f4f0;border-left:4px solid #4a7c59;border-radius:0 8px 8px 0;">
           <p style="margin:0;font-weight:600;color:#2d4a32;margin-bottom:8px;">Your Message Summary</p>
           <p style="margin:4px 0;color:#374151;font-size:0.9rem;"><strong>Reason for Contact:</strong> ${safeTopic}</p>
