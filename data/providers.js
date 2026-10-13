@@ -122,6 +122,15 @@ export const interns = [
     supervisor: null,
     profileImage: { src: 'images/intern-amy.webp', width: 800, height: 800 },
     shortBio: 'Amy is finishing up her final year at Wongu University and brings a warm, attentive approach to patient care. She is dedicated to helping patients feel comfortable and supported throughout treatment.'
+  },
+  {
+    // Interns are listed by first name and last initial only.
+    name: 'Rhenand M.',
+    quarter: null,
+    active: true,
+    supervisor: null,
+    profileImage: { src: 'images/intern-rhenand.webp', width: 800, height: 800 },
+    shortBio: null // add once Rhenand has approved a short bio
   }
 ];
 

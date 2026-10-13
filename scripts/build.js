@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 19;
+const CSS_VERSION = 20;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -400,9 +400,9 @@ const renderers = {
         `    <div class="intern-photo">${headshot(i.profileImage, `Wongu student intern ${i.name} at the student clinic`)}</div>`,
         `    <h3>${escapeHtml(i.name)}</h3>`,
         '    <p class="team-card-role">Senior Intern</p>',
-        `    <p class="team-card-bio">${escapeHtml(i.shortBio)}</p>`,
+        i.shortBio ? `    <p class="team-card-bio">${escapeHtml(i.shortBio)}</p>` : null,
         '  </article>'
-      ].join('\n')),
+      ].filter(Boolean).join('\n')),
       '</div>'
     ].join('\n');
   },
