@@ -10,7 +10,7 @@
   /* Primary Palette */
   --sage: #7A9E7E;
   --sage-light: #A8C5AB;
-  --sage-dark: #5B7D5E;
+  --sage-dark: #4F7052; /* darkened from #5B7D5E for 4.5:1 text contrast */
   --forest: #2D4A32;
   --cream: #FAF8F5;
   --warm-white: #FFFFFF;
@@ -26,7 +26,7 @@
   --charcoal: #2C2C2C;
   --slate: #4A4A4A;
   --gray: #6B6B6B;
-  --gray-light: #767676;
+  --gray-light: #666666; /* darkened from #767676 for 4.5:1 on cream/sand */
   --border: #E5E2DD;
 
   /* Typography */
@@ -34,7 +34,7 @@
   --font-body: 'Figtree', -apple-system, sans-serif;
 
   /* Spacing */
-  --section-pad: clamp(60px, 10vw, 120px);
+  --section-pad: clamp(56px, 7vw, 88px);
   --container-max: 1200px;
   --radius: 12px;
   --gutter: 24px;
@@ -63,7 +63,7 @@ html {
 body {
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--charcoal);
   background: var(--warm-white);
   overflow-x: hidden;
@@ -730,13 +730,13 @@ html:not(.js) .has-dropdown:focus-within .nav-dropdown { display: block; }
 }
 
 .hero-float-card.card-1 {
-  bottom: 40px;
-  left: -30px;
+  bottom: 24px;
+  left: 16px;
 }
 
 .hero-float-card.card-2 {
-  top: 40px;
-  right: -20px;
+  top: 24px;
+  right: 16px;
   animation-delay: -3s;
 }
 
@@ -2889,4 +2889,26 @@ picture { display: contents; }
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* --- Design tightening (visual review) --- */
+/* Slimmer pinned nav */
+.header-main { padding: 8px 0; }
+.logo-icon { width: 40px; height: 40px; }
+.nav-cta { padding: 10px 22px; font-size: 0.9rem; }
+
+/* Hero facts: one line each on desktop; smaller and allowed to wrap on phones */
+.hero-stats { gap: 32px; }
+.hero-stat .number { font-size: 1.6rem; }
+@media (min-width: 769px) { .hero-stat .number { white-space: nowrap; } }
+@media (max-width: 768px) { .hero-stats { gap: 20px; } .hero-stat .number { font-size: 1.2rem; } }
+
+/* Desktop hero: smaller headline so the buttons and price show on the first screen */
+@media (min-width: 769px) {
+  .hero-home { min-height: 0; padding: 48px 0 64px; }
+  .hero-home .hero-grid { align-items: start; }
+  .hero-home h1 { font-size: clamp(2.6rem, 3.6vw, 3.75rem); line-height: 1.1; }
+  .hero-home .hero-badge { margin-bottom: 16px; }
+  .hero-home .hero-desc { margin-bottom: 24px; }
+  .hero-home .hero-stats { padding-top: 24px; }
 }

@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 24;
+const CSS_VERSION = 25;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -147,16 +147,17 @@ function renderHeader(file) {
   return [
     '<a href="#main-content" class="skip-nav" style="position:absolute;top:-100%;left:16px;">Skip to main content</a>',
     ...renderAnnouncement(),
-    '<header class="site-header" role="banner">',
-    '  <div class="header-top">',
-    '    <div class="container">',
-    "      <span>Nevada's Only Oriental Medicine University Clinic</span>",
-    '      <div style="display:flex;gap:24px;align-items:center;">',
-    `        <a href="tel:${clinic.phone.replace(/-/g, '')}">${PHONE_ICON}(702) 852-1280</a>`,
-    `        <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>`,
-    '      </div>',
+    // Utility bar scrolls away; only the white nav inside <header> stays pinned.
+    '<div class="header-top">',
+    '  <div class="container">',
+    "    <span>Nevada's Only Oriental Medicine University Clinic</span>",
+    '    <div style="display:flex;gap:24px;align-items:center;">',
+    `      <a href="tel:${clinic.phone.replace(/-/g, '')}">${PHONE_ICON}(702) 852-1280</a>`,
+    `      <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>`,
     '    </div>',
     '  </div>',
+    '</div>',
+    '<header class="site-header" role="banner">',
     '  <div class="header-main">',
     '    <div class="container">',
     '      <a href="/" class="logo" aria-label="Wongu Health Center Home">',
