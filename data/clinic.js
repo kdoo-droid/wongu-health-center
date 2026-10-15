@@ -94,7 +94,7 @@ export function currentHours(date = new Date()) {
 export const LIMITED_HOURS_TEXT = 'Limited appointments — please contact the clinic for availability';
 
 export const insurance = {
-  lead: 'VA Community Care and Culinary patients',
+  lead: 'VA Community Care and Culinary Health Fund patients',
   body: 'should contact Wongu Health Center before scheduling so we can verify eligibility, authorization, and provider availability.',
   coverage: 'Coverage is subject to applicable authorization, eligibility, and plan requirements.'
 };

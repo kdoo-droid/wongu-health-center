@@ -16,7 +16,7 @@
 export const providers = [
   {
     id: 'yu',
-    name: 'Dr. Yu',
+    name: 'Dr. Eunhee Yu',
     credentials: 'MSOM, L.Ac., Dipl. OM',
     role: 'Clinic Director · Licensed OMD',
     category: 'clinicLeadership',

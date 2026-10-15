@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 22;
+const CSS_VERSION = 23;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -112,6 +112,8 @@ function navState(href, current) {
   return '';
 }
 
+const PHONE_ICON = '<svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+
 const CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
 
 /* Dropdowns are disclosure buttons (no link of their own); each group's overview page is in its list.
@@ -150,7 +152,7 @@ function renderHeader(file) {
     '    <div class="container">',
     "      <span>Nevada's Only Oriental Medicine University Clinic</span>",
     '      <div style="display:flex;gap:24px;align-items:center;">',
-    `        <a href="tel:${clinic.phone.replace(/-/g, '')}">&#128222; (702) 852-1280</a>`,
+    `        <a href="tel:${clinic.phone.replace(/-/g, '')}">${PHONE_ICON}(702) 852-1280</a>`,
     `        <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>`,
     '      </div>',
     '    </div>',
@@ -225,7 +227,7 @@ function renderFooter(file) {
     '<script src="/main.js"></script>',
     '<!-- Sticky Mobile Book Now Bar -->',
     '<div class="mobile-book-bar">',
-    '  <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">&#128222; Call</a>',
+    `  <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">${PHONE_ICON}Call</a>`,
     // The products page sells over the counter, so its bar offers a text instead of booking.
     pagePath(file) === '/products'
       ? '  <a href="sms:+17025509483">Text Us &rarr;</a>'

@@ -2865,3 +2865,16 @@ picture { display: contents; }
   .product-ingredients { columns: 1; }
   .product-ctas { grid-template-columns: 1fr; }
 }
+
+/* Phone icon in the header bar and mobile call button (replaces the emoji) */
+.icon-phone {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
