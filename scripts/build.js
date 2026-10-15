@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 23;
+const CSS_VERSION = 24;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -400,25 +400,6 @@ const renderers = {
       knowsAbout: p.focus,
       worksFor: { '@type': 'MedicalClinic', '@id': clinic.id, name: clinic.name }
     });
-  },
-
-  // Swipeable row on phones, wrapped grid on larger screens. No auto-scrolling.
-  'interns-home': () => {
-    const interns = activeInterns();
-    if (!interns.length) return '';
-    return [
-      '<h3 class="text-center" id="interns-heading" style="margin:48px 0 24px;">Our Interns</h3>',
-      '<div class="intern-strip" role="region" aria-labelledby="interns-heading" tabindex="0">',
-      '  <ul class="intern-strip-list">',
-      ...interns.map(i => [
-        '    <li class="card">',
-        `      <div class="team-photo">${headshot(i.profileImage, `Wongu student intern ${i.name}`)}</div>`,
-        `      <h4>${escapeHtml(i.name)}</h4>`,
-        '    </li>'
-      ].join('\n')),
-      '  </ul>',
-      '</div>'
-    ].join('\n');
   },
 
   'interns-student-clinic': () => {

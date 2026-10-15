@@ -634,6 +634,18 @@ html:not(.js) .has-dropdown:focus-within .nav-dropdown { display: block; }
   margin-bottom: 20px;
 }
 
+/* Small keyword line inside the homepage H1, above the large headline */
+.hero-kicker {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+}
+
 .hero h1 em {
   font-style: italic;
   color: var(--sage-dark);
