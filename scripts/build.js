@@ -75,9 +75,23 @@ const FOOTER_COLUMNS = [
 
 // Top menu. Items with children render as dropdowns; Services and Conditions reuse the footer lists.
 const footerLinks = title => FOOTER_COLUMNS.find(c => c.title === title).links;
+// Every condition guide; the footer column keeps a shorter list.
+const CONDITION_LINKS = [
+  ['/conditions/back-pain', 'Back Pain'],
+  ['/conditions/neck-shoulder-pain', 'Neck &amp; Shoulder Pain'],
+  ['/conditions/sciatica', 'Sciatica'],
+  ['/conditions/knee-joint-pain', 'Knee &amp; Joint Pain'],
+  ['/conditions/headaches-migraines', 'Headaches &amp; Migraines'],
+  ['/conditions/stress-anxiety', 'Stress &amp; Anxiety'],
+  ['/conditions/sleep-insomnia', 'Sleep &amp; Insomnia'],
+  ['/conditions/womens-health', "Women's Health"],
+  ['/conditions/digestive-health', 'Digestive Health'],
+  ['/conditions/nausea-treatment-support', 'Nausea &amp; Treatment Support'],
+  ['/conditions', 'All Conditions']
+];
 const NAV = [
   { label: 'Services', children: footerLinks('Services') },
-  { label: 'Conditions', children: footerLinks('Conditions') },
+  { label: 'Conditions', children: CONDITION_LINKS },
   { href: '/pricing', label: 'Pricing' },
   { href: '/products', label: 'Products' },
   { label: 'About', children: [
