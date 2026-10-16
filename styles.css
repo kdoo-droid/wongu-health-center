@@ -2931,8 +2931,8 @@ picture { display: contents; }
 }
 
 /* Hero photo on tablets/phones: square instead of a thin 16:7 strip, framed on the
-   treatment (face, flame, and cups) rather than the middle of the photo. */
+   needles in the upper part of the photo rather than its middle. */
 @media (max-width: 1024px) {
   .hero-home .hero-image-main { aspect-ratio: 1 / 1; max-width: 560px; margin: 0 auto; }
 }
-.hero-home .hero-image-main img { object-position: 50% 60%; }
+.hero-home .hero-image-main img { object-position: 50% 30%; }
