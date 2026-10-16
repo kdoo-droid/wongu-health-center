@@ -2937,6 +2937,5 @@ picture { display: contents; }
 }
 .hero-home .hero-image-main img { object-position: 50% 30%; }
 
-/* Conditions page: evidence tiers (strong = sage default, mixed = gold, limited = gray) */
+/* Conditions page: evidence tiers (strong = sage default, mixed = gold) */
 .callout--mixed { border-left-color: var(--gold); }
-.callout--limited { border-left-color: #8a8a8a; background: #f6f5f3; }
