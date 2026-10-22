@@ -2936,3 +2936,7 @@ picture { display: contents; }
   .hero-home .hero-image-main { aspect-ratio: 1 / 1; max-width: 560px; margin: 0 auto; }
 }
 .hero-home .hero-image-main img { object-position: 50% 30%; }
+
+/* Urgent notice (phone outage etc.): same bar, stronger color. White on #9A3412 is about 7:1. */
+.announcement-bar--urgent { background: #9A3412; color: #fff; }
+.announcement-bar--urgent a { color: #fff; }

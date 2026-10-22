@@ -15,7 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   SITE_URL, BOOKING_URL, clinic, currentHours, insurance, cancellationPolicy, herbalSafetyNote,
-  prices, hoursEntryText, hoursSummaryText, announcementActive, saturdayAnnouncementText
+  prices, hoursEntryText, hoursSummaryText, announcementActive, saturdayAnnouncementText, serviceNotice
 } from '../data/clinic.js';
 import { activeProviders, activeInterns, internBio } from '../data/providers.js';
 
@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 31;
+const CSS_VERSION = 32;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -147,7 +147,17 @@ function renderNavItem(item, current) {
 }
 
 // Sits above the sticky header so it scrolls away; shown on phones too, unlike .header-top.
+const TEXT_HREF = `sms:+1${serviceNotice.textNumber.replace(/-/g, '')}`;
+
 function renderAnnouncement() {
+  // A phone outage takes the banner's place so the most urgent message is the only one shown.
+  if (serviceNotice.phoneDown) {
+    return [
+      '<div class="announcement-bar announcement-bar--urgent" role="region" aria-label="Important notice">',
+      `  <p><strong>Our phone line is temporarily down.</strong> Please <a href="${TEXT_HREF}">text us at ${serviceNotice.textNumber}</a> or <a href="/contact#contact-form">send an email request</a>, and we'll get back to you.</p>`,
+      '</div>'
+    ];
+  }
   if (!announcementActive()) return [];
   return [
     '<div class="announcement-bar" role="region" aria-label="Announcement">',
@@ -166,7 +176,9 @@ function renderHeader(file) {
     '  <div class="container">',
     "    <span>Nevada's Only Oriental Medicine University Clinic</span>",
     '    <div style="display:flex;gap:24px;align-items:center;">',
-    `      <a href="tel:${clinic.phone.replace(/-/g, '')}">${PHONE_ICON}(702) 852-1280</a>`,
+    serviceNotice.phoneDown
+      ? `      <a href="${TEXT_HREF}">${PHONE_ICON}Text ${serviceNotice.textNumber}</a>`
+      : `      <a href="tel:${clinic.phone.replace(/-/g, '')}">${PHONE_ICON}(702) 852-1280</a>`,
     `      <a href="${clinic.parentOrganization.url}" target="_blank" rel="noopener">Part of Wongu University &rarr;</a>`,
     '    </div>',
     '  </div>',
@@ -242,10 +254,13 @@ function renderFooter(file) {
     '<script src="/main.js"></script>',
     '<!-- Sticky Mobile Book Now Bar -->',
     '<div class="mobile-book-bar">',
-    `  <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">${PHONE_ICON}Call</a>`,
-    // The products page sells over the counter, so its bar offers a text instead of booking.
+    serviceNotice.phoneDown
+      ? `  <a href="${TEXT_HREF}" class="mobile-call-btn" aria-label="Text Wongu Health Center at ${serviceNotice.textNumber}">${PHONE_ICON}Text Us</a>`
+      : `  <a href="tel:+17028521280" class="mobile-call-btn" aria-label="Call Wongu Health Center at (702) 852-1280">${PHONE_ICON}Call</a>`,
+    // The products page sells over the counter, so its bar offers a text instead of booking
+    // (or an email request while the phone is down, since the left button already texts).
     pagePath(file) === '/products'
-      ? '  <a href="sms:+17025509483">Text Us &rarr;</a>'
+      ? (serviceNotice.phoneDown ? '  <a href="/contact#contact-form">Email Us &rarr;</a>' : '  <a href="sms:+17025509483">Text Us &rarr;</a>')
       : `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="online-booking-btn">Book Online &rarr;</a>`,
     '</div>'
   ].join('\n');

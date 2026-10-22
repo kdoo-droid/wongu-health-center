@@ -62,6 +62,14 @@ export const announcement = {
   showUntil: '2026-11-30'
 };
 
+/* Urgent service notice. While phoneDown is true, every page shows a phone-outage banner in place
+   of the announcement above, and the header and mobile "Call" links switch to texting.
+   Set phoneDown to false (then npm run generate and deploy) once the phone line is back. */
+export const serviceNotice = {
+  phoneDown: true,
+  textNumber: '702-550-9483'
+};
+
 export function announcementActive(date = new Date()) {
   return Boolean(announcement && lasVegasToday(date) <= announcement.showUntil);
 }
