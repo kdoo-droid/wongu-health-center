@@ -66,7 +66,7 @@ export const announcement = {
    of the announcement above, and the header and mobile "Call" links switch to texting.
    Set phoneDown to false (then npm run generate and deploy) once the phone line is back. */
 export const serviceNotice = {
-  phoneDown: true,
+  phoneDown: false,
   textNumber: '702-550-9483'
 };
 
