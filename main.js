@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <button type="button" class="booking-modal-close" aria-label="Close">&times;</button>
         <h3 id="bookingModalTitle">Before You Book Online</h3>
         <p>Online booking is for <strong>self-pay</strong> patients.</p>
+        <p><strong>One appointment per patient per day.</strong> If you book more than one appointment on the same day, we'll keep the first one you booked and cancel the others. Cancellations made less than 24 hours before the appointment are subject to our late cancellation fee. Not sure who to book with? <a href="sms:+17025509483" style="color:inherit;text-decoration:underline;font-weight:600;">Text us at 702-550-9483</a> and we'll help you choose.</p>
         <p><!-- build:insurance-note --><strong>VA Community Care and Culinary Health Fund patients</strong> should <a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact Wongu Health Center</a> before scheduling so we can verify eligibility, authorization, and provider availability.<!-- /build:insurance-note --></p>
         <p><!-- build:insurance-coverage -->Coverage is subject to applicable authorization, eligibility, and plan requirements.<!-- /build:insurance-coverage --></p>
         <div class="booking-modal-actions">

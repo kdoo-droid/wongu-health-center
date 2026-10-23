@@ -503,7 +503,7 @@ const renderers = {
 
   'cancellation-text': () => {
     const { noticeHours: h, fees } = cancellationPolicy;
-    return `Appointments canceled or rescheduled at least ${h} hours in advance have no fee. Late Cancellation / Rescheduling (&lt;${h} Hours): rescheduling with less than ${h} hours' notice is treated the same as a late cancellation — $${fees.intern.late} for intern appointments and $${fees.omd.late} for licensed OMD appointments. Missed appointments without notice (no-shows) are $${fees.intern.noShow} for intern appointments and $${fees.omd.noShow} for licensed OMD appointments.`;
+    return `Appointments canceled or rescheduled at least ${h} hours in advance have no fee. Late Cancellation / Rescheduling (&lt;${h} Hours): rescheduling with less than ${h} hours' notice is treated the same as a late cancellation — $${fees.intern.late} for intern appointments and $${fees.omd.late} for licensed OMD appointments. Missed appointments without notice (no-shows) are $${fees.intern.noShow} for intern appointments and $${fees.omd.noShow} for licensed OMD appointments. One appointment per patient per day: if more than one appointment is booked for the same patient on the same day, we keep the first one booked and cancel the others, and any that are canceled less than ${h} hours in advance are subject to the late cancellation fee.`;
   },
 
   'clinic-jsonld': () => {
