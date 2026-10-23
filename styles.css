@@ -2940,3 +2940,13 @@ picture { display: contents; }
 /* Urgent notice (phone outage etc.): same bar, stronger color. White on #9A3412 is about 7:1. */
 .announcement-bar--urgent { background: #9A3412; color: #fff; }
 .announcement-bar--urgent a { color: #fff; }
+
+/* Booking popup: keep the Call / Book buttons visible while the notes above them scroll */
+.booking-modal-actions {
+  position: sticky;
+  bottom: -32px;
+  margin: 0 -32px -32px;
+  padding: 16px 32px 32px;
+  background: white;
+  border-top: 1px solid var(--border);
+}
