@@ -49,7 +49,7 @@ export const clinic = {
 export const hours = [
   { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], label: 'Monday – Friday', short: 'Mon–Fri', status: 'open', opens: '08:00', closes: '16:30' },
   // Saturday hours began October 17, 2026 (see `announcement` below).
-  { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'open', opens: '08:00', closes: '16:30' },
+  { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'open', opens: '08:00', closes: '15:30' },
   { days: ['Sunday'], label: 'Sunday', short: 'Sun', status: 'closed' }
 ];
 
