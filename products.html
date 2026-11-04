@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jawoongo Herbal Skin Salve: Roller &amp; Jar | Wongu Health Center</title>
-  <meta name="description" content="Jawoongo (Zi Yun Gao), an all-purpose herbal skin salve for dry, rough, or chapped skin, made at Wongu University in Las Vegas. Roller $10, jar $20. Pickup at the clinic.">
-  <meta property="og:title" content="Jawoongo Herbal Skin Salve: Roller &amp; Jar | Wongu Health Center">
-  <meta property="og:description" content="An all-purpose herbal skin salve made at Wongu University in Las Vegas. Roller $10, jar $20. Pickup at the clinic.">
+  <title>Herbal Products: Jawoongo &amp; Digestive Support | Wongu Health Center</title>
+  <meta name="description" content="Herbal products made at Wongu University in Las Vegas: Jawoongo skin salve (roller $10, jar $20) and Herbal Digestive Support ($45). Pickup at the clinic.">
+  <meta property="og:title" content="Herbal Products: Jawoongo &amp; Digestive Support | Wongu Health Center">
+  <meta property="og:description" content="Jawoongo skin salve and Herbal Digestive Support, made at Wongu University in Las Vegas. Pickup at the clinic.">
   <meta property="og:type" content="website">
   <!-- build:head-assets -->
   <link rel="canonical" href="https://www.wonguhealthcenter.com/products">
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Figtree:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=33">
+  <link rel="stylesheet" href="/styles.css?v=34">
   <!-- Google Analytics 4 (loaded after page load by analytics.js) -->
   <script defer src="/analytics.js"></script>
   <!-- /build:head-assets -->
@@ -27,8 +27,8 @@
   <meta property="og:image:height" content="800">
   <meta property="og:image:alt" content="Wongu Health Center Jawoongo herbal skin salve jar">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Jawoongo Herbal Skin Salve: Roller &amp; Jar | Wongu Health Center">
-  <meta name="twitter:description" content="An all-purpose herbal skin salve made at Wongu University in Las Vegas. Roller $10, jar $20. Pickup at the clinic.">
+  <meta name="twitter:title" content="Herbal Products: Jawoongo &amp; Digestive Support | Wongu Health Center">
+  <meta name="twitter:description" content="Jawoongo skin salve and Herbal Digestive Support, made at Wongu University in Las Vegas. Pickup at the clinic.">
   <meta name="twitter:image" content="https://www.wonguhealthcenter.com/images/product-jawoongo-jar.jpg">
   <script type="application/ld+json">
   {
@@ -48,6 +48,20 @@
       { "@type": "Offer", "name": "Jawoongo Roller", "price": "10.00", "priceCurrency": "USD", "availability": "https://schema.org/InStoreOnly", "seller": { "@id": "https://www.wonguhealthcenter.com/#clinic" } },
       { "@type": "Offer", "name": "Jawoongo Jar", "price": "20.00", "priceCurrency": "USD", "availability": "https://schema.org/InStoreOnly", "seller": { "@id": "https://www.wonguhealthcenter.com/#clinic" } }
     ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Herbal Digestive Support",
+    "image": [
+      "https://www.wonguhealthcenter.com/images/product-digestive.jpg",
+      "https://www.wonguhealthcenter.com/images/product-digestive-open.jpg"
+    ],
+    "description": "An herbal dietary supplement that supports normal digestive function and digestive comfort. Made at Wongu University of Oriental Medicine in Las Vegas.",
+    "brand": { "@type": "Brand", "name": "Wongu Health Center" },
+    "offers": { "@type": "Offer", "price": "45.00", "priceCurrency": "USD", "availability": "https://schema.org/InStoreOnly", "seller": { "@id": "https://www.wonguhealthcenter.com/#clinic" } }
   }
   </script>
   <!-- build:faq-jsonld -->
@@ -199,11 +213,22 @@
   <!-- /build:site-header -->
 
   <main id="main-content">
-  <!-- PRODUCT -->
-  <section class="product-hero" aria-label="Jawoongo">
+  <!-- PAGE HEADER -->
+  <section class="product-page-header" aria-label="Products">
     <div class="container">
       <div class="breadcrumb product-breadcrumb"><a href="/">Home</a><span class="sep">&#8250;</span><span>Products</span></div>
+      <h1 class="product-page-title">Products</h1>
+      <p class="product-tagline">Herbal products made at Wongu University. Available for pickup at our front desk.</p>
+      <div class="product-index">
+        <a class="product-index-card" href="#jawoongo"><img src="/images/product-jawoongo-jar-480.webp" width="480" height="480" alt="" decoding="async"><span><strong>Jawoongo</strong>Herbal skin salve &middot; Roller $10, Jar $20</span></a>
+        <a class="product-index-card" href="#digestive-support"><img src="/images/product-digestive-480.webp" width="480" height="480" alt="" decoding="async"><span><strong>Herbal Digestive Support</strong>Herbal dietary supplement &middot; $45</span></a>
+      </div>
+    </div>
+  </section>
 
+  <!-- JAWOONGO -->
+  <section class="product-hero" id="jawoongo" aria-label="Jawoongo">
+    <div class="container">
       <div class="product" data-product>
         <div class="product-gallery">
           <div class="product-gallery-set" data-variant="roller">
@@ -230,7 +255,7 @@
 
         <div class="product-info">
           <p class="product-eyebrow">Made at Wongu University</p>
-          <h1 class="product-title">Jawoongo <span lang="ko">자운고</span></h1>
+          <h2 class="product-title">Jawoongo <span lang="ko">자운고</span></h2>
           <p class="product-tagline">An all-purpose herbal skin salve for dry, rough, or chapped skin.</p>
 
           <div class="product-variants" role="group" aria-label="Choose roller or jar" hidden>
@@ -347,7 +372,7 @@
     <div class="container max-900">
       <div class="section-header">
         <span class="section-label">Questions</span>
-        <h2>Good to Know</h2>
+        <h2>Jawoongo: Good to Know</h2>
       </div>
 
       <div class="faq-item">
@@ -381,6 +406,60 @@
       </div>
 
       <p class="safety-note" style="margin-top:32px;"><strong>For external use only.</strong> Keep out of reach of children. Stop use if irritation occurs. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+    </div>
+  </section>
+
+  <!-- HERBAL DIGESTIVE SUPPORT -->
+  <section class="product-hero product-hero--next" id="digestive-support" aria-label="Herbal Digestive Support">
+    <div class="container">
+      <div class="product" data-product>
+        <div class="product-gallery">
+          <div class="product-gallery-set">
+            <div class="product-slides">
+              <picture class="product-slide"><source type="image/webp" srcset="/images/product-digestive-480.webp 480w, /images/product-digestive.webp 800w" sizes="(max-width: 900px) calc(100vw - 48px), 560px"><img src="/images/product-digestive.jpg" width="800" height="800" alt="Bottle of Herbal Digestive Support with the Wongu Health Center label" loading="lazy" decoding="async"></picture>
+              <picture class="product-slide"><source type="image/webp" srcset="/images/product-digestive-open-480.webp 480w, /images/product-digestive-open.webp 800w" sizes="(max-width: 900px) calc(100vw - 48px), 560px"><img src="/images/product-digestive-open.jpg" width="800" height="800" alt="Open bottle of Herbal Digestive Support next to a small pile of the herbal powder" loading="lazy" decoding="async"></picture>
+            </div>
+            <div class="product-thumbs" role="group" aria-label="Herbal Digestive Support photos" hidden>
+              <button type="button" class="product-thumb" aria-label="Show closed bottle"><img src="/images/product-digestive-480.webp" width="480" height="480" alt="" loading="lazy" decoding="async"></button>
+              <button type="button" class="product-thumb" aria-label="Show open bottle and powder"><img src="/images/product-digestive-open-480.webp" width="480" height="480" alt="" loading="lazy" decoding="async"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <p class="product-eyebrow">Made at Wongu University</p>
+          <h2 class="product-title">Herbal Digestive Support <span lang="zh-Hant">草本消化調理方</span></h2>
+          <p class="product-tagline">An herbal dietary supplement that supports normal digestive function and digestive comfort.*</p>
+
+          <p class="product-price">$45 <span>4.23 oz (120 g) powder</span></p>
+          <p class="product-text"><strong>Suggested use:</strong> Take 1/2 level teaspoon with warm water as needed for digestive comfort.</p>
+
+          <p class="product-availability"><span class="product-dot" aria-hidden="true"></span> Available at our front desk &middot; Pickup only</p>
+
+          <div class="product-ctas">
+            <a href="tel:+17028521280" class="btn btn-primary">Call to Check Stock</a>
+            <a href="sms:+17025509483" class="btn btn-secondary">Text Us</a>
+          </div>
+          <p class="product-note">Call or text ahead to make sure it's in stock.</p>
+
+          <h3 class="product-subhead">Ingredients</h3>
+          <ul class="product-ingredients product-ingredients--single">
+            <li>Bai Zhu (white atractylodes rhizome)</li>
+            <li>Huang Lian (coptis rhizome)</li>
+            <li>Wu Zhu Yu (evodia fruit)</li>
+            <li>Fu Ling (poria)</li>
+          </ul>
+
+          <h3 class="product-subhead">Before you use it</h3>
+          <p class="product-text">If you are pregnant or breastfeeding, don't use it unless your doctor or practitioner says it's OK. <!-- build:herbal-safety -->Tell your practitioner about all medications and supplements you take. Herbal formulas may interact with medications and may not be appropriate during pregnancy or for certain medical conditions.<!-- /build:herbal-safety --> Keep out of reach of children.</p>
+
+          <div class="callout callout--urgent">
+            <p>See a doctor for digestive symptoms that are severe, frequent, or lasting, and get care right away for trouble swallowing, vomiting blood, black stools, or unexplained weight loss. Call 911 for chest pain.</p>
+          </div>
+
+          <p class="safety-note">*This statement has not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+        </div>
+      </div>
     </div>
   </section>
 
