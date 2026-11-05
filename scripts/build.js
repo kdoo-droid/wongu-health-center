@@ -464,7 +464,7 @@ const renderers = {
       `    <tr role="row"><td role="rowheader">Initial visit (consultation + treatment)</td><td role="cell" data-label="Supervised Intern">$${intern.initial} &middot; ${intern.initialLength}</td><td role="cell" data-label="Licensed OMD">$${omd.initial} &middot; ${omd.initialLength}</td></tr>`,
       `    <tr role="row"><td role="rowheader">Follow-up visit</td><td role="cell" data-label="Supervised Intern">$${intern.followUp} &middot; ${intern.followUpLength}</td><td role="cell" data-label="Licensed OMD">$${omd.followUp} &middot; ${omd.followUpLength}</td></tr>`,
       `    <tr role="row"><td role="rowheader">Cupping (up to 30 min)</td><td role="cell" data-label="Supervised Intern">$${intern.cupping}</td><td role="cell" data-label="Licensed OMD">$${omd.cupping} (includes OMD consultation)</td></tr>`,
-      `    <tr role="row"><td role="rowheader">Custom herbal formulas &amp; teas</td><td role="cell" data-label="Supervised Intern">From $${prices.herbsPerDay}/day</td><td role="cell" data-label="Licensed OMD">From $${prices.herbsPerDay}/day</td></tr>`,
+      `    <tr role="row"><td role="rowheader">Herbal formulas &amp; powders</td><td role="cell" data-label="Supervised Intern">From $${prices.herbsPerDay}/day</td><td role="cell" data-label="Licensed OMD">From $${prices.herbsPerDay}/day</td></tr>`,
       '  </tbody>',
       '</table>'
     ].join('\n');

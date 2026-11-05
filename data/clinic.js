@@ -109,7 +109,8 @@ export const insurance = {
 export const prices = {
   intern: { initial: 80, initialLength: '1.5–2 hours', followUp: 50, followUpLength: 'about 1 hour', cupping: 50 },
   omd: { initial: 120, initialLength: 'about 1 hour', followUp: 80, followUpLength: '30–55 minutes', cupping: 100, consultation: 100 },
-  herbsPerDay: 15
+  herbsPerDay: 10, // liquid formula or powder
+  herbsBothPerDay: 15 // liquid formula and powder together
 };
 
 /* Late-cancellation window applies equally to cancelling and rescheduling. */
