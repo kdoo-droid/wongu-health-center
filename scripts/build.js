@@ -65,6 +65,7 @@ const FOOTER_COLUMNS = [
     ['/about', 'About Us'],
     ['/practitioners', 'Practitioners'],
     ['/pricing', 'Pricing'],
+    ['/packages', 'Visit Packages'],
     ['/products', 'Products'],
     ['/what-to-expect', 'What to Expect'],
     ['/faq', 'FAQ'],
@@ -93,6 +94,7 @@ const NAV = [
   { label: 'Services', children: footerLinks('Services') },
   { label: 'Conditions', children: CONDITION_LINKS },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/packages', label: 'Packages' },
   { href: '/products', label: 'Products' },
   { label: 'About', children: [
     ['/about', 'About Us'],
@@ -113,6 +115,7 @@ const MOBILE_NAV = [
   { href: '/student-clinic', label: 'Student Clinic' },
   { href: '/practitioners', label: 'Practitioners' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/packages', label: 'Packages' },
   { href: '/products', label: 'Products' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
