@@ -48,7 +48,7 @@ export const clinic = {
    Pages are static, so run `npm run generate` and redeploy on or after startsOn. */
 export const hours = [
   { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], label: 'Monday – Friday', short: 'Mon–Fri', status: 'open', opens: '08:00', closes: '16:30' },
-  // Saturday hours began October 17, 2026 (see `announcement` below).
+  // Saturday hours began October 17, 2026.
   { days: ['Saturday'], label: 'Saturday', short: 'Sat', status: 'open', opens: '08:00', closes: '14:30' },
   { days: ['Sunday'], label: 'Sunday', short: 'Sun', status: 'closed' }
 ];
@@ -57,10 +57,7 @@ export const hours = [
    showUntil: last Las Vegas date the bar is rendered. Pages are static, so the bar only
    disappears the next time `npm run generate` runs after that date and the site redeploys.
    Set announcement to null to turn it off right away. */
-export const announcement = {
-  saturdayStartsOn: '2026-10-17',
-  showUntil: '2026-11-30'
-};
+export const announcement = null; // Saturday banner retired Nov 5, 2026
 
 /* Urgent service notice. While phoneDown is true, every page shows a phone-outage banner in place
    of the announcement above, and the header and mobile "Call" links switch to texting.
