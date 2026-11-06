@@ -2990,3 +2990,13 @@ picture { display: contents; }
 .product-info .callout { margin: 16px 0; }
 .product-info .safety-note { font-size: 0.88rem; }
 .product-title { font-weight: 600; }
+
+/* Booking popup: practitioner faces and names */
+.booking-modal { max-width: 520px; }
+.booking-group-title { font-size: 1rem; color: var(--forest); margin: 16px 0 10px; }
+.booking-group-title span { display: block; font-size: 0.85rem; font-weight: 400; color: var(--gray); }
+.booking-people { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 12px 8px; margin: 0; padding: 0; }
+.booking-people li { text-align: center; font-size: 0.85rem; line-height: 1.3; color: var(--charcoal); font-weight: 600; }
+.booking-people img { display: block; width: 72px; height: 72px; margin: 0 auto 6px; border-radius: 50%; object-fit: cover; background: var(--sand); }
+.booking-notes-heading { font-size: 1rem; color: var(--forest); margin: 20px 0 8px; padding-top: 16px; border-top: 1px solid var(--border); }
+.booking-modal .booking-reminder { margin: 0; font-size: 0.85rem; line-height: 1.4; text-align: center; }

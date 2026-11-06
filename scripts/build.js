@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 35;
+const CSS_VERSION = 37;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -513,6 +513,29 @@ const renderers = {
   'insurance-note': () => `<strong>${escapeHtml(insurance.lead)}</strong> ${escapeHtml(insurance.body).replace('contact Wongu Health Center', '<a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact Wongu Health Center</a>')}`,
 
   'insurance-coverage': () => escapeHtml(insurance.coverage),
+
+  // Faces and names in the booking popup, since the Unified Practice portal doesn't show photos.
+  'booking-providers': () => {
+    const person = (name, photo) => {
+      const src = `/${photo.src}`;
+      const small = src.replace(/\.webp$/, '-480.webp');
+      const img = existsSync(path.join(ROOT, small)) ? small : src;
+      const position = photo.position ? ` style="object-position:${photo.position};"` : '';
+      return `    <li><img src="${img}" width="72" height="72" alt=""${position} loading="lazy" decoding="async"><span>${escapeHtml(name)}</span></li>`;
+    };
+    const group = (title, note, people) => [
+      `<h4 class="booking-group-title">${title} <span>${note}</span></h4>`,
+      '<ul class="booking-people">',
+      ...people,
+      '</ul>'
+    ];
+    const omds = activeProviders().filter(p => p.bookingEnabled).map(p => person(p.name, p.photo));
+    const interns = activeInterns().map(i => person(i.name, i.profileImage));
+    return [
+      ...group('Licensed OMDs', `First visit $${prices.omd.initial}`, omds),
+      ...(interns.length ? group('Student Interns', `First visit $${prices.intern.initial}, supervised by an OMD`, interns) : [])
+    ].join('\n');
+  },
 
   'herbal-safety': () => escapeHtml(herbalSafetyNote),
 
