@@ -2,6 +2,7 @@
   "type": "module",
   "scripts": {
     "generate": "node scripts/build.js",
-    "generate:check": "node scripts/build.js --check"
+    "generate:check": "node scripts/build.js --check",
+    "check": "node scripts/check-site.js"
   }
 }

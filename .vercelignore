@@ -1,2 +1,7 @@
 # Draft pages kept in git but not deployed
 drafts/
+
+# Build tooling and notes aren't part of the site. (data/ stays: api/contact.js imports it.)
+scripts/
+.github/
+images/README.md

@@ -4,7 +4,11 @@ window.gtag = window.gtag || function gtag() {
 };
 
 window.gtag('js', new Date());
-window.gtag('config', 'G-2E5GE8PD7D');
+// A health site has no use for Google's ad features, so they stay off.
+window.gtag('config', 'G-2E5GE8PD7D', {
+  allow_google_signals: false,
+  allow_ad_personalization_signals: false
+});
 
 // Load the GA library after the page has loaded so it doesn't compete with
 // page content on mobile connections. Calls made before then are queued in

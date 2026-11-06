@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 34;
+const CSS_VERSION = 35;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -189,7 +189,7 @@ function renderHeader(file) {
     '<header class="site-header" role="banner">',
     '  <div class="header-main">',
     '    <div class="container">',
-    '      <a href="/" class="logo" aria-label="Wongu Health Center Home">',
+    '      <a href="/" class="logo" aria-label="Wongu Health Center University Acupuncture Clinic, home">',
     '        <div class="logo-icon"><img src="/images/logo-96.png" width="96" height="96" alt="Wongu Health Center Logo" decoding="async"></div>',
     '        <div class="logo-text"><span class="logo-name">Wongu Health Center</span><span class="logo-tagline">University Acupuncture Clinic</span></div>',
     '      </a>',
@@ -280,13 +280,13 @@ function renderHeadAssets({ content, file }) {
     '<link rel="icon" type="image/x-icon" href="/images/favicon.ico">',
     '<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">',
     '<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">',
-    '<link rel="preconnect" href="https://fonts.googleapis.com">',
-    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Figtree:wght@400;500;600;700;800&display=swap">',
+    '<link rel="preload" href="/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>',
     `<link rel="stylesheet" href="/styles.css?v=${CSS_VERSION}">`,
     '<!-- Google Analytics 4 (loaded after page load by analytics.js) -->',
     '<script defer src="/analytics.js"></script>'
   ];
+  const article = articleData(content, file, url);
+  if (article) lines.push(jsonLdScript(article));
   const crumbs = breadcrumbItems(content, url);
   if (crumbs.length > 1) {
     lines.push(jsonLdScript({
@@ -296,6 +296,36 @@ function renderHeadAssets({ content, file }) {
     }));
   }
   return lines.join('\n');
+}
+
+/* Describes condition guides and blog posts for search engines, using only what the page itself shows.
+   Add reviewedBy and lastReviewed here once a clinician has reviewed the pages. */
+function articleData(content, file, url) {
+  const isGuide = file.replace(/\\/g, '/').startsWith('conditions/');
+  const isPost = /^blog-.+\.html$/.test(file);
+  if (!isGuide && !isPost) return null;
+  const heading = content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+  const description = content.match(/<meta name="description" content="([^"]*)"/);
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': isGuide ? 'MedicalWebPage' : 'BlogPosting',
+    [isGuide ? 'name' : 'headline']: heading ? toPlainText(heading[1]) : '',
+    description: description ? toPlainText(description[1]) : '',
+    url,
+    inLanguage: 'en-US',
+    image: `${SITE_URL}/images/og-default.jpg`,
+    publisher: { '@type': 'MedicalClinic', '@id': clinic.id, name: clinic.name }
+  };
+  if (isPost) {
+    const byline = content.match(/>\s*(?:By ([^<&]+?)\s*&middot;\s*)?((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4})/);
+    if (byline) {
+      const date = new Date(`${byline[2]} 12:00:00 UTC`);
+      data.datePublished = date.toISOString().slice(0, 10);
+      if (byline[1]) data.author = { '@type': 'Person', name: byline[1].trim() };
+    }
+    if (!data.author) data.author = { '@type': 'Organization', name: clinic.name };
+  }
+  return data;
 }
 
 /* Reads the visible breadcrumb trail: links for ancestors, a plain <span> for the current page. */

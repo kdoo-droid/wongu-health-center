@@ -30,7 +30,8 @@ const ALLOWED_TOPICS = new Set([
 const ALLOWED_INSURANCE = new Set([
   'VA Community Care',
   'VA (Veterans Affairs)', // label used before the Community Care wording; kept for cached pages
-  'Culinary Insurance',
+  'Culinary Health Fund',
+  'Culinary Insurance', // label used before Oct 2026; kept for cached pages
   'Self-Pay',
   'Other'
 ]);
