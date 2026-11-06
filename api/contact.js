@@ -21,7 +21,8 @@ globalThis.__wonguRateLimitStore = rateLimitStore;
 
 const ALLOWED_TOPICS = new Set([
   'General Question',
-  'Herbal Formula & Tea Request',
+  'Herbal Formula & Powder Request',
+  'Herbal Formula & Tea Request', // label used before Nov 2026; kept for cached pages
   'VA / Insurance Eligibility Question',
   'Billing Question',
   'Other'
