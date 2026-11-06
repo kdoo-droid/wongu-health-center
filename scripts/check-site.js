@@ -18,6 +18,7 @@ const RETIRED_WORDING = [
   [/final year/i, 'interns are at different levels'],
   [/\b\d(st|nd|rd|th)[- ]year\b/i, 'interns are at different levels'],
   [/culinary insurance/i, 'use "Culinary Health Fund"'],
+  [/other qualifying individuals|active military|photo id is required at check-in|eligible community members|community discount members/i, 'community discount wording comes from data/clinic.js'],
   [/\b(pills|tinctures)\b/i, 'the clinic sells liquid formulas and powders'],
   [/herbal teas?\b/i, 'the clinic sells liquid formulas and powders', new Set(['blog-chinese-herbs.html'])]
 ];

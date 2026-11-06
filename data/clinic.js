@@ -104,6 +104,21 @@ export const insurance = {
   coverage: 'Coverage is subject to applicable authorization, eligibility, and plan requirements.'
 };
 
+/* Who qualifies for the community discount. Every page pulls this list and ID rule from here,
+   including the Pricing badges, the Packages cards, and the Terms. */
+export const communityDiscount = {
+  groups: [
+    { badge: 'Seniors (65+)', text: 'seniors (65+)' },
+    { badge: 'Military & Veterans', text: 'military and veterans' },
+    { badge: 'Non-Wongu Students', text: 'non-Wongu students' },
+    { badge: 'Minors & Pediatric Patients', text: 'minors and pediatric patients' },
+    { badge: 'People with Disabilities', text: 'people with disabilities' },
+    { badge: 'Essential Workers', text: 'essential workers' },
+    { badge: 'Educators', text: 'educators' }
+  ],
+  idRule: 'Valid photo ID is required where applicable.'
+};
+
 /* Visit prices shown in the summary tables on service, condition, and practitioner pages.
    The full /pricing page is hand-written; update it too when these change. */
 export const prices = {

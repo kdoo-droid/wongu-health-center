@@ -14,7 +14,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  SITE_URL, BOOKING_URL, clinic, currentHours, insurance, cancellationPolicy, herbalSafetyNote,
+  SITE_URL, BOOKING_URL, clinic, currentHours, insurance, communityDiscount, cancellationPolicy, herbalSafetyNote,
   prices, hoursEntryText, hoursSummaryText, announcementActive, saturdayAnnouncementText, serviceNotice
 } from '../data/clinic.js';
 import { activeProviders, activeInterns, internBio } from '../data/providers.js';
@@ -513,6 +513,17 @@ const renderers = {
   'insurance-note': () => `<strong>${escapeHtml(insurance.lead)}</strong> ${escapeHtml(insurance.body).replace('contact Wongu Health Center', '<a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact Wongu Health Center</a>')}`,
 
   'insurance-coverage': () => escapeHtml(insurance.coverage),
+
+  'discount-groups': () => {
+    const names = communityDiscount.groups.map(g => escapeHtml(g.text));
+    return `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
+  },
+
+  'discount-badges': () => communityDiscount.groups
+    .map(g => `<span class="discount-badge">${escapeHtml(g.badge)}</span>`)
+    .join('\n'),
+
+  'discount-id': () => escapeHtml(communityDiscount.idRule),
 
   // Faces and names in the booking popup, since the Unified Practice portal doesn't show photos.
   'booking-providers': () => {
