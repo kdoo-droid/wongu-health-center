@@ -3000,3 +3000,17 @@ picture { display: contents; }
 .booking-people img { display: block; width: 72px; height: 72px; margin: 0 auto 6px; border-radius: 50%; object-fit: cover; background: var(--sand); }
 .booking-notes-heading { font-size: 1rem; color: var(--forest); margin: 20px 0 8px; padding-top: 16px; border-top: 1px solid var(--border); }
 .booking-modal .booking-reminder { margin: 0; font-size: 0.85rem; line-height: 1.4; text-align: center; }
+
+/* Packages: who qualifies for the community discount cards */
+.package-eligibility {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius-sm);
+  background: #fffbeb;
+  color: var(--slate);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  text-align: left;
+}
+.package-eligibility strong { display: block; color: var(--forest); margin-bottom: 2px; }
