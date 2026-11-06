@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <li><img src="/images/dr-yu-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Dr. Eunhee Yu</span></li>
             <li><img src="/images/dr-sekine-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Dr. Keita Sekine</span></li>
         </ul>
-        <h4 class="booking-group-title">Student Interns <span>First visit $80, supervised by an OMD</span></h4>
+        <h4 class="booking-group-title">Student Interns <span>First visit $80, OMD supervisor in the room</span></h4>
         <ul class="booking-people">
             <li><img src="/images/intern-francisca-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Franica M.</span></li>
             <li><img src="/images/intern-bria-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Bria H.</span></li>

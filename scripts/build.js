@@ -544,7 +544,7 @@ const renderers = {
     const interns = activeInterns().map(i => person(i.name, i.profileImage));
     return [
       ...group('Licensed OMDs', `First visit $${prices.omd.initial}`, omds),
-      ...(interns.length ? group('Student Interns', `First visit $${prices.intern.initial}, supervised by an OMD`, interns) : [])
+      ...(interns.length ? group('Student Interns', `First visit $${prices.intern.initial}, OMD supervisor in the room`, interns) : [])
     ].join('\n');
   },
 
