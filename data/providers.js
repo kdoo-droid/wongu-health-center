@@ -79,14 +79,14 @@ export const interns = [
   {
     name: 'Tichelle H.',
     quarter: null,
-    active: true,
+    active: false, // not at the clinic this quarter (Nov 2026); set back to true when they return
     supervisor: null,
     profileImage: { src: 'images/intern-tchelle.webp', width: 800, height: 800 }
   },
   {
     name: 'Joyce W.',
     quarter: null,
-    active: true,
+    active: false, // not at the clinic this quarter (Nov 2026); set back to true when they return
     supervisor: null,
     profileImage: { src: 'images/intern-joyce.webp', width: 800, height: 800 }
   },
