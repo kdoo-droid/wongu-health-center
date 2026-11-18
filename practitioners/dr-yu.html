@@ -23,7 +23,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <link rel="preload" href="/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=38">
+  <link rel="stylesheet" href="/styles.css?v=39">
   <!-- Google Analytics 4 (loaded after page load by analytics.js) -->
   <script defer src="/analytics.js"></script>
   <script type="application/ld+json">
@@ -103,13 +103,14 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-links">
             <li class="has-dropdown">
-              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-services">Services<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-              <ul class="nav-dropdown" id="nav-services">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-treatments">Treatments<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              <ul class="nav-dropdown" id="nav-treatments">
                 <li><a href="/acupuncture-las-vegas">Acupuncture</a></li>
                 <li><a href="/cupping-las-vegas">Cupping Therapy</a></li>
                 <li><a href="/chinese-herbal-medicine-las-vegas">Chinese Herbal Medicine</a></li>
                 <li><a href="/student-clinic">Student Clinic</a></li>
                 <li><a href="/services">All Services</a></li>
+                <li><a href="/products">Products</a></li>
               </ul>
             </li>
             <li class="has-dropdown">
@@ -128,14 +129,19 @@
                 <li><a href="/conditions">All Conditions</a></li>
               </ul>
             </li>
-            <li><a href="/pricing">Pricing</a></li>
-            <li><a href="/packages">Packages</a></li>
-            <li><a href="/products">Products</a></li>
             <li class="has-dropdown">
-              <button type="button" class="nav-dropdown-toggle active" aria-expanded="false" aria-controls="nav-about">About<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-              <ul class="nav-dropdown" id="nav-about">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-pricing">Pricing<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              <ul class="nav-dropdown" id="nav-pricing">
+                <li><a href="/pricing">Visit Pricing</a></li>
+                <li><a href="/packages">Visit Packages</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <button type="button" class="nav-dropdown-toggle active" aria-expanded="false" aria-controls="nav-our-clinic">Our Clinic<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              <ul class="nav-dropdown" id="nav-our-clinic">
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/practitioners">Practitioners</a></li>
+                <li><a href="/student-clinic">Student Clinic</a></li>
                 <li><a href="/what-to-expect">What to Expect</a></li>
                 <li><a href="/faq">FAQ</a></li>
                 <li><a href="/blog">Blog</a></li>
@@ -150,7 +156,7 @@
     </div>
   </header>
 
-  <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
     <button class="mobile-close" aria-label="Close menu">&times;</button>
     <a href="/">Home</a>
     <a href="/services">Services</a>

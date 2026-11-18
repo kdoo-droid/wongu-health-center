@@ -68,7 +68,10 @@
     }).then(function(result) {
       if (result.ok) {
         form.style.display = 'none';
-        if (success) success.style.display = 'block';
+        if (success) {
+          success.style.display = 'block';
+          success.focus();
+        }
         if (typeof window.gtag === 'function') {
           window.gtag('event', 'contact_message', {
             event_category: 'CTA',

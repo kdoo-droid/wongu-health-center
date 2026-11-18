@@ -1,3 +1,10 @@
+// Avoid sending page-path telemetry from pages that reveal health interests or
+// contain private contact/legal context. Conversion events remain available on
+// general informational and pricing pages.
+var analyticsExcludedPath = /^(\/conditions(?:\/|$)|\/contact(?:\/|$)|\/hipaa(?:\/|$)|\/privacy(?:\/|$))/;
+if (analyticsExcludedPath.test(window.location.pathname)) {
+  window.gtag = function () {};
+} else {
 window.dataLayer = window.dataLayer || [];
 window.gtag = window.gtag || function gtag() {
   window.dataLayer.push(arguments);
@@ -33,3 +40,4 @@ window.gtag('config', 'G-2E5GE8PD7D', {
     window.addEventListener('load', schedule);
   }
 })();
+}

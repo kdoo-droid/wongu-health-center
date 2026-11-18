@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 38;
+const CSS_VERSION = 39;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -91,14 +91,19 @@ const CONDITION_LINKS = [
   ['/conditions', 'All Conditions']
 ];
 const NAV = [
-  { label: 'Services', children: footerLinks('Services') },
+  { label: 'Treatments', children: [
+    ...footerLinks('Services'),
+    ['/products', 'Products']
+  ] },
   { label: 'Conditions', children: CONDITION_LINKS },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/packages', label: 'Packages' },
-  { href: '/products', label: 'Products' },
-  { label: 'About', children: [
+  { label: 'Pricing', children: [
+    ['/pricing', 'Visit Pricing'],
+    ['/packages', 'Visit Packages']
+  ] },
+  { label: 'Our Clinic', children: [
     ['/about', 'About Us'],
     ['/practitioners', 'Practitioners'],
+    ['/student-clinic', 'Student Clinic'],
     ['/what-to-expect', 'What to Expect'],
     ['/faq', 'FAQ'],
     ['/blog', 'Blog']
@@ -137,7 +142,7 @@ const CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"
    CSS opens them on hover; main.js adds click/tap, keyboard, and click-outside handling. */
 function renderNavItem(item, current) {
   if (!item.children) return `          <li><a href="${item.href}"${navState(item.href, current)}>${item.label}</a></li>`;
-  const id = `nav-${item.label.toLowerCase()}`;
+  const id = `nav-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
   const inGroup = item.children.some(([href]) => href === current || current.startsWith(`${href}/`));
   return [
     '          <li class="has-dropdown">',
@@ -204,7 +209,7 @@ function renderHeader(file) {
     '  </div>',
     '</header>',
     '',
-    '<div class="mobile-menu" role="dialog" aria-label="Mobile navigation">',
+    '<div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">',
     '  <button class="mobile-close" aria-label="Close menu">&times;</button>',
     ...MOBILE_NAV.map(n => `  <a href="${n.href}"${n.href === current ? ' aria-current="page"' : ''}>${n.label}</a>`),
     `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="btn btn-primary online-booking-btn">Book Online</a>`,

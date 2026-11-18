@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mobileToggle && mobileMenu) {
     const focusableSelectors = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let inertRoots = [];
 
     if (!mobileMenu.id) mobileMenu.id = 'mobile-menu';
     mobileToggle.setAttribute('aria-controls', mobileMenu.id);
@@ -22,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openMenu() {
+      inertRoots = Array.from(document.body.children).filter(el => el !== mobileMenu && !el.contains(mobileMenu));
+      inertRoots.forEach(el => { el.inert = true; });
       mobileMenu.classList.add('active');
       setScrollLock(true);
       mobileToggle.setAttribute('aria-expanded', 'true');
@@ -37,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setScrollLock(false);
       mobileToggle.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
+      inertRoots.forEach(el => { el.inert = false; });
+      inertRoots = [];
       if (restoreFocus) mobileToggle.focus();
     }
 
@@ -167,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', () => trackEvent('online_booking_click', el.textContent.trim()));
   });
 
-  // --- Online Booking Confirmation Modal ---
+  // --- Online Booking Routing Modal ---
   // Online booking is for self-pay patients only. VA Community Care/Culinary
   // patients need to contact the clinic so eligibility can be verified first.
   // The insurance wording below is generated from data/clinic.js (npm run build).
@@ -181,34 +186,28 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingOverlay.innerHTML = `
       <div class="booking-modal">
         <button type="button" class="booking-modal-close" aria-label="Close">&times;</button>
-        <h3 id="bookingModalTitle">Who Would You Like to See?</h3>
-        <p>Here's who is seeing patients now. You'll choose your practitioner by name on the next screen.</p>
-        <!-- build:booking-providers -->
-        <h4 class="booking-group-title">Licensed OMDs <span>First visit $120</span></h4>
-        <ul class="booking-people">
-            <li><img src="/images/dr-yu-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Dr. Eunhee Yu</span></li>
-            <li><img src="/images/dr-sekine-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Dr. Keita Sekine</span></li>
-        </ul>
-        <h4 class="booking-group-title">Student Interns <span>First visit $80, OMD supervisor in the room</span></h4>
-        <ul class="booking-people">
-            <li><img src="/images/intern-francisca-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Franica M.</span></li>
-            <li><img src="/images/intern-bria-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Bria H.</span></li>
-            <li><img src="/images/intern-brittany-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Brittany T.</span></li>
-            <li><img src="/images/intern-roman-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Roman G.</span></li>
-            <li><img src="/images/intern-amy-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Amy P.</span></li>
-            <li><img src="/images/intern-rhenand-480.webp" width="72" height="72" alt="" loading="lazy" decoding="async"><span>Rhenand M.</span></li>
-        </ul>
-        <!-- /build:booking-providers -->
-        <h4 class="booking-notes-heading">Before you book</h4>
-        <p>Online booking is for <strong>self-pay</strong> patients.</p>
-        <p><strong>One appointment per patient per day.</strong> If you book more than one appointment on the same day, we'll keep the first one you booked and cancel the others. Cancellations made less than 24 hours before the appointment are subject to our late cancellation fee. Not sure who to book with? <a href="sms:+17025509483" style="color:inherit;text-decoration:underline;font-weight:600;">Text us at 702-550-9483</a> and we'll help you choose.</p>
-        <p><strong>Booking for a spouse or family member?</strong> They need their own account and their own intake forms. Appointments booked under your account count as yours, and anyone who arrives without completed forms will need to fill them out at the clinic before treatment.</p>
-        <p><!-- build:insurance-note --><strong>VA Community Care and Culinary Health Fund patients</strong> should <a href="/contact#contact-form" style="color:inherit;text-decoration:underline;font-weight:600;">contact Wongu Health Center</a> before scheduling so we can verify eligibility, authorization, and provider availability.<!-- /build:insurance-note --></p>
-        <p><!-- build:insurance-coverage -->Coverage is subject to applicable authorization, eligibility, and plan requirements.<!-- /build:insurance-coverage --></p>
+        <h3 id="bookingModalTitle">How Would You Like to Schedule?</h3>
+        <p class="booking-intro">Choose the path that matches how your visit will be paid for.</p>
+        <div class="booking-route booking-route-primary">
+          <h4>Self-pay patients</h4>
+          <p>Book online and choose a licensed OMD or supervised student intern on the next screen.</p>
+          <button type="button" class="btn btn-primary btn-full booking-continue">Continue to Online Booking</button>
+        </div>
+        <div class="booking-route">
+          <h4>VA Community Care or Culinary Health Fund</h4>
+          <p>Contact us first so we can verify eligibility, authorization, and provider availability.</p>
+          <a href="/contact.html#contact-form" class="btn btn-secondary btn-full">Verify Eligibility</a>
+        </div>
+        <details class="booking-details">
+          <summary>Important booking information</summary>
+          <div>
+            <p><strong>One appointment per patient per day.</strong> Duplicate appointments may be canceled and late-cancellation fees may apply.</p>
+            <p><strong>Booking for someone else?</strong> Each patient needs a separate account and completed intake forms.</p>
+            <p>Not sure whom to choose? <a href="sms:+17025509483">Text 702-550-9483</a> or call us and we'll help.</p>
+          </div>
+        </details>
         <div class="booking-modal-actions">
-          <p class="booking-reminder"><strong>One appointment per patient per day.</strong> Self-pay only. Please read the notes above.</p>
           <a href="tel:+17028521280" class="btn btn-secondary btn-full">Call (702) 852-1280</a>
-          <button type="button" class="btn btn-primary btn-full">Book Your Appointment</button>
         </div>
       </div>
     `;
@@ -216,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bookingClose = bookingOverlay.querySelector('.booking-modal-close');
     const bookingCall = bookingOverlay.querySelector('a[href^="tel:"]');
-    const bookingContinue = bookingOverlay.querySelector('.booking-modal-actions button');
+    const bookingContinue = bookingOverlay.querySelector('.booking-continue');
     let pendingBookingUrl = null;
     let bookingLastFocused = null;
 
@@ -241,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bookingTriggers.forEach(trigger => {
       trigger.addEventListener('click', e => {
+        if (sessionStorage.getItem('wongu-booking-route') === 'self-pay') return;
         e.preventDefault();
         openBookingModal(trigger.href, trigger);
       });
@@ -273,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bookingContinue.addEventListener('click', () => {
       const url = pendingBookingUrl;
+      sessionStorage.setItem('wongu-booking-route', 'self-pay');
       closeBookingModal();
       if (url) {
         trackEvent('online_booking_confirmed', 'Booking Modal Continue');

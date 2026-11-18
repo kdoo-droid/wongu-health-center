@@ -369,8 +369,8 @@ h4 { font-size: clamp(1rem, 1.8vw, 1.2rem); font-family: var(--font-body); font-
 }
 
 .logo-tagline {
-  font-size: 0.65rem;
-  color: var(--gray-light);
+  font-size: 0.72rem;
+  color: var(--gray);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -1826,6 +1826,31 @@ html:not(.js) .has-dropdown:focus-within .nav-dropdown { display: block; }
 .booking-modal h3 { color: var(--forest); margin-bottom: 14px; padding-right: 24px; }
 .booking-modal p { color: var(--slate); line-height: 1.7; font-size: 0.95rem; margin-bottom: 14px; }
 .booking-modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.booking-intro { margin-bottom: 18px; }
+.booking-route { padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; }
+.booking-route-primary { background: var(--cream); border-color: rgba(79,112,82,0.35); }
+.booking-route h4 { color: var(--forest); font-size: 1rem; margin-bottom: 6px; }
+.booking-route p { margin-bottom: 14px; font-size: 0.9rem; }
+.booking-details { margin-top: 16px; color: var(--slate); }
+.booking-details summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--forest); font-weight: 700; }
+.booking-details div { padding: 8px 4px 0; }
+.booking-details a { color: var(--forest); font-weight: 700; text-decoration: underline; }
+
+/* Secondary homepage stories stay available without lengthening the primary
+   trust-to-action path for patients who are ready to schedule. */
+.home-more { border-block: 1px solid var(--border); background: var(--warm-white); }
+.home-more > summary {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  color: var(--forest);
+  font-weight: 700;
+  cursor: pointer;
+}
+.home-more > summary::after { content: '+'; margin-left: 10px; font-size: 1.35rem; }
+.home-more[open] > summary::after { content: '−'; }
 
 /* --- Blog editorial system --- */
 .blog-article { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
@@ -2405,8 +2430,10 @@ select.form-input {
   font-size: 0.88rem;
   line-height: 1.7;
   margin: 16px 0 24px;
-  padding-left: 12px;
-  border-left: 3px solid rgba(122,158,126,0.35);
+  padding: 12px 14px;
+  border: 1px solid rgba(122,158,126,0.35);
+  border-radius: var(--radius-sm);
+  background: rgba(122,158,126,0.08);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2703,7 +2730,7 @@ picture { display: contents; }
   .logo-icon { width: 40px; height: 40px; }
   .logo-text { min-width: 0; }
   .logo-name { font-size: 1.15rem; white-space: nowrap; }
-  .logo-tagline { font-size: 0.6rem; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .logo-tagline { font-size: 0.7rem; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mobile-book-bar { padding-left: 12px; padding-right: 12px; gap: 8px; }
   .contact-quick-actions .btn { font-size: 0.9rem; }
 }
@@ -3005,7 +3032,7 @@ picture { display: contents; }
 .package-eligibility {
   margin: 0 0 16px;
   padding: 12px 14px;
-  border-left: 4px solid var(--gold);
+  border: 1px solid rgba(196,154,58,0.45);
   border-radius: var(--radius-sm);
   background: #fffbeb;
   color: var(--slate);
