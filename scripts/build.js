@@ -24,7 +24,7 @@ const REGION = /<!-- build:([\w-]+) -->([\s\S]*?)<!-- \/build:\1 -->/g;
 const PAGE_DIRS = ['', 'conditions', 'practitioners'];
 const EXTRA_FILES = ['main.js'];
 // Bump when styles.css changes so browsers and the CDN pick up the new file.
-const CSS_VERSION = 39;
+const CSS_VERSION = 40;
 // Shows the "Español" footer link on every page. Turn on once es.html has been reviewed by a
 // native Spanish speaker and its robots noindex tag removed.
 const SPANISH_PAGE_PUBLISHED = false;
@@ -78,17 +78,17 @@ const FOOTER_COLUMNS = [
 const footerLinks = title => FOOTER_COLUMNS.find(c => c.title === title).links;
 // Every condition guide; the footer column keeps a shorter list.
 const CONDITION_LINKS = [
-  ['/conditions/back-pain', 'Back Pain'],
+  ['/conditions/back-pain', 'Back Pain', 'Pain &amp; Mobility'],
   ['/conditions/neck-shoulder-pain', 'Neck &amp; Shoulder Pain'],
   ['/conditions/sciatica', 'Sciatica'],
   ['/conditions/knee-joint-pain', 'Knee &amp; Joint Pain'],
-  ['/conditions/headaches-migraines', 'Headaches &amp; Migraines'],
+  ['/conditions/headaches-migraines', 'Headaches &amp; Migraines', 'Whole-Body Support'],
   ['/conditions/stress-anxiety', 'Stress &amp; Anxiety'],
   ['/conditions/sleep-insomnia', 'Sleep &amp; Insomnia'],
   ['/conditions/womens-health', "Women's Health"],
   ['/conditions/digestive-health', 'Digestive Health'],
   ['/conditions/nausea-treatment-support', 'Nausea &amp; Treatment Support'],
-  ['/conditions', 'All Conditions']
+  ['/conditions', 'View All Conditions', 'Explore']
 ];
 const NAV = [
   { label: 'Treatments', children: [
@@ -111,20 +111,22 @@ const NAV = [
   { href: '/contact', label: 'Contact' }
 ];
 
-// The phone menu stays a flat list of the main pages.
+// The phone menu mirrors the desktop information architecture, using native
+// disclosures so a visitor never has to scan a long, undifferentiated list.
 const MOBILE_NAV = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/conditions', label: 'Conditions' },
-  { href: '/what-to-expect', label: 'What to Expect' },
-  { href: '/student-clinic', label: 'Student Clinic' },
-  { href: '/practitioners', label: 'Practitioners' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/packages', label: 'Packages' },
-  { href: '/products', label: 'Products' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/faq', label: 'FAQ' }
+  { label: 'Care', children: [
+    ['/services', 'All Treatments'], ['/acupuncture-las-vegas', 'Acupuncture'],
+    ['/cupping-las-vegas', 'Cupping Therapy'], ['/chinese-herbal-medicine-las-vegas', 'Herbal Medicine'],
+    ['/conditions', 'Conditions We Treat']
+  ] },
+  { label: 'Patient Information', children: [
+    ['/what-to-expect', 'What to Expect'], ['/pricing', 'Visit Pricing'],
+    ['/packages', 'Visit Packages'], ['/faq', 'Frequently Asked Questions']
+  ] },
+  { label: 'Our Clinic', children: [
+    ['/about', 'About Us'], ['/practitioners', 'Practitioners'],
+    ['/student-clinic', 'Student Clinic'], ['/products', 'Products'], ['/blog', 'Health Resources']
+  ] }
 ];
 
 /* A nav item is active on its own page and on pages nested under it (e.g. /conditions/sciatica). */
@@ -147,8 +149,11 @@ function renderNavItem(item, current) {
   return [
     '          <li class="has-dropdown">',
     `            <button type="button" class="nav-dropdown-toggle${inGroup ? ' active' : ''}" aria-expanded="false" aria-controls="${id}">${item.label}${CHEVRON}</button>`,
-    `            <ul class="nav-dropdown" id="${id}">`,
-    ...item.children.map(([href, label]) => `              <li><a href="${href}"${href === current ? ' aria-current="page"' : ''}>${label}</a></li>`),
+    `            <ul class="nav-dropdown${item.label === 'Conditions' ? ' nav-dropdown--conditions' : ''}" id="${id}">`,
+    ...item.children.flatMap(([href, label, group], index) => [
+      ...(group ? [`              <li class="nav-dropdown-group${index ? '' : ' nav-dropdown-group--first'}">${group}</li>`] : []),
+      `              <li><a href="${href}"${href === current ? ' aria-current="page"' : ''}>${label}</a></li>`
+    ]),
     '            </ul>',
     '          </li>'
   ].join('\n');
@@ -211,7 +216,16 @@ function renderHeader(file) {
     '',
     '<div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">',
     '  <button class="mobile-close" aria-label="Close menu">&times;</button>',
-    ...MOBILE_NAV.map(n => `  <a href="${n.href}"${n.href === current ? ' aria-current="page"' : ''}>${n.label}</a>`),
+    '  <a class="mobile-home" href="/"' + (current === '/' ? ' aria-current="page"' : '') + '>Home</a>',
+    ...MOBILE_NAV.map((group, index) => [
+      `  <details class="mobile-nav-group"${group.children.some(([href]) => href === current || current.startsWith(`${href}/`)) ? ' open' : ''}>`,
+      `    <summary>${group.label}${CHEVRON}</summary>`,
+      '    <div class="mobile-nav-group-links">',
+      ...group.children.map(([href, label]) => `      <a href="${href}"${href === current ? ' aria-current="page"' : ''}>${label}</a>`),
+      '    </div>',
+      '  </details>'
+    ].join('\n')),
+    '  <a class="mobile-contact" href="/contact"' + (current === '/contact' ? ' aria-current="page"' : '') + '>Contact</a>',
     `  <a href="${BOOKING_URL}" target="_blank" rel="noopener" class="btn btn-primary online-booking-btn">Book Online</a>`,
     '  <a href="tel:+17028521280" class="btn btn-secondary">Call (702) 852-1280</a>',
     '</div>'

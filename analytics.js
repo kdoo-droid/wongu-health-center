@@ -1,8 +1,7 @@
-// Avoid sending page-path telemetry from pages that reveal health interests or
-// contain private contact/legal context. Conversion events remain available on
-// general informational and pricing pages.
-var analyticsExcludedPath = /^(\/conditions(?:\/|$)|\/contact(?:\/|$)|\/hipaa(?:\/|$)|\/privacy(?:\/|$))/;
-if (analyticsExcludedPath.test(window.location.pathname)) {
+// Health-interest URLs are private by default. Analytics only runs on this
+// explicit set of general clinic and business-information pages.
+var analyticsAllowedPath = /^(\/$|\/(?:about|blog|faq|packages|practitioners|pricing|products|services|student-clinic|terms)\/?$)/;
+if (!analyticsAllowedPath.test(window.location.pathname)) {
   window.gtag = function () {};
 } else {
 window.dataLayer = window.dataLayer || [];

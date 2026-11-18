@@ -133,7 +133,7 @@ function cleanupRateLimitStore(now) {
   }
 }
 
-function checkRateLimit(ip) {
+function checkLocalRateLimit(ip) {
   const now = Date.now();
   cleanupRateLimitStore(now);
 
@@ -161,6 +161,53 @@ function checkRateLimit(ip) {
     remaining: Math.max(0, RATE_LIMIT_MAX_REQUESTS - existing.count),
     resetAt: existing.resetAt
   };
+}
+
+async function checkRateLimit(ip) {
+  const url = getEnvText('KV_REST_API_URL').replace(/\/$/, '');
+  const token = getEnvText('KV_REST_API_TOKEN');
+
+  // Upstash/Vercel KV is optional in local development. In production it
+  // provides one atomic counter shared by every serverless instance.
+  if (url && token && ip !== 'unknown') {
+    const key = `contact:${ip}`;
+    try {
+      const response = await fetch(`${url}/pipeline`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([
+          ['INCR', key],
+          ['PEXPIRE', key, RATE_LIMIT_WINDOW_MS, 'NX'],
+          ['PTTL', key]
+        ])
+      });
+      if (!response.ok) throw new Error(`Shared rate limiter returned ${response.status}`);
+      const results = await response.json();
+      const count = Number(results?.[0]?.result);
+      const ttl = Math.max(1000, Number(results?.[2]?.result) || RATE_LIMIT_WINDOW_MS);
+      if (!Number.isFinite(count)) throw new Error('Shared rate limiter returned an invalid counter');
+      const resetAt = Date.now() + ttl;
+      return {
+        allowed: count <= RATE_LIMIT_MAX_REQUESTS,
+        remaining: Math.max(0, RATE_LIMIT_MAX_REQUESTS - count),
+        resetAt,
+        retryAfterSeconds: Math.max(1, Math.ceil(ttl / 1000))
+      };
+    } catch (error) {
+      // Availability wins over silently dropping appointment requests. Log the
+      // failure and retain per-instance burst protection as a fallback.
+      console.error('Shared contact rate limiter unavailable', error);
+    }
+  }
+
+  // Do not put unrelated visitors into one shared "unknown" bucket.
+  if (ip === 'unknown') {
+    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS, resetAt: Date.now() + RATE_LIMIT_WINDOW_MS };
+  }
+  return checkLocalRateLimit(ip);
 }
 
 async function sendResendEmail(payload) {
@@ -196,7 +243,7 @@ export default async function handler(req, res) {
   }
 
   const clientIp = getClientIp(req);
-  const rateLimit = checkRateLimit(clientIp);
+  const rateLimit = await checkRateLimit(clientIp);
   if (!rateLimit.allowed) {
     if (typeof res.setHeader === 'function') {
       res.setHeader('Retry-After', String(rateLimit.retryAfterSeconds));

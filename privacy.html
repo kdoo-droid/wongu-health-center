@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <link rel="preload" href="/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=39">
+  <link rel="stylesheet" href="/styles.css?v=40">
   <!-- Google Analytics 4 (loaded after page load by analytics.js) -->
   <script defer src="/analytics.js"></script>
   <script type="application/ld+json">
@@ -83,18 +83,21 @@
             </li>
             <li class="has-dropdown">
               <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-conditions">Conditions<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-              <ul class="nav-dropdown" id="nav-conditions">
+              <ul class="nav-dropdown nav-dropdown--conditions" id="nav-conditions">
+                <li class="nav-dropdown-group nav-dropdown-group--first">Pain &amp; Mobility</li>
                 <li><a href="/conditions/back-pain">Back Pain</a></li>
                 <li><a href="/conditions/neck-shoulder-pain">Neck &amp; Shoulder Pain</a></li>
                 <li><a href="/conditions/sciatica">Sciatica</a></li>
                 <li><a href="/conditions/knee-joint-pain">Knee &amp; Joint Pain</a></li>
+                <li class="nav-dropdown-group">Whole-Body Support</li>
                 <li><a href="/conditions/headaches-migraines">Headaches &amp; Migraines</a></li>
                 <li><a href="/conditions/stress-anxiety">Stress &amp; Anxiety</a></li>
                 <li><a href="/conditions/sleep-insomnia">Sleep &amp; Insomnia</a></li>
                 <li><a href="/conditions/womens-health">Women's Health</a></li>
                 <li><a href="/conditions/digestive-health">Digestive Health</a></li>
                 <li><a href="/conditions/nausea-treatment-support">Nausea &amp; Treatment Support</a></li>
-                <li><a href="/conditions">All Conditions</a></li>
+                <li class="nav-dropdown-group">Explore</li>
+                <li><a href="/conditions">View All Conditions</a></li>
               </ul>
             </li>
             <li class="has-dropdown">
@@ -126,18 +129,37 @@
 
   <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
     <button class="mobile-close" aria-label="Close menu">&times;</button>
-    <a href="/">Home</a>
-    <a href="/services">Services</a>
-    <a href="/conditions">Conditions</a>
-    <a href="/what-to-expect">What to Expect</a>
-    <a href="/student-clinic">Student Clinic</a>
-    <a href="/practitioners">Practitioners</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/packages">Packages</a>
-    <a href="/products">Products</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/faq">FAQ</a>
+    <a class="mobile-home" href="/">Home</a>
+    <details class="mobile-nav-group">
+      <summary>Care<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="mobile-nav-group-links">
+        <a href="/services">All Treatments</a>
+        <a href="/acupuncture-las-vegas">Acupuncture</a>
+        <a href="/cupping-las-vegas">Cupping Therapy</a>
+        <a href="/chinese-herbal-medicine-las-vegas">Herbal Medicine</a>
+        <a href="/conditions">Conditions We Treat</a>
+      </div>
+    </details>
+    <details class="mobile-nav-group">
+      <summary>Patient Information<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="mobile-nav-group-links">
+        <a href="/what-to-expect">What to Expect</a>
+        <a href="/pricing">Visit Pricing</a>
+        <a href="/packages">Visit Packages</a>
+        <a href="/faq">Frequently Asked Questions</a>
+      </div>
+    </details>
+    <details class="mobile-nav-group">
+      <summary>Our Clinic<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="mobile-nav-group-links">
+        <a href="/about">About Us</a>
+        <a href="/practitioners">Practitioners</a>
+        <a href="/student-clinic">Student Clinic</a>
+        <a href="/products">Products</a>
+        <a href="/blog">Health Resources</a>
+      </div>
+    </details>
+    <a class="mobile-contact" href="/contact">Contact</a>
     <a href="https://patient.unifiedpractice.com/wongu-health-center" target="_blank" rel="noopener" class="btn btn-primary online-booking-btn">Book Online</a>
     <a href="tel:+17028521280" class="btn btn-secondary">Call (702) 852-1280</a>
   </div>

@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="booking-route">
           <h4>VA Community Care or Culinary Health Fund</h4>
           <p>Contact us first so we can verify eligibility, authorization, and provider availability.</p>
-          <a href="/contact.html#contact-form" class="btn btn-secondary btn-full">Verify Eligibility</a>
+          <a href="/contact#contact-form" class="btn btn-secondary btn-full">Verify Eligibility</a>
         </div>
         <details class="booking-details">
           <summary>Important booking information</summary>
@@ -240,7 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bookingTriggers.forEach(trigger => {
       trigger.addEventListener('click', e => {
-        if (sessionStorage.getItem('wongu-booking-route') === 'self-pay') return;
+        // Storage is only a convenience. Privacy modes and embedded browsers
+        // may reject it, so it must never stand between a patient and booking.
+        try {
+          if (sessionStorage.getItem('wongu-booking-route') === 'self-pay') return;
+        } catch {
+          // Continue through the confirmation dialog without persistence.
+        }
         e.preventDefault();
         openBookingModal(trigger.href, trigger);
       });
@@ -273,7 +279,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bookingContinue.addEventListener('click', () => {
       const url = pendingBookingUrl;
-      sessionStorage.setItem('wongu-booking-route', 'self-pay');
+      try {
+        sessionStorage.setItem('wongu-booking-route', 'self-pay');
+      } catch {
+        // Booking remains available when storage is blocked or full.
+      }
       closeBookingModal();
       if (url) {
         trackEvent('online_booking_confirmed', 'Booking Modal Continue');
